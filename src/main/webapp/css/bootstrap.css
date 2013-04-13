@@ -5691,6 +5691,16 @@ a.badge:focus {
   background-color: #356635;
 }
 
+.label--follow,
+.badge-follow {
+  background-color: #99FF00;
+}
+
+.label-follow[href],
+.badge-follow[href] {
+  background-color: #2d6987;
+}
+
 .label-info,
 .badge-info {
   background-color: #3a87ad;
