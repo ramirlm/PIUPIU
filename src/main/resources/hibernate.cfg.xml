@@ -4,27 +4,22 @@
 	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 	
 <hibernate-configuration>
-
 	<session-factory>
-	
-		<!-- HSQL EXAMPLE -->	
-		<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
-		<property name="hibernate.connection.url">jdbc:hsqldb:mem:piupiu</property>
-		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
-		<property name="hibernate.connection.username">sa</property>
-		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://piupiu.no-ip.info:5432/piupiu</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">postgres</property>
 
-		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="format_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
-		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
 
 		<!-- Mappings Examples 
  		<mapping class="info.noip.piupiu.model.Dvd" />
  		<mapping class="info.noip.piupiu.model.DvdRental" />
  		<mapping class="info.noip.piupiu.model.User" />
  		-->
-
 	</session-factory>
-
 </hibernate-configuration>
 	
