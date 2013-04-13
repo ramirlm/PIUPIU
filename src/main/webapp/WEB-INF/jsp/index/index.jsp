@@ -10,14 +10,14 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="piupiu/../css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="piupiu/../css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -31,6 +31,8 @@
                     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
                                    <link rel="shortcut icon" href="ico/favicon.png">
   </head>
+  
+  
 
   <body>
 
@@ -65,9 +67,9 @@
         <div class="span3">
          <form class="form-sigup" action="/piupiu/users" name="registerForm" method="post">
 	  	      <h2>Cadastre-se</h2>
-	  	      <input type="text" class="input-block-level" placeholder="Nome" name="user.name" value="${user.name}">
-	  	      <input type="text" class="input-block-level" placeholder="Endereço de Email" name="user.email" value="${user.email}">
-	          <input type="password" class="input-block-level" placeholder="Senha" name="user.password" value="${user.password}">
+	  	      <input type="text" class="input-block-level" placeholder="Nome" id="userName" name="user.name" value="${user.name}">
+	  	      <input type="text" class="input-block-level" placeholder="Endereço de Email" id="userEmail" name="user.email" value="${user.email}">
+	          <input type="password" class="input-block-level" placeholder="Senha" id="userPassword" name="user.password" value="${user.password}">
 	  	      <button class="btn btn-large btn-success" type="submit">Cadastre-se</button>
   	      </form>
         </div><!--/span-->
@@ -82,12 +84,26 @@
       
 	<c:if test="${not empty errors}">
 		<div id="errors">
-			<ul>
-				<c:forEach items="${errors }" var="error">
-					<script type="text/javascript">alert('Error');</script>
-					<li>${error.category } - ${error.message }</li>
-				</c:forEach>
-			</ul>
+			<c:forEach items="${errors}" var="error">
+				<c:if test="${error.category eq 'name'}">
+					<script type="text/javascript">
+						var elem = document.getElementById("userName");
+			    	    elem.style.borderColor="#CC0000";
+					</script>
+				</c:if>
+				<c:if test="${error.category eq 'email'}">
+					<script type="text/javascript">
+						var elem = document.getElementById("userEmail");
+			    	    elem.style.borderColor="#CC0000";
+					</script>
+				</c:if>
+				<c:if test="${error.category eq 'password'}">
+					<script type="text/javascript">
+						var elem = document.getElementById("userPassword");
+			    	    elem.style.borderColor="#CC0000";
+					</script>
+				</c:if>
+			</c:forEach>
 		</div>
 	</c:if>
 
@@ -96,7 +112,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-1.9.1.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="piupiu/../js/jquery-1.9.1.js"></script>
+    <script src="piupiu/../js/bootstrap.js"></script>
   </body>
 </html>
