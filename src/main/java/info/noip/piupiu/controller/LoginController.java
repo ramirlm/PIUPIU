@@ -11,14 +11,23 @@ public class LoginController {
 
 	private final Result result;
 
-	private LoginController(Result result) {
+	public LoginController(Result result) {
 		this.result = result;
 	}
 
 	@Path("/login")
 	@Post
 	public void login(User user) {
-		result.redirectTo(ProfilesController.class).show(user);
+		Boolean sucess = doLogin(user);
+		if (sucess) {
+			result.redirectTo(ProfileController.class).show(user);	
+		}else{
+			result.redirectTo(IndexController.class).index();
+		}
+	}
+
+	private Boolean doLogin(User user) {
+		return true;
 	}
 
 }

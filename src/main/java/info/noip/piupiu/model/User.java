@@ -21,9 +21,6 @@ public class User {
 	private String name;
 	
 	@Column
-	private String login;
-	
-	@Column
 	private String password;
 	
 	@Column
@@ -43,14 +40,6 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 	public String getPassword() {
