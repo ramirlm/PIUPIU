@@ -56,6 +56,12 @@
 			<name>Reflections Maven2 Repository</name>
 			<url>http://reflections.googlecode.com/svn/repo</url>
 		</repository>
+		
+		<repository>
+			<id>Oss-conatype-caelum</id>
+			<name>Oss Sonatype Caelum</name>
+			<url>https://oss.sonatype.org/content/repositories/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -90,6 +96,25 @@
 	        </exclusions>  
 	    </dependency>  
 	    
+	    <!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+	    
 	    <dependency>  
 	        <groupId>org.apache.tiles</groupId>  
 	        <artifactId>tiles-jsp</artifactId>  
@@ -119,26 +144,29 @@
     		<artifactId>bootstrap-maven</artifactId>
     		<version>2.3.1</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>br.com.caelum.vraptor</groupId>
 			<artifactId>vraptor-plugin-hibernate4</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-commons-annotations</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-		</dependency>
-
+	
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.1.4.Final</version>
 		</dependency>
-		
-
+		 
 	</dependencies>
 
 	<build>

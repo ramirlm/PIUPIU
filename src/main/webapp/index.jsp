@@ -61,12 +61,12 @@
           </div>
         </div><!--/span-->
         <div class="span3">
-         <form class="form-sigup">
-  	      <h2>Cadastre-se</h2>
-  	      <input type="text" class="input-block-level" placeholder="Nome">
-  	      <input type="text" class="input-block-level" placeholder="Endereço de Email">
-          <input type="password" class="input-block-level" placeholder="Senha">
-  	      <button class="btn btn-large btn-success" type="submit">Cadastre-se</button>
+         <form class="form-sigup" action="/piupiu/users" name="registerForm" method="post">
+	  	      <h2>Cadastre-se</h2>
+	  	      <input type="text" class="input-block-level" placeholder="Nome" name="user.name" value="${user.name}">
+	  	      <input type="text" class="input-block-level" placeholder="Endereço de Email" name="user.email" value="${user.email}">
+	          <input type="password" class="input-block-level" placeholder="Senha" name="user.password" value="${user.password}">
+	  	      <button class="btn btn-large btn-success" type="submit">Cadastre-se</button>
   	      </form>
         </div><!--/span-->
         
