@@ -24,10 +24,10 @@ public class User {
 
 	@Column(nullable = false, length = 45)
 	@NotEmpty(message = "- O Nome é obrigatório.")
-	@Length(min = 10, max = 45, message = "- O Nome deve conter entre 10 e 45 caracteres.")
+	@Length(min = 3, message = "- O Nome deve conter no mínimo 3 caracteres.")
 	private String name;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 45)
 	@NotEmpty(message = "- A Senha é obrigatória.")
 	private String password;
 
@@ -35,7 +35,7 @@ public class User {
 	@NotEmpty(message = "- A Confirmação de Senha é obrigatória.")
 	private String passwordConfirmation;
 
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 45)
 	@Email(message = "- E-mail inválido.")
 	@NotEmpty(message = "- O E-mail é obrigatório.")
 	private String email;

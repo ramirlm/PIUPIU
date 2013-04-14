@@ -65,13 +65,14 @@
 	  	      <span>e veja como &eacute; divertido piar.</span>
 	  	      <br/><br/>
 	  	      <input type="text" class="input-block-level" placeholder="Nome" id="userName" 
-	  	      	name="user.name" value="${user.name}">
+	  	      	name="user.name" value="${user.name}" maxlength="45">
 	  	      <input type="text" class="input-block-level" placeholder="Endereço de E-mail" id="userEmail" 
-	  	      	name="user.email" value="${user.email}">
+	  	      	name="user.email" value="${user.email}" maxlength="45">
 	          <input type="password" class="input-block-level" placeholder="Senha" id="userPassword" 
-	          	name="user.password" value="${user.password}">
+	          	name="user.password" value="${user.password}" maxlength="45">
 	          <input type="password" class="input-block-level" placeholder="Confirmação de Senha" 
-	          	id="userPasswordConfirmation" name="user.passwordConfirmation" value="${user.passwordConfirmation}">
+	          	id="userPasswordConfirmation" name="user.passwordConfirmation" value="${user.passwordConfirmation}"
+	          	maxlength="45">
 	  	      <button class="btn btn-large btn-success" type="submit">Cadastre-se</button>
   	      </form>
         </div><!--/span-->
