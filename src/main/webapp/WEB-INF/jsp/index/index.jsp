@@ -11,6 +11,7 @@
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/jquery.ui.dialog.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -83,6 +84,10 @@
         <p class="muted credit" style="text-align: center;">&copy; Piu-Piu Company 2013</p>
       </footer>
       
+      <div id="messages" title="Atenção" style="display: none;">
+      	<p></p>
+      </div>
+      
 	<c:if test="${not empty errors}">
 		<div id="errors">
 			<c:forEach items="${errors}" var="error">
@@ -104,7 +109,14 @@
 			    	    elem.style.borderColor="#CC0000";
 					</script>
 				</c:if>
+				<c:if test="${error.category eq 'passwordConfirmation'}">
+					<script type="text/javascript">
+						var elem = document.getElementById("userPasswordConfirmation");
+			    	    elem.style.borderColor="#CC0000";
+					</script>
+				</c:if>
 			</c:forEach>
+			
 		</div>
 	</c:if>
 
@@ -114,6 +126,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/jquery.ui.dialog.js"></script>
     <script src="js/bootstrap.js"></script>
+    
   </body>
 </html>
