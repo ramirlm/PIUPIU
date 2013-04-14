@@ -28,13 +28,18 @@ public class UsersController {
 	@Path("/users")
 	@Post
 	public void save(final User user) {
-		validator.checking(new Validations() {{
-	    	if (user != null) {
-	    		that(user.getName(), is(notEmpty()), "name", "Nome é obrigatório");
-	    		that(user.getPassword(), is(notEmpty()), "password", "Senha é obrigatória");
-	    		that(user.getEmail(), is(notEmpty()),"email", "Email é obrigatório");
-	    	}
-		}});
+		validator.checking(new Validations() {
+			{
+				if (user != null) {
+					that(user.getName(), is(notEmpty()), "name",
+							"Nome é obrigatório");
+					that(user.getPassword(), is(notEmpty()), "password",
+							"Senha é obrigatória");
+					that(user.getEmail(), is(notEmpty()), "email",
+							"Email é obrigatório");
+				}
+			}
+		});
 		
 		validator.onErrorRedirectTo(IndexController.class).index();
 		

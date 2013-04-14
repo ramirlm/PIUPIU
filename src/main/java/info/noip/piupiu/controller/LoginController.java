@@ -20,7 +20,7 @@ public class LoginController {
 	public void login(User user) {
 		Boolean sucess = doLogin(user);
 		if (sucess) {
-			result.redirectTo(ProfileController.class).show(user);	
+			result.redirectTo(ProfilesController.class).show(user);	
 		}else{
 			result.redirectTo(IndexController.class).index();
 		}
