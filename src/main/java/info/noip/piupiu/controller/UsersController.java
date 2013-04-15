@@ -16,8 +16,7 @@ public class UsersController {
 	private final Validator validator;
 	private final Result result;
 
-	private UsersController(UsersDao usersDao, Result result,
-			Validator validator) {
+	private UsersController(UsersDao usersDao, Result result, Validator validator) {
 		this.usersDao = usersDao;
 		this.result = result;
 		this.validator = validator;

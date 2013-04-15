@@ -107,7 +107,7 @@
 		          <input type="text" class="search-query" placeholder="Pesquisar">
 		        </form>
               	<p class="navbar-text pull-right">
-              		Logado como <a href="#" class="navbar-link">@bragaLuis</a>
+              		Logado como <a href="#" class="navbar-link">${user.email} -- @bragaLuis</a>
             	</p>
             </div><!--/.nav-collapse -->
           </div>
