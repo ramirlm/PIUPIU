@@ -152,20 +152,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>br.com.caelum.vraptor</groupId>
-			<artifactId>vraptor-plugin-hibernate4</artifactId>
-			<version>1.0.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.hibernate</groupId>
-					<artifactId>hibernate-annotations</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.hibernate</groupId>
-					<artifactId>hibernate-commons-annotations</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+	        <groupId>br.com.caelum.vraptor</groupId>
+	        <artifactId>vraptor-hibernate</artifactId>
+	        <version>1.0.0</version>
+	        <scope>compile</scope>
+	    </dependency>
 	
 		<dependency>
 			<groupId>org.hibernate</groupId>
