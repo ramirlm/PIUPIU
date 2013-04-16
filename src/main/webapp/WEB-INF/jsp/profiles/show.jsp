@@ -107,7 +107,7 @@
 		          <input type="text" class="search-query" placeholder="Pesquisar">
 		        </form>
               	<p class="navbar-text pull-right">
-              		Logado como <a href="#" class="navbar-link">${user.email} -- @bragaLuis</a>
+              		Logado como <a href="#" class="navbar-link">${user.email}</a>
             	</p>
             </div><!--/.nav-collapse -->
           </div>
@@ -119,11 +119,11 @@
         <div class="span3 well">
           <div class="row">
             <div class="span1">
-              <a href="http://critterapp.pagodabox.com/others/admin" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="photo_profile"></a>
-              <p>@bragaLuis</p>
+              <a href="" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="photo_profile"></a>
+              <p>${user.name }</p>
             </div>
             <div class="span3">
-        			<p><strong>Luis Eugênio</strong></p>
+        			<p><strong>${user.name }</strong></p>
 					    <span class=" badge badge-warning">8 Direct Mensages</span>
 					    <p>
 	  				    <span class=" badge badge-follow">10 Seguindo</span>
