@@ -8,28 +8,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    
     <!-- Le styles -->
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery.ui.theme.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/jquery.ui.dialog.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
-
+    
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
   	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  	
+  	<style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+  	
+  	<script src="js/jquery-1.9.1.js"></script>
+  	<script src="js/jquery-ui.js"></script>
+    <script src="js/bootstrap.js"></script>
   </head>
 
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -76,7 +81,6 @@
 	  	      <button class="btn btn-large btn-success" type="submit">Cadastre-se</button>
   	      </form>
         </div><!--/span-->
-        
       </div><!--/row-->
       
       <hr>
@@ -86,12 +90,16 @@
       </footer>
       
       <div id="messages" title="Atenção" style="display: none;">
-      	<p></p>
+      	<ul></ul>
       </div>
       
 	<c:if test="${not empty errors}">
 		<div id="errors">
 			<c:forEach items="${errors}" var="error">
+				<script type="text/javascript">
+					$("#messages").append("<p>${error.message}</p>");
+				</script>
+			
 				<c:if test="${error.category eq 'name'}">
 					<script type="text/javascript">
 						var elem = document.getElementById("userName");
@@ -118,17 +126,24 @@
 				</c:if>
 			</c:forEach>
 			
+			<script type="text/javascript">
+				$(function() {
+				    $("#messages").dialog("open");
+				});
+			</script>
+			
 		</div>
 	</c:if>
-
     </div><!--/.fluid-container-->
-    
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-1.9.1.js"></script>
-    <script src="js/jquery.ui.dialog.js"></script>
-    <script src="js/bootstrap.js"></script>
-    
   </body>
+  
+  <script type="text/javascript">
+	$("#messages").dialog({
+	  height: 200,
+	  width: 350,
+	  autoOpen: false,
+      modal: true,
+      resizable: false
+    });
+  </script>
 </html>
