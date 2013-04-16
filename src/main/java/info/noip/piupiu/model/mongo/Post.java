@@ -2,6 +2,7 @@ package info.noip.piupiu.model.mongo;
 
 import java.util.Date;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,19 +10,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Post {
 
 	@Id
-	private Object id;
+	private ObjectId id;
 
 	private String author;
-	
+
 	private Date date;
-	
+
 	private String text;
 
-	public Object getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(Object id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 
@@ -48,5 +49,5 @@ public class Post {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 }

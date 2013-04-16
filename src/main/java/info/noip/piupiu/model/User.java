@@ -20,26 +20,27 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
 	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq")
-	private Integer id;
+	private Long id;
 
 	@Column(nullable = false, length = 45)
-	@NotEmpty(message = "- Nome é obrigatório.")
-	@Length(min = 10, max = 45, message = "- O nome deve conter entre 10 e 45 caracteres.")
+	@NotEmpty(message = "- O Nome é obrigatório.")
+	@Length(min = 3, message = "- O Nome deve conter no mínimo 3 caracteres.")
 	private String name;
 
-	@Column(nullable = false)
-	@NotEmpty(message = "- Senha é obrigatória.")
+	@Column(nullable = false, length = 45)
+	@NotEmpty(message = "- A Senha é obrigatória.")
 	private String password;
 
 	@Transient
+	@NotEmpty(message = "- A Confirmação de Senha é obrigatória.")
 	private String passwordConfirmation;
 
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 45)
 	@Email(message = "- E-mail inválido.")
-	@NotEmpty(message = "- E-mail é obrigatório.")
+	@NotEmpty(message = "- O E-mail é obrigatório.")
 	private String email;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 

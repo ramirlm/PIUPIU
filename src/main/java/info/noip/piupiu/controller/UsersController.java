@@ -1,8 +1,5 @@
 package info.noip.piupiu.controller;
 
-
-import static info.noip.piupiu.validation.CustomMatchers.notEmpty;
-import static org.hamcrest.Matchers.is;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
 import br.com.caelum.vraptor.Path;
@@ -28,16 +25,22 @@ public class UsersController {
 	@Path("/users")
 	@Post
 	public void save(final User user) {
-		validator.checking(new Validations() {{
-	    	if (user != null) {
-	    		that(user.getName(), is(notEmpty()), "name", "Nome é obrigatório");
-	    		that(user.getPassword(), is(notEmpty()), "password", "Senha é obrigatória");
-	    		that(user.getEmail(), is(notEmpty()),"email", "Email é obrigatório");
-	    	}
-		}});
-		
+		validator.validate(user);
+
+		validator.checking(new Validations() {
+			{
+				if (user.getPassword() != null
+						&& user.getPasswordConfirmation() != null) {
+					that(user.getPassword().equals(
+							user.getPasswordConfirmation()),
+							"passwordConfirmation",
+							"- A Senha e a Confirmação de Senha não conferem.");
+				}
+			}
+		});
+
 		validator.onErrorRedirectTo(IndexController.class).index();
-		
+
 		this.usersDao.save(user);
 		result.forwardTo(LoginController.class).login(user);
 	}
