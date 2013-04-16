@@ -7,8 +7,8 @@ import info.noip.piupiu.model.mongo.Post;
 import java.util.Date;
 
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -28,11 +28,11 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public User save(User user) {
 		session.save(user);
-		saveOnMong(user);
+		saveOnMongo(user);
 		return user;
 	}
 
-	private void saveOnMong(User user) {
+	private void saveOnMongo(User user) {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 		MongoOperations mongoOperation = (MongoOperations)ctx.getBean("mongoTemplate");
 	    
@@ -51,7 +51,7 @@ public class UsersDaoImpl implements UsersDao {
 					.createQuery("from User where email = :email and password = :password");
 			query.setParameter("email", user.getEmail());
 			query.setParameter("password", user.getPassword());
-			return (User) query.getSingleResult();
+			return (User) query.uniqueResult();
 		} catch (NoResultException e) {
 			return null;
 		}
