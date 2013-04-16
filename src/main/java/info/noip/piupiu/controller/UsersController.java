@@ -1,13 +1,18 @@
 package info.noip.piupiu.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
+import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.Validations;
+import br.com.caelum.vraptor.view.Results;
 
 @Resource
 public class UsersController {
@@ -43,6 +48,16 @@ public class UsersController {
 
 		this.usersDao.save(user);
 		result.forwardTo(LoginController.class).login(user);
+	}
+	
+	@Get
+	public void find(String query){
+		if(query == null){
+			return;
+		}
+		System.out.println("Query:"+query);
+		List<User> usuarios = usersDao.find(query);
+		result.use(Results.json()).from(usuarios).serialize();
 	}
 
 }

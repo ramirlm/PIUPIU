@@ -2,6 +2,8 @@ package info.noip.piupiu.dao;
 
 import info.noip.piupiu.model.User;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import org.hibernate.Query;
@@ -23,7 +25,7 @@ public class UsersDaoImpl implements UsersDao {
 		session.save(user);
 		return user;
 	}
-	
+
 	@Override
 	public User login(User user) {
 		try {
@@ -35,6 +37,14 @@ public class UsersDaoImpl implements UsersDao {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public List<User> find(String user) {
+		Query query = (Query) session
+				.createQuery("Select name from User where lower(name) like :name");
+		query.setParameter("name", "%" + user.toLowerCase() + "%");
+		return (List<User>) query.list();
 	}
 
 }

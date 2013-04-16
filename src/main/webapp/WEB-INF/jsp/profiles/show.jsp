@@ -68,6 +68,7 @@
 
     </style>
     <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="../css/typeahead.js-bootstrap.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -104,7 +105,7 @@
                 	<li><a href="#sobre">Sobre</a></li>
               	</ul>
             	<form class="navbar-search pull-left" action="">
-		          <input type="text" class="search-query" placeholder="Pesquisar">
+		          <input type="text" class="search-query" placeholder="Pesquisar" id="search" autocomplete="off">
 		        </form>
               	<p class="navbar-text pull-right">
               		Logado como <a href="#" class="navbar-link">${user.email}</a>
@@ -205,54 +206,37 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../js/jquery-1.9.1.js"></script>
+    <script src="../js/jquery-1.8.3.js"></script>
     <script src="../js/bootstrap.js"></script>
+    <script src="../js/bootstrap-typeahead.js"></script>
     <script>
-    $(function(){
-    	 
-        /*
-            Keyup é um evento que é disparado sempre que o usuário tirou o dedo da tecla.
-            Ou seja, não queremos fazer nada quando o usuário clica, somente quando ele solta
-            a tecla.
-        */
+    $(function() {
         $(".maxlength").keyup(function(event){
-        	
-            // abaixo algumas variáveis que iremos utilizar.
-     
-            // pega a span onde esta a quantidade máxima de caracteres.
             var target    = $("#content-countdown");
-     		
-            // pego pelo atributo title a quantidade maxima permitida.
             var max        = 140;
-     
-            // tamanho da string dentro da textarea.
             var len     = $(this).val().length;
-     
-            // quantidade de caracteres restantes dentro da textarea.
             var remain    = max - len;
-     
-            // caso a quantidade dentro da textarea seja maior que
-            // a quantidade maxima.
-            if(len > max)
-            {
-                // abaixo vamos pegar tudo que tiver na string e limitar
-                // a quantidade de caracteres para o máximo setado.
-                // isso significa que qualquer coisa que seja maior que
-                // o máximo será cortado.
-                
+            if(len > max) {
                 var val = $(this).val();
                 $(this).val(val.substr(0, max));
-     
-                // setamos o restante para 0.
                 remain = 0;
             }
-     
-            // atualizamos a quantidade de caracteres restantes.
             target.html(remain + ' caracteres restantes');
-     
         });
-     
+        
+        $('#search').typeahead({
+        	minLength : 3,
+            source: function (query, process) {
+                return $.get('../users/find', { query: query }, function (data) {
+                	
+                    return process(data.list);
+                });
+            }
+        });
     });
+    
+    
+    
     </script>
 
   </body>
