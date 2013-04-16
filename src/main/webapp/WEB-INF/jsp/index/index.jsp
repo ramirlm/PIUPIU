@@ -45,9 +45,9 @@
           </button>
           <a class="brand" href="index">Piu-Piu</a>
           <div class="nav-collapse collapse">
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="E-mail">
-              <input class="span2" type="password" placeholder="Senha">
+            <form class="navbar-form pull-right" action="/piupiu/login" name="registerForm" method="post" accept-charset="utf-8">
+              <input class="span2" type="text" placeholder="E-mail" name="user.email">
+              <input class="span2" type="password" placeholder="Senha" name="user.password">
               <button type="submit" class="btn">Entrar</button>
             </form>
           </div><!--/.nav-collapse -->

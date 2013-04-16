@@ -107,7 +107,7 @@
 		          <input type="text" class="search-query" placeholder="Pesquisar">
 		        </form>
               	<p class="navbar-text pull-right">
-              		Logado como <a href="#" class="navbar-link">@bragaLuis</a>
+              		Logado como <a href="#" class="navbar-link">${user.email}</a>
             	</p>
             </div><!--/.nav-collapse -->
           </div>
@@ -119,11 +119,11 @@
         <div class="span3 well">
           <div class="row">
             <div class="span1">
-              <a href="http://critterapp.pagodabox.com/others/admin" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="photo_profile"></a>
-              <p>@bragaLuis</p>
+              <a href="" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="photo_profile"></a>
+              <p>${user.name }</p>
             </div>
             <div class="span3">
-        			<p><strong>Luis Eugênio</strong></p>
+        			<p><strong>${user.name }</strong></p>
 					    <span class=" badge badge-warning">8 Direct Mensages</span>
 					    <p>
 	  				    <span class=" badge badge-follow">10 Seguindo</span>
@@ -134,10 +134,10 @@
         </div>
         <div class="span6 well">
   	      <form accept-charset="UTF-8" action="" method="POST">
-            <textarea class="span6" id="new_message" name="new_message" 		        placeholder="Escreva sua mensagem" rows="5"></textarea>
-		        <h6 class="pull-right">140 caracteres restantes</h6>
+            <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
+	        <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
   	        <button class="btn btn-info" type="submit">Pie para seus amigos</button>
-    	    </form>
+   	      </form>
           <hr>
     	    <div class="row">
             <div class="span8">
@@ -207,6 +207,53 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../js/jquery-1.9.1.js"></script>
     <script src="../js/bootstrap.js"></script>
+    <script>
+    $(function(){
+    	 
+        /*
+            Keyup é um evento que é disparado sempre que o usuário tirou o dedo da tecla.
+            Ou seja, não queremos fazer nada quando o usuário clica, somente quando ele solta
+            a tecla.
+        */
+        $(".maxlength").keyup(function(event){
+        	
+            // abaixo algumas variáveis que iremos utilizar.
+     
+            // pega a span onde esta a quantidade máxima de caracteres.
+            var target    = $("#content-countdown");
+     		
+            // pego pelo atributo title a quantidade maxima permitida.
+            var max        = 140;
+     
+            // tamanho da string dentro da textarea.
+            var len     = $(this).val().length;
+     
+            // quantidade de caracteres restantes dentro da textarea.
+            var remain    = max - len;
+     
+            // caso a quantidade dentro da textarea seja maior que
+            // a quantidade maxima.
+            if(len > max)
+            {
+                // abaixo vamos pegar tudo que tiver na string e limitar
+                // a quantidade de caracteres para o máximo setado.
+                // isso significa que qualquer coisa que seja maior que
+                // o máximo será cortado.
+                
+                var val = $(this).val();
+                $(this).val(val.substr(0, max));
+     
+                // setamos o restante para 0.
+                remain = 0;
+            }
+     
+            // atualizamos a quantidade de caracteres restantes.
+            target.html(remain + ' caracteres restantes');
+     
+        });
+     
+    });
+    </script>
 
   </body>
 </html>
