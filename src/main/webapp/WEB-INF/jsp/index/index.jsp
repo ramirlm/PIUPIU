@@ -46,8 +46,10 @@
           <a class="brand" href="index">Piu-Piu</a>
           <div class="nav-collapse collapse">
             <form class="navbar-form pull-right" action="/piupiu/login" name="registerForm" method="post" accept-charset="utf-8">
-              <input class="span2" type="text" placeholder="E-mail" name="user.email">
-              <input class="span2" type="password" placeholder="Senha" name="user.password">
+              <input id="emailLogin" class="span2" type="text" 
+              	placeholder="E-mail" name="user.email" value="${user.email}">
+              <input id="passwordLogin" class="span2" type="password" 
+              	placeholder="Senha" name="user.password" value="${user.password}">
               <button type="submit" class="btn">Entrar</button>
             </form>
           </div><!--/.nav-collapse -->
@@ -99,6 +101,19 @@
 				<script type="text/javascript">
 					$("#messages").append("<p>${error.message}</p>");
 				</script>
+				
+				<c:if test="${error.category eq 'emailLogin'}">
+					<script type="text/javascript">
+						var elem = document.getElementById("emailLogin");
+			    	    elem.style.borderColor="#CC0000";
+					</script>
+				</c:if>
+				<c:if test="${error.category eq 'passwordLogin'}">
+					<script type="text/javascript">
+						var elem = document.getElementById("passwordLogin");
+			    	    elem.style.borderColor="#CC0000";
+					</script>
+				</c:if>
 			
 				<c:if test="${error.category eq 'name'}">
 					<script type="text/javascript">
