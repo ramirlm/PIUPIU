@@ -133,7 +133,7 @@
           </div>
         </div>
         <div class="span6 well">
-  	      <form accept-charset="UTF-8" action="" method="POST">
+  	      <form accept-charset="UTF-8" action="/piupiu/posts" method="post">
             <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
 	        <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
   	        <button class="btn btn-info" type="submit">Pie para seus amigos</button>

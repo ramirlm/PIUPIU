@@ -20,7 +20,6 @@ public class SpringMongoConfig {
 
 	public @Bean MongoTemplate mongoTemplate() throws Exception {
 
-		// remove _class
 		MappingMongoConverter converter = new MappingMongoConverter(
 				mongoDbFactory(), new MongoMappingContext());
 		

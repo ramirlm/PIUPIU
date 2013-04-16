@@ -1,8 +1,8 @@
 package info.noip.piupiu.dao;
 
-import info.noip.piupiu.infra.SpringMongoConfig;
+import info.noip.piupiu.infra.MongoTemplate;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.mongo.Post;
+import info.noip.piupiu.model.mongo.Peep;
 
 import java.util.Date;
 
@@ -10,9 +10,6 @@ import javax.persistence.NoResultException;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
 
 import br.com.caelum.vraptor.ioc.Component;
 
@@ -20,9 +17,11 @@ import br.com.caelum.vraptor.ioc.Component;
 public class UsersDaoImpl implements UsersDao {
 
 	private Session session;
+	private MongoTemplate mongoTemplate;
 
-	public UsersDaoImpl(Session session) {
+	public UsersDaoImpl(Session session, MongoTemplate mongoTemplate) {
 		this.session = session;
+		this.mongoTemplate = mongoTemplate;
 	}
 
 	@Override
@@ -33,15 +32,12 @@ public class UsersDaoImpl implements UsersDao {
 	}
 
 	private void saveOnMongo(User user) {
-		ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
-		MongoOperations mongoOperation = (MongoOperations)ctx.getBean("mongoTemplate");
-	    
-	    Post post = new Post();
+	    Peep post = new Peep();
 	    post.setAuthor(user.getEmail());
 	    post.setDate(new Date());
 	    post.setText("Estou testando a configuração do mongo");
 	    
-	    mongoOperation.save(post);
+	    mongoTemplate.getMongoOperations().save(post);
 	} 
 	
 	@Override
