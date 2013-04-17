@@ -52,6 +52,7 @@ public class LoginController {
 		validator.onErrorRedirectTo(IndexController.class).index();
 
 		this.userSession.setUser(userLogged);
+		result.include("userSession",userSession);
 		result.redirectTo(ProfilesController.class).show(userLogged);
 	}
 }

@@ -122,25 +122,19 @@
           <div class="row">
             <div class="span1">
               <a href="" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="photo_profile"></a>
-              <p>${userSession.user.email }</p>
+              <p>${user.email }</p>
             </div>
             <div class="span3">
-        			<p><strong>${userSession.user.name }</strong></p>
-					    <span class=" badge badge-warning">8 Direct Mensages</span>
-					    <p>
-	  				    <span class=" badge badge-follow">10 Seguindo</span>
-  					    <span class=" badge badge-info">15 Seguidores</span>
-					    </p>
-				    </div>
+	   			<p><strong>${user.name }</strong></p>
+			    <p>
+				    <span class=" badge badge-follow">10 Seguindo</span>
+  				    <span class=" badge badge-info">15 Seguidores</span>
+			    </p>
+		    </div>
           </div>
         </div>
         <div class="span6 well">
-  	      <form accept-charset="UTF-8" action="/piupiu/posts" method="post">
-            <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
-	        <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
-  	        <button class="btn btn-info" type="submit">Pie para seus amigos</button>
-   	      </form>
-          <hr>
+  	      
     	    <div class="row">
             <div class="span8">
               <div class="row">
@@ -183,7 +177,7 @@
                 <div class="span8">
                   <p></p>
                   <p>
-                    <i class="icon-user"></i> by <a href="#">Chico</a>
+                    <i class="icon-user"></i> by <a href="#">Ze</a>
                     | <i class="icon-calendar"></i> 12 de Abril de 2013 as 16h30.
                   </p>
                 </div>

@@ -8,5 +8,6 @@ public interface UsersDao {
 
 	User save(User user);
 	User login(User user);
+	User getById(Long id);
 	List<User> find(String user);
 }

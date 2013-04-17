@@ -21,7 +21,8 @@ public class UsersController {
 	private final Validator validator;
 	private final Result result;
 
-	private UsersController(UsersDao usersDao, Result result, Validator validator) {
+	private UsersController(UsersDao usersDao, Result result,
+			Validator validator) {
 		this.usersDao = usersDao;
 		this.result = result;
 		this.validator = validator;
@@ -49,15 +50,20 @@ public class UsersController {
 		this.usersDao.save(user);
 		result.forwardTo(LoginController.class).login(user);
 	}
-	
+
 	@Get
-	public void find(String query){
-		if(query == null){
+	public void find(String query) {
+		if (query == null) {
 			return;
 		}
-		System.out.println("Query:"+query);
 		List<User> usuarios = usersDao.find(query);
-		result.use(Results.json()).from(usuarios).serialize();
+		result.use(Results.json()).from(usuarios).exclude("password")
+				.serialize();
+	}
+
+	@Get
+	public User show(Long id) {
+		return usersDao.getById(id);
 	}
 
 }
