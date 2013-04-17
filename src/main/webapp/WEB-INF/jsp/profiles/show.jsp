@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+
+	<c:set var="ctx" value="<%= request.getContextPath() %>"/>
 
     <!-- CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -136,12 +140,14 @@
           </div>
         </div>
         <div class="span6 well">
-  	      <form accept-charset="UTF-8" action="/piupiu/posts" method="post">
+  	      <form accept-charset="UTF-8" id="peepForm">
             <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
 	        <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
-  	        <button class="btn btn-info" type="submit">Pie para seus amigos</button>
+  	        <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
    	      </form>
           <hr>
+          <div id="wall">
+          </div>
     	    <div class="row">
             <div class="span8">
               <div class="row">
@@ -254,7 +260,48 @@
         });
     });
     
-    
+    function peep(){
+    	var message = $('#new_message').val();
+    	$.ajax({
+		      url: "${ctx}/peeps",
+		      type: "POST",
+		      data: '{ "peep":{ "text":  "' + message + '" }}',
+		      dataType: "json",
+		      contentType: "application/json",
+		      async: true,
+		      success: function(html){
+		    	  $('#new_message').val('');
+		    	  
+		    	  var row = '<div class="row">'+ 
+		    	  			'<div class="span8">'+ 
+		    	  			'<div class="row">' + 
+		    	  			'<div class="span1">' + 
+		    	  			'<a href="#" class="thumbnail">'+
+		                      '<img src="http://placehold.it/140x100" alt="">'+
+		                    '</a>'+
+		                	'</div>'+
+		                '<div class="span4"> <p>' + message + '</p>'+
+		                '</div>' +
+		              '</div>' +
+		              '<div class="row">'+
+		                '<div class="span8">'+
+		                  '<p></p>'+
+		                  '<p>' +
+		                    '<i class="icon-user"></i> by <a href="#">'+ html.author + '</a>'+ 
+		                    '| <i class="icon-calendar"></i> 13 de Abril de 2013 as 15h00.' +
+		                  '</p>'+
+		                '</div>'+
+		              '</div>'+ 
+		            '</div>' +
+		           '</div>'+
+		          '<hr>'; 
+		    	  $('#wall').append(row);
+		      },
+		      error: function(data, status, e) {
+		    	  //Show Error Div 
+			  }
+		   });
+    }
     
     </script>
 
