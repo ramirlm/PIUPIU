@@ -98,10 +98,10 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Piu-Piu</a>
+            <a class="brand" href="/piupiu/profiles/show">Piu-Piu</a>
             <div class="nav-collapse collapse">
             	<ul class="nav">
-                	<li class="active"><a href="#">Home</a></li>
+                	<li class="active"><a href="/piupiu/profiles/show">Home</a></li>
                 	<li><a href="#sobre">Sobre</a></li>
               	</ul>
             	<form class="navbar-search pull-left" action="/piupiu/users/show" method="get">
@@ -109,7 +109,8 @@
 		          <input type="hidden" name="id" id="idUser">
 		        </form>
               	<p class="navbar-text pull-right">
-              		Logado como <a href="#" class="navbar-link">${userSession.user.email}</a>
+              		Logado como <a href="#sair" class="navbar-link">${userSession.user.email}</a>
+              		<a style="padding-left: 20px;" href="#">Sair</a>
             	</p>
             </div><!--/.nav-collapse -->
           </div>
