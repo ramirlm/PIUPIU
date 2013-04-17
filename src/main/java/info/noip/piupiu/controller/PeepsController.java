@@ -6,8 +6,10 @@ import info.noip.piupiu.model.UserSession;
 import info.noip.piupiu.model.mongo.Peep;
 
 import java.util.Date;
+import java.util.List;
 
 import br.com.caelum.vraptor.Consumes;
+import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
@@ -38,6 +40,14 @@ public class PeepsController {
 			postsDao.save(peep);
 			result.use(Results.json()).withoutRoot().from(peep).serialize();	
 		}
+	}
+	
+	@Path("/peeps/{skip}/{limit}")
+	@Get
+	public void list(Integer skip, Integer limit){
+		User user = userSession.getUser();
+		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), skip, limit);
+		result.use(Results.json()).withoutRoot().from(peeps).serialize();	
 	}
 
 }
