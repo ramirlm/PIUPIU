@@ -148,56 +148,7 @@
           <hr>
           <div id="wall">
           </div>
-    	    <div class="row">
-            <div class="span8">
-              <div class="row">
-                <div class="span1">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/140x100" alt="">
-                  </a>
-                </div>
-                <div class="span4">
-                  <p> Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span8">
-                  <p></p>
-                  <p>
-                    <i class="icon-user"></i> by <a href="#">Ze</a>
-                    | <i class="icon-calendar"></i> 13 de Abril de 2013 as 15h00.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="span8">
-              <div class="row">
-                <div class="span1">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/140x100" alt="">
-                  </a>
-                </div>
-                <div class="span4">
-                  <p> Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span8">
-                  <p></p>
-                  <p>
-                    <i class="icon-user"></i> by <a href="#">Chico</a>
-                    | <i class="icon-calendar"></i> 12 de Abril de 2013 as 16h30.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr>
+    	    
         </div>
 
       </div> <!-- container -->
@@ -219,6 +170,8 @@
     <script src="../js/bootstrap-typeahead.js"></script>
     <script>
     $(function() {
+    	loadPeeps();
+    	
         $(".maxlength").keyup(function(event){
             var target    = $("#content-countdown");
             var max        = 140;
@@ -266,36 +219,25 @@
 		      url: "${ctx}/peeps",
 		      type: "POST",
 		      data: '{ "peep":{ "text":  "' + message + '" }}',
-		      dataType: "json",
 		      contentType: "application/json",
 		      async: true,
 		      success: function(html){
 		    	  $('#new_message').val('');
-		    	  
-		    	  var row = '<div class="row">'+ 
-		    	  			'<div class="span8">'+ 
-		    	  			'<div class="row">' + 
-		    	  			'<div class="span1">' + 
-		    	  			'<a href="#" class="thumbnail">'+
-		                      '<img src="http://placehold.it/140x100" alt="">'+
-		                    '</a>'+
-		                	'</div>'+
-		                '<div class="span4"> <p>' + message + '</p>'+
-		                '</div>' +
-		              '</div>' +
-		              '<div class="row">'+
-		                '<div class="span8">'+
-		                  '<p></p>'+
-		                  '<p>' +
-		                    '<i class="icon-user"></i> by <a href="#">'+ html.author + '</a>'+ 
-		                    '| <i class="icon-calendar"></i> 13 de Abril de 2013 as 15h00.' +
-		                  '</p>'+
-		                '</div>'+
-		              '</div>'+ 
-		            '</div>' +
-		           '</div>'+
-		          '<hr>'; 
-		    	  $('#wall').append(row);
+		    	  $('#wall').prepend(html);
+		      },
+		      error: function(data, status, e) {
+		    	  //Show Error Div 
+			  }
+		   });
+    }
+    
+    function loadPeeps() {
+    	$.ajax({
+		      url: "${ctx}/peeps/show",
+		      type: "GET",
+		      async: true,
+		      success: function(html){
+		    	  $('#wall').append(html);
 		      },
 		      error: function(data, status, e) {
 		    	  //Show Error Div 

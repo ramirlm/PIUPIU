@@ -23,7 +23,8 @@ public class PeepsController {
 	private Result result;
 	private UserSession userSession;
 
-	public PeepsController(PostsDao postsDao, Result result, UserSession userSession) {
+	public PeepsController(PostsDao postsDao, Result result,
+			UserSession userSession) {
 		this.postsDao = postsDao;
 		this.result = result;
 		this.userSession = userSession;
@@ -31,23 +32,31 @@ public class PeepsController {
 
 	@Path("/peeps")
 	@Post
-	@Consumes("application/json")  
+	@Consumes("application/json")
 	public void save(Peep peep) {
 		User user = userSession.getUser();
-		if(user!=null){
+		if (user != null) {
 			peep.setDate(new Date());
 			peep.setAuthor(user.getEmail());
 			postsDao.save(peep);
-			result.use(Results.json()).withoutRoot().from(peep).serialize();	
+			result.include("peep", peep);
 		}
 	}
-	
+
 	@Path("/peeps/{skip}/{limit}")
 	@Get
-	public void list(Integer skip, Integer limit){
+	public void list(Integer skip, Integer limit) {
 		User user = userSession.getUser();
 		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), skip, limit);
-		result.use(Results.json()).withoutRoot().from(peeps).serialize();	
+		result.use(Results.json()).withoutRoot().from(peeps).serialize();
+	}
+
+	@Path("/peeps/show")
+	@Get
+	public void show() {
+		User user = userSession.getUser();
+		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), 0, 50);
+		result.include("peeps", peeps);
 	}
 
 }
