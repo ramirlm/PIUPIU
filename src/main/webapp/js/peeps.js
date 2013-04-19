@@ -16,9 +16,9 @@ function peep(){
 		   });
     }
     
-    function loadPeeps(xxx) {
+    function loadPeeps(author) {
     	$.ajax({
-		      url: "/piupiu/peeps/show/"+xxx,
+		      url: "/piupiu/peeps/show/"+author,
 		      type: "GET",
 		      async: true,
 		      success: function(html){
@@ -29,3 +29,7 @@ function peep(){
 			  }
 		   });
     }
+    function mudarIMG(author){
+    	
+    }
+    
