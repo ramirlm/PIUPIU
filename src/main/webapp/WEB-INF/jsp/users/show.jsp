@@ -70,17 +70,7 @@
     <link href="../css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="../css/typeahead.js-bootstrap.css" rel="stylesheet">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
@@ -98,10 +88,10 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Piu-Piu</a>
+            <a class="brand" href="/piupiu/profiles/show">Piu-Piu</a>
             <div class="nav-collapse collapse">
             	<ul class="nav">
-                	<li class="active"><a href="#">Home</a></li>
+                	<li class="active"><a href="/piupiu/profiles/show">Home</a></li>
                 	<li><a href="#sobre">Sobre</a></li>
               	</ul>
             	<form class="navbar-search pull-left" action="/piupiu/users/show" method="get">
@@ -134,57 +124,8 @@
           </div>
         </div>
         <div class="span6 well">
-  	      
-    	    <div class="row">
-            <div class="span8">
-              <div class="row">
-                <div class="span1">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/140x100" alt="">
-                  </a>
-                </div>
-                <div class="span4">
-                  <p> Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span8">
-                  <p></p>
-                  <p>
-                    <i class="icon-user"></i> by <a href="#">Ze</a>
-                    | <i class="icon-calendar"></i> 13 de Abril de 2013 as 15h00.
-                  </p>
-                </div>
-              </div>
-            </div>
+  	      <div id="wall">
           </div>
-          <hr>
-          <div class="row">
-            <div class="span8">
-              <div class="row">
-                <div class="span1">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/140x100" alt="">
-                  </a>
-                </div>
-                <div class="span4">
-                  <p> Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span8">
-                  <p></p>
-                  <p>
-                    <i class="icon-user"></i> by <a href="#">Ze</a>
-                    | <i class="icon-calendar"></i> 12 de Abril de 2013 as 16h30.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr>
         </div>
 
       </div> <!-- container -->
@@ -204,8 +145,11 @@
     <script src="../js/jquery-1.8.3.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/bootstrap-typeahead.js"></script>
+    <script src="../js/peeps.js"></script>
     <script>
     $(function() {
+    	loadPeeps("${user.email}");
+    	
         $(".maxlength").keyup(function(event){
             var target    = $("#content-countdown");
             var max        = 140;
@@ -246,8 +190,6 @@
             }
         });
     });
-    
-    
     
     </script>
 

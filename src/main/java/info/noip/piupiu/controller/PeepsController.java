@@ -51,12 +51,15 @@ public class PeepsController {
 		result.use(Results.json()).withoutRoot().from(peeps).serialize();
 	}
 
-	@Path("/peeps/show")
+	@Path("/peeps/show/{email}")
 	@Get
-	public void show() {
-		User user = userSession.getUser();
-		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), 0, 50);
+	public void show(String email) {
+		String emailAuthor = email;
+		if("".equals(email)){
+			emailAuthor = userSession.getUser().getEmail();
+		}
+		List<Peep> peeps = postsDao.findByAuthor(emailAuthor, 0, 50);
 		result.include("peeps", peeps);
 	}
-
+	
 }

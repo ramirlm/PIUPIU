@@ -73,18 +73,8 @@
     </style>
     <link href="../css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="../css/typeahead.js-bootstrap.css" rel="stylesheet">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+	
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
@@ -168,9 +158,10 @@
     <script src="../js/jquery-1.8.3.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/bootstrap-typeahead.js"></script>
+    <script src="../js/peeps.js"></script>
     <script>
     $(function() {
-    	loadPeeps();
+    	loadPeeps("${userSession.user.email}");
     	
         $(".maxlength").keyup(function(event){
             var target    = $("#content-countdown");
@@ -212,38 +203,6 @@
             }
         });
     });
-    
-    function peep(){
-    	var message = $('#new_message').val();
-    	$.ajax({
-		      url: "${ctx}/peeps",
-		      type: "POST",
-		      data: '{ "peep":{ "text":  "' + message + '" }}',
-		      contentType: "application/json",
-		      async: true,
-		      success: function(html){
-		    	  $('#new_message').val('');
-		    	  $('#wall').prepend(html);
-		      },
-		      error: function(data, status, e) {
-		    	  //Show Error Div 
-			  }
-		   });
-    }
-    
-    function loadPeeps() {
-    	$.ajax({
-		      url: "${ctx}/peeps/show",
-		      type: "GET",
-		      async: true,
-		      success: function(html){
-		    	  $('#wall').append(html);
-		      },
-		      error: function(data, status, e) {
-		    	  //Show Error Div 
-			  }
-		   });
-    }
     
     </script>
 
