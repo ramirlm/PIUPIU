@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+
+	<c:set var="ctx" value="<%= request.getContextPath() %>"/>
 
     <!-- CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -109,7 +112,8 @@
 		          <input type="hidden" name="id" id="idUser">
 		        </form>
               	<p class="navbar-text pull-right">
-              		Logado como <a href="#" class="navbar-link">${userSession.user.email}</a>
+              		Logado como ${userSession.user.email}
+              		<a href="${ctx}/logout" class="btn">Sair</a>
             	</p>
             </div><!--/.nav-collapse -->
           </div>
@@ -134,57 +138,9 @@
           </div>
         </div>
         <div class="span6 well">
-  	      
-    	    <div class="row">
-            <div class="span8">
-              <div class="row">
-                <div class="span1">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/140x100" alt="">
-                  </a>
-                </div>
-                <div class="span4">
-                  <p> Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span8">
-                  <p></p>
-                  <p>
-                    <i class="icon-user"></i> by <a href="#">Ze</a>
-                    | <i class="icon-calendar"></i> 13 de Abril de 2013 as 15h00.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="span8">
-              <div class="row">
-                <div class="span1">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/140x100" alt="">
-                  </a>
-                </div>
-                <div class="span4">
-                  <p> Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span8">
-                  <p></p>
-                  <p>
-                    <i class="icon-user"></i> by <a href="#">Ze</a>
-                    | <i class="icon-calendar"></i> 12 de Abril de 2013 as 16h30.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr>
+      		<div id="wall">
+          	</div>  	      
+    	    
         </div>
 
       </div> <!-- container -->
@@ -204,8 +160,11 @@
     <script src="../js/jquery-1.8.3.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/bootstrap-typeahead.js"></script>
+    <script src="../js/peeps.js"></script>
     <script>
     $(function() {
+    	loadPeeps();
+    	
         $(".maxlength").keyup(function(event){
             var target    = $("#content-countdown");
             var max        = 140;
@@ -246,8 +205,6 @@
             }
         });
     });
-    
-    
     
     </script>
 

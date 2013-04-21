@@ -3,6 +3,7 @@ package info.noip.piupiu.controller;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;
+import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
@@ -55,4 +56,11 @@ public class LoginController {
 		result.include("userSession",userSession);
 		result.redirectTo(ProfilesController.class).show(userLogged);
 	}
+	
+	@Get("/logout")
+    public void logout() {
+		this.userSession.setUser(null);
+		result.include("userSession",null);
+        result.redirectTo(IndexController.class).index();
+    }
 }
