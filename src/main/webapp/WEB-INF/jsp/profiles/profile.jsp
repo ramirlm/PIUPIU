@@ -130,11 +130,11 @@
         <div class="span3 well">
           <div class="row">
             <div class="span1">
-              <a href="" class="thumbnail"><img src="http://www.gravatar.com/avatar/${userSession.user.hashFoto}?s=200" alt="photo_profile"></a>
-              <p>${userSession.user.email }</p>
+              <a href="" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="photo_profile"></a>
+              <p>${user.email }</p>
             </div>
             <div class="span3">
-        			<p><strong>${userSession.user.name }</strong></p>
+        			<p><strong>${user.name }</strong></p>
 					    <span class=" badge badge-warning">8 Direct Mensages</span>
 					    <p>
 	  				    <span class=" badge badge-follow">10 Seguindo</span>
@@ -144,14 +144,33 @@
           </div>
         </div>
         <div class="span6 well">
-  	      <form accept-charset="UTF-8" id="peepForm">
-            <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
-	        <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
-  	        <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
-   	      </form>
-          <hr>
-          <div id="wall">
-          </div>
+			<c:forEach items="${peeps}" var="peep">
+				<div class="row">
+				  <div class="span8">
+				    <div class="row">
+				      <div class="span1">
+				        <a href="#" class="thumbnail">
+				            <img src="http://placehold.it/140x100" alt="">
+				        </a>
+				      </div>
+				      <div class="span4">
+				        <p> ${peep.text}
+				        </p>
+				      </div>
+				    </div>
+				    <div class="row">
+				      <div class="span8">
+				        <p></p>
+				        <p>
+				          <i class="icon-user"></i> by <a href="#">${peep.author}</a>
+				          | <i class="icon-calendar"></i> ${peep.date}
+				        </p>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<hr>
+			</c:forEach>
     	    
         </div>
 
@@ -174,8 +193,6 @@
     <script src="../js/bootstrap-typeahead.js"></script>
     <script>
     $(function() {
-    	loadPeeps();
-    	
         $(".maxlength").keyup(function(event){
             var target    = $("#content-countdown");
             var max        = 140;
@@ -216,48 +233,6 @@
             }
         });
     });
-    
-    function peep(){
-    	var message = $('#new_message').val();
-    	$.ajax({
-		      url: "${ctx}/peeps",
-		      type: "POST",
-		      data: '{ "peep":{ "text":  "' + message + '" }}',
-		      contentType: "application/json",
-		      async: true,
-		      success: function(html){
-		    	  $('#new_message').val('');
-		    	  $('#wall').prepend(html);
-		      },
-		      error: function(data, status, e) {
-		    	  //Show Error Div 
-			  }
-		   });
-    }
-    
-    function loadPeeps() {
-    	$.ajax({
-		      url: "${ctx}/peeps/show",
-		      type: "GET",
-		      async: true,
-		      success: function(html){
-		    	  $('#wall').append(html);
-		      },
-		      error: function(data, status, e) {
-		    	  //Show Error Div 
-			  }
-		   });
-    }
-    
-    function showRepeepDialog(author, peep){
-    	$('#new_message').val('RP @' + get_username(author) +': '+ peep);
-    	$('html,body').animate({scrollTop: 0},'slow');
-    }
-    
-    function get_username(email) {
-        var m = email.match('([^@]+)');
-        return m ? m[0] : null;
-    }
     
     </script>
 
