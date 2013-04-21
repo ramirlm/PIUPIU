@@ -14,6 +14,8 @@
 
     <!-- CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/jquery-ui.css" rel="stylesheet">
+    <link href="../css/jquery.ui.theme.css" rel="stylesheet">
     <style type="text/css">
 
       /* Sticky footer styles
@@ -85,6 +87,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    
+    <script src="../js/jquery-ui.js"></script>
   </head>
 
   <body>
@@ -152,7 +156,7 @@
         </div>
 
       </div> <!-- container -->
-
+      
       <div id="push"></div>
 
       <div id="footer">
@@ -243,6 +247,16 @@
 		    	  //Show Error Div 
 			  }
 		   });
+    }
+    
+    function showRepeepDialog(author, peep){
+    	$('#new_message').val('RP @' + get_username(author) +': '+ peep);
+    	$('html,body').animate({scrollTop: 0},'slow');
+    }
+    
+    function get_username(email) {
+        var m = email.match('([^@]+)');
+        return m ? m[0] : null;
     }
     
     </script>
