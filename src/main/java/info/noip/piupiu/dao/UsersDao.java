@@ -10,4 +10,5 @@ public interface UsersDao {
 	User login(User user);
 	User getById(Long id);
 	List<User> find(String user);
+	User findByEmail(String email);
 }
