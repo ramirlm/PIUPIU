@@ -39,6 +39,16 @@ public class User {
 	@Email(message = "- E-mail inválido.")
 	@NotEmpty(message = "- O E-mail é obrigatório.")
 	private String email;
+	
+	private String hashFoto;
+
+	public String getHashFoto() {
+		return hashFoto;
+	}
+
+	public void setHashFoto(String hashFoto) {
+		this.hashFoto = hashFoto;
+	}
 
 	public Long getId() {
 		return id;

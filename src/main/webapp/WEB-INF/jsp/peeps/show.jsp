@@ -5,7 +5,7 @@
 	    <div class="row">
 	      <div class="span1">
 	        <a href="#" class="thumbnail">
-	            <img src="http://placehold.it/140x100" alt="">
+	            <img src="http://www.gravatar.com/avatar/${peep.hash}?s=200" alt="">
 	        </a>
 	      </div>
 	      <div class="span4">

@@ -38,6 +38,7 @@ public class PeepsController {
 		if (user != null) {
 			peep.setDate(new Date());
 			peep.setAuthor(user.getEmail());
+			peep.setHash(user.getHashFoto());
 			postsDao.save(peep);
 			result.include("peep", peep);
 		}
