@@ -19,6 +19,7 @@
 	        <p>
 	          <i class="icon-user"></i> by <a href="#">${peep.author}</a>
 	          | <i class="icon-calendar"></i> ${peep.date}
+	          | <a href="javascript: showRepeepDialog('${peep.author}','${peep.text}')">RePeep</a>
 	        </p>
 	      </div>
 	    </div>
