@@ -6,8 +6,11 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.ioc.Component;
 
@@ -51,5 +54,14 @@ public class UsersDaoImpl implements UsersDao {
 	public User getById(Long id) {
 		return (User) session.get(User.class, id);
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		Criteria criteria = session.createCriteria(User.class);
+		criteria.add(Restrictions.like("email", email, MatchMode.EXACT));
+		return (User) criteria.uniqueResult();
+	}
+	
+	
 
 }
