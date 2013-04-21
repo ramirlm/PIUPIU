@@ -130,7 +130,7 @@
         <div class="span3 well">
           <div class="row">
             <div class="span1">
-              <a href="" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="photo_profile"></a>
+              <a href="" class="thumbnail"><img src="http://www.gravatar.com/avatar/${userSession.user.hashFoto}?s=200" alt="photo_profile"></a>
               <p>${userSession.user.email }</p>
             </div>
             <div class="span3">

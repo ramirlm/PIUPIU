@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import info.noip.piupiu.dao.UsersDao;
+import info.noip.piupiu.infra.MD5Util;
 import info.noip.piupiu.model.User;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -46,7 +47,7 @@ public class UsersController {
 		});
 
 		validator.onErrorRedirectTo(IndexController.class).index();
-
+		user.setHashFoto(MD5Util.md5Hex(user.getEmail()));
 		this.usersDao.save(user);
 		result.forwardTo(LoginController.class).login(user);
 	}

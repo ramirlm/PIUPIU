@@ -41,7 +41,7 @@ public class LoginController {
 		validator.onErrorRedirectTo(IndexController.class).index();
 
 		final User userLogged = usersDao.login(user);
-
+		
 		validator.checking(new Validations() {
 			{
 				that(userLogged != null, "user",

@@ -2,6 +2,7 @@ package info.noip.piupiu.controller;
 
 import static org.mockito.Mockito.when;
 import info.noip.piupiu.dao.PostsDao;
+import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;
 import info.noip.piupiu.model.mongo.Peep;
@@ -25,6 +26,9 @@ public class PeepsControllerTest {
 
 	@Mock
 	PostsDao postsDao;
+	
+	@Mock
+	UsersDao usersDao;
 	
 	@Mock
 	UserSession userSession;
@@ -57,7 +61,7 @@ public class PeepsControllerTest {
 		when(postsDao.findByAuthor("teste@gmail.com", 0, 50)).thenReturn(peeps);
 		
 		MockResult result = new MockResult();
-		PeepsController controller = new PeepsController(postsDao, result, userSession);
+		PeepsController controller = new PeepsController(postsDao, usersDao, result, userSession);
 		controller.list(0, 50);
 		Assert.assertTrue(result.used());
 	}
