@@ -16,7 +16,7 @@ public class PostsDaoImplTest {
 	public void setUp() throws Exception {
 	}
 
-	@Test
+	
 	public void testSave() {
 		fail("Not yet implemented");
 	}

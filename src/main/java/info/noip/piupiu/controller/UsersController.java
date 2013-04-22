@@ -56,6 +56,7 @@ public class UsersController {
 		validator.onErrorRedirectTo(IndexController.class).index();
 		user.setHashFoto(MD5Util.md5Hex(user.getEmail()));
 		this.usersDao.save(user);
+		result.include(user);
 		result.forwardTo(LoginController.class).login(user);
 	}
 

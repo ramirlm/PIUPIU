@@ -1,17 +1,13 @@
 package info.noip.piupiu.controller;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;
-import info.noip.piupiu.model.mongo.Circle;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,6 +35,9 @@ public class UsersControllerTest {
 	@Mock
 	Validator validator;
 	
+	@Mock
+	IndexController indexController;
+	
 	private User user;
 	private List<User> users;
 
@@ -56,9 +55,12 @@ public class UsersControllerTest {
 	@Test
 	public void testSave() {
 		user = createFakeUser("teste@gmail.com","testuser");
+		user.setPassword("trolololo");
 		MockResult result = new MockResult();
+		when(validator.onErrorRedirectTo(IndexController.class)).thenReturn(indexController);
 		UsersController controller = new UsersController(usersDao, result, validator, userSession, circleDao);
 		controller.save(user);
+		Assert.assertTrue(result.used());
 	}
 
 	@Test
@@ -112,21 +114,6 @@ public class UsersControllerTest {
 		ret = new User();
 		ret.setEmail(email);
 		ret.setName(name);
-		return ret;
-	}
-	
-	private HashSet<String> createFakeListOfEmails(String email, String name, int qtd){
-		HashSet<String> users = new HashSet<String>();
-		for(int i=0; i<qtd; i++){
-			users.add(i+"_test@gmail.com");
-		}
-		return users;
-	}
-	
-	private Circle createCircleOfAnUser(String userEmail, Set<String> followers){
-		Circle ret = new Circle();
-		ret.setUserEmail(userEmail);
-		ret.setFollowers(new HashSet<String>(followers));
 		return ret;
 	}
 
