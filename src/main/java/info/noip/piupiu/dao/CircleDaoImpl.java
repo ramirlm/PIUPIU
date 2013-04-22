@@ -98,11 +98,6 @@ public class CircleDaoImpl implements CircleDao {
 				.is(userEmail));
 		Circle userCircle = mongoTemplate.getMongoOperations().findOne(query, Circle.class);
 		
-		if(userCircle == null){
-			userCircle = new Circle();
-			userCircle.setUserEmail(userEmail);
-		}
-		
 		userCircle.removeFollowing(userToUnfollowEmail);
 		
 		mongoTemplate.getMongoOperations().save(userCircle);
