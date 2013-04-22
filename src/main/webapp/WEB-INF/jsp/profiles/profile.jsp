@@ -127,6 +127,14 @@
 	  				    <span class=" badge badge-follow">10 Seguindo</span>
   					    <span class=" badge badge-info">15 Seguidores</span>
 					    </p>
+					    <p id="pIsFollowing">
+							<c:if test="${isFollowing}">
+		  				    	<a href="javascript:unfollow('${user.email }')" class=" badge badge-follow">Deixar de Seguir</a>
+		  				    </c:if>
+		  				    <c:if test="${not isFollowing}">
+		  				    	<a href="javascript:follow('${user.email }')" class=" badge badge-follow">Seguir</a>
+		  				    </c:if>
+					    </p>
 				    </div>
           </div>
         </div>
@@ -225,6 +233,42 @@
             }
         });
     });
+    
+    function follow(email){
+    	$.ajax({
+		      url: "${ctx}/users/follow",
+		      type: "POST",
+		      data: '{ "userToFollow":{ "email":  "' + email + '" }}',
+		      contentType: "application/json",
+		      async: true,
+		      success: function(html){
+		    	  $("#pIsFollowing").empty();
+		    	  $("#pIsFollowing").append("<a></a>");
+		    	  $("#pIsFollowing a").attr("href","javascript:unfollow('${user.email }')").attr("class","badge badge-follow").text("Deixar de Seguir");
+		      },
+		      error: function(data, status, e) {
+		    	  //Show Error Div 
+			  }
+		   });
+    }
+    
+    function unfollow(email){
+    	$.ajax({
+		      url: "${ctx}/users/unfollow",
+		      type: "POST",
+		      data: '{ "userToUnfollow":{ "email":  "' + email + '" }}',
+		      contentType: "application/json",
+		      async: true,
+		      success: function(html){
+		    	  $("#pIsFollowing").empty();
+		    	  $("#pIsFollowing").append("<a></a>");
+		    	  $("#pIsFollowing a").attr("href","javascript:follow('${user.email }')").attr("class","badge badge-follow").text("Seguir");
+		      },
+		      error: function(data, status, e) {
+		    	  //Show Error Div 
+			  }
+		   });
+    }
     
     </script>
 
