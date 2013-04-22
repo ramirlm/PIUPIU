@@ -27,7 +27,7 @@ public class UsersController {
 	private UserSession userSession;
 	private CircleDao circleDao;
 
-	private UsersController(UsersDao usersDao, Result result,
+	public UsersController(UsersDao usersDao, Result result,
 			Validator validator, UserSession userSession, CircleDao circleDao) {
 		this.usersDao = usersDao;
 		this.result = result;

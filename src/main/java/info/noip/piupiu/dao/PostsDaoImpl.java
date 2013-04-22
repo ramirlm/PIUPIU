@@ -16,7 +16,7 @@ public class PostsDaoImpl implements PostsDao{
 
 	private MongoTemplate mongoTemplate;
 	
-	private PostsDaoImpl(MongoTemplate mongoTemplate) {
+	public PostsDaoImpl(MongoTemplate mongoTemplate) {
 		this.mongoTemplate = mongoTemplate;
 	}
 
