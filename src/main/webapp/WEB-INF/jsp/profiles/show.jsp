@@ -15,6 +15,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/jquery-ui.css" rel="stylesheet">
     <link href="css/jquery.ui.theme.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <style type="text/css">
 
       /* Sticky footer styles
@@ -99,11 +100,12 @@
               	</ul>
             	<form class="navbar-search pull-left" action="/piupiu/profiles/" method="get">
 		          <input type="text" class="search-query" placeholder="Pesquisar" id="search" autocomplete="off">
+		          <span class="icon-search"></span>
 		          <input type="hidden" name="email" id="emailUser">
 		        </form>
               	<p class="navbar-text pull-right">
               		Logado como ${userSession.user.email}
-              		<a href="${ctx}/logout" >Sair</a>
+              		<a class="icon-white icon-off" style="margin-left: 20px;" href="${ctx}/logout" title="Sair"></a>
             	</p>
             </div><!--/.nav-collapse -->
           </div>
@@ -120,10 +122,10 @@
             </div>
             <div class="span3">
         			<p><strong>${userSession.user.name }</strong></p>
-					    <span class=" badge badge-warning">8 Direct Mensages</span>
+					    <span class=" badge badge-warning">0 Mensagens Pessoais</span>
 					    <p>
-	  				    <span class=" badge badge-follow">10 Seguindo</span>
-  					    <span class=" badge badge-info">15 Seguidores</span>
+	  				    <span class=" badge badge-follow">Seguindo ${following}</span>
+  					    <span class=" badge badge-info">${followers} Seguidores</span>
 					    </p>
 				    </div>
           </div>
