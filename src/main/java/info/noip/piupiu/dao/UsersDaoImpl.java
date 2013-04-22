@@ -44,10 +44,9 @@ public class UsersDaoImpl implements UsersDao {
 
 	@Override
 	public List<User> find(String user) {
-		Query query = (Query) session
-				.createQuery("from User where lower(name) like :name");
-		query.setParameter("name", "%" + user.toLowerCase() + "%");
-		return (List<User>) query.list();
+		Criteria criteria = session.createCriteria(User.class);
+		criteria.add(Restrictions.ilike("name", user.toLowerCase(), MatchMode.ANYWHERE));
+		return (List<User>)criteria.list();
 	}
 
 	@Override
