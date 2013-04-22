@@ -25,7 +25,7 @@ import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.util.test.MockResult;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UsersControllertest {
+public class UsersControllerTest {
 	
 	@Mock
 	UsersDao usersDao;
@@ -44,13 +44,21 @@ public class UsersControllertest {
 
 	@Before
 	public void setUp() throws Exception {
+		user = new User();
+		user.setName("Dana White");
+		user.setEmail("dana@ufc.com");
+		userSession = new UserSession();
+		userSession.setUser(user);
 		MockitoAnnotations.initMocks(this);
 		
 	}
 
 	@Test
 	public void testSave() {
-		fail("Not yet implemented");
+		user = createFakeUser("teste@gmail.com","testuser");
+		MockResult result = new MockResult();
+		UsersController controller = new UsersController(usersDao, result, validator, userSession, circleDao);
+		controller.save(user);
 	}
 
 	@Test
@@ -65,19 +73,38 @@ public class UsersControllertest {
 		controller.find("testUser");
 		Assert.assertTrue(result.used());
 	}
+	
+	@Test
+	public void testFindNull() {
+		user = createFakeUser("teste@gmail.com","testuser");
+		users = new ArrayList<User>();
+		users.add(user);
+		when(usersDao.find("testUser")).thenReturn(users);
+		
+		MockResult result = new MockResult();
+		UsersController controller = new UsersController(usersDao, result, validator, userSession, circleDao);
+		controller.find(null);
+		Assert.assertFalse(result.used());
+	}
 
 	@Test
 	public void testFollow() {
-		User user = createFakeUser("andersonsilva@gmail.com","AndersonTheSpiderSilva");
-		HashSet<String> followers = createFakeListOfEmails("test@gmail.com", "ChaelSonnen", 5);
-		Circle circle = createCircleOfAnUser("andersonsilva@gmail.com", followers);
-		
-		
+		User userTest = createFakeUser("andersonsilva@ufc.com","AndersonTheSpiderSilva");
+		MockResult result = new MockResult();
+		when(userSession.getUser()).thenReturn(user);
+		UsersController controller = new UsersController(usersDao, result, validator, userSession, circleDao);
+		controller.follow(userTest);
+		Assert.assertTrue(result.used());
 	}
 
 	@Test
 	public void testUnfollow() {
-		fail("Not yet implemented");
+		User userTest = createFakeUser("andersonsilva@ufc.com","AndersonTheSpiderSilva");
+		MockResult result = new MockResult();
+		when(userSession.getUser()).thenReturn(user);
+		UsersController controller = new UsersController(usersDao, result, validator, userSession, circleDao);
+		controller.unfollow(userTest);
+		Assert.assertTrue(result.used());
 	}
 	
 	private User createFakeUser(String email, String name){
