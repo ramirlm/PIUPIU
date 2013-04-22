@@ -20,6 +20,8 @@ public class Peep implements Serializable{
 	private Date date;
 
 	private String text;
+	
+	private String hash;
 
 	public ObjectId getId() {
 		return id;
@@ -51,6 +53,14 @@ public class Peep implements Serializable{
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 }

@@ -3,6 +3,7 @@ package info.noip.piupiu.controller;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;
+import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
@@ -41,7 +42,7 @@ public class LoginController {
 		validator.onErrorRedirectTo(IndexController.class).index();
 
 		final User userLogged = usersDao.login(user);
-
+		
 		validator.checking(new Validations() {
 			{
 				that(userLogged != null, "user",
@@ -53,6 +54,13 @@ public class LoginController {
 
 		this.userSession.setUser(userLogged);
 		result.include("userSession",userSession);
-		result.redirectTo(ProfilesController.class).show(userLogged);
+		result.redirectTo(ProfilesController.class).show();
 	}
+	
+	@Get("/logout")
+    public void logout() {
+		this.userSession.setUser(null);
+		result.include("userSession",null);
+        result.redirectTo(IndexController.class).index();
+    }
 }

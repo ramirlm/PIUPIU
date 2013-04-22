@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+	<c:set var="ctx" value="<%= request.getContextPath() %>"/>
+
     <!-- CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/jquery-ui.css" rel="stylesheet">
+    <link href="../css/jquery.ui.theme.css" rel="stylesheet">
     <style type="text/css">
 
       /* Sticky footer styles
@@ -70,16 +75,6 @@
     <link href="../css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="../css/typeahead.js-bootstrap.css" rel="stylesheet">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="../assets/ico/favicon.png">
   </head>
 
@@ -98,18 +93,19 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Piu-Piu</a>
+            <a class="brand" href="/piupiu/profiles">Piu-Piu</a>
             <div class="nav-collapse collapse">
             	<ul class="nav">
-                	<li class="active"><a href="#">Home</a></li>
+                	<li class="active"><a href="/piupiu/profiles">Home</a></li>
                 	<li><a href="#sobre">Sobre</a></li>
               	</ul>
-            	<form class="navbar-search pull-left" action="/piupiu/users/show" method="get">
+            	<form class="navbar-search pull-left" action="/piupiu/profiles/" method="get">
 		          <input type="text" class="search-query" placeholder="Pesquisar" id="search" autocomplete="off">
-		          <input type="hidden" name="id" id="idUser">
+		          <input type="hidden" name="email" id="emailUser">
 		        </form>
               	<p class="navbar-text pull-right">
-              		Logado como <a href="#" class="navbar-link">${userSession.user.email}</a>
+              		Logado como ${userSession.user.email}
+              		<a href="${ctx}/logout" >Sair</a>
             	</p>
             </div><!--/.nav-collapse -->
           </div>
@@ -121,74 +117,60 @@
         <div class="span3 well">
           <div class="row">
             <div class="span1">
-              <a href="" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="photo_profile"></a>
+              <a href="" class="thumbnail"><img src="http://www.gravatar.com/avatar/${user.hashFoto}?s=200" alt="photo_profile"></a>
               <p>${user.email }</p>
             </div>
             <div class="span3">
-	   			<p><strong>${user.name }</strong></p>
-			    <p>
-				    <span class=" badge badge-follow">10 Seguindo</span>
-  				    <span class=" badge badge-info">15 Seguidores</span>
-			    </p>
-		    </div>
+        			<p><strong>${user.name }</strong></p>
+					    <span class=" badge badge-warning">8 Direct Mensages</span>
+					    <p>
+	  				    <span class=" badge badge-follow">10 Seguindo</span>
+  					    <span class=" badge badge-info">15 Seguidores</span>
+					    </p>
+					    <p id="pIsFollowing">
+							<c:if test="${isFollowing}">
+		  				    	<a href="javascript:unfollow('${user.email }')" class=" badge badge-follow">Deixar de Seguir</a>
+		  				    </c:if>
+		  				    <c:if test="${not isFollowing}">
+		  				    	<a href="javascript:follow('${user.email }')" class=" badge badge-follow">Seguir</a>
+		  				    </c:if>
+					    </p>
+				    </div>
           </div>
         </div>
         <div class="span6 well">
-  	      
-    	    <div class="row">
-            <div class="span8">
-              <div class="row">
-                <div class="span1">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/140x100" alt="">
-                  </a>
-                </div>
-                <div class="span4">
-                  <p> Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span8">
-                  <p></p>
-                  <p>
-                    <i class="icon-user"></i> by <a href="#">Ze</a>
-                    | <i class="icon-calendar"></i> 13 de Abril de 2013 as 15h00.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="span8">
-              <div class="row">
-                <div class="span1">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/140x100" alt="">
-                  </a>
-                </div>
-                <div class="span4">
-                  <p> Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="span8">
-                  <p></p>
-                  <p>
-                    <i class="icon-user"></i> by <a href="#">Ze</a>
-                    | <i class="icon-calendar"></i> 12 de Abril de 2013 as 16h30.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr>
+			<c:forEach items="${peeps}" var="peep">
+				<div class="row">
+				  <div class="span8">
+				    <div class="row">
+				      <div class="span1">
+				        <a href="#" class="thumbnail">
+				            <img src="http://placehold.it/140x100" alt="">
+				        </a>
+				      </div>
+				      <div class="span4">
+				        <p> ${peep.text}
+				        </p>
+				      </div>
+				    </div>
+				    <div class="row">
+				      <div class="span8">
+				        <p></p>
+				        <p>
+				          <i class="icon-user"></i> by <a href="#">${peep.author}</a>
+				          | <i class="icon-calendar"></i> ${peep.date}
+				        </p>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<hr>
+			</c:forEach>
+    	    
         </div>
 
       </div> <!-- container -->
-
+      
       <div id="push"></div>
 
       <div id="footer">
@@ -202,10 +184,12 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../js/jquery-1.8.3.js"></script>
+    <script src="../js/jquery-ui.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/bootstrap-typeahead.js"></script>
     <script>
     $(function() {
+    	
         $(".maxlength").keyup(function(event){
             var target    = $("#content-countdown");
             var max        = 140;
@@ -222,32 +206,69 @@
         $('#search').typeahead({
         	minLength : 3,
             source: function (query, process) {
-                return $.get('../users/find', { query: query }, function (data) {
+                return $.get('/piupiu/users/find', { query: query }, function (data) {
                 	 names = new Array();
-                     ids    = new Array();
+                     emails    = new Array();
              
                      for (var i= 0; i < data.list.length; i++) {
                         var user = data.list[i];
                         names[i] = user.name;
-                        ids[i]    = user.id;
+                        emails[i] = user.email;
                      }
                     return process(names);
                 });
             },
+  
             updater: function(item) {
 				for ( var i = 0; i < names.length; i++) {
 					if(names[i] === item) {
-						$('#idUser').val(ids[i]);
+						$('#emailUser').val(emails[i]);
+						var email = emails[i];
 						break;
 					}
 				}
-            	this.$element[0].form.submit();
-                return item;
+            	var url = "/piupiu/profiles/" + email ;
+            	window.location = url;
+            	return item;
             }
         });
     });
     
+    function follow(email){
+    	$.ajax({
+		      url: "${ctx}/users/follow",
+		      type: "POST",
+		      data: '{ "userToFollow":{ "email":  "' + email + '" }}',
+		      contentType: "application/json",
+		      async: true,
+		      success: function(html){
+		    	  $("#pIsFollowing").empty();
+		    	  $("#pIsFollowing").append("<a></a>");
+		    	  $("#pIsFollowing a").attr("href","javascript:unfollow('${user.email }')").attr("class","badge badge-follow").text("Deixar de Seguir");
+		      },
+		      error: function(data, status, e) {
+		    	  //Show Error Div 
+			  }
+		   });
+    }
     
+    function unfollow(email){
+    	$.ajax({
+		      url: "${ctx}/users/unfollow",
+		      type: "POST",
+		      data: '{ "userToUnfollow":{ "email":  "' + email + '" }}',
+		      contentType: "application/json",
+		      async: true,
+		      success: function(html){
+		    	  $("#pIsFollowing").empty();
+		    	  $("#pIsFollowing").append("<a></a>");
+		    	  $("#pIsFollowing a").attr("href","javascript:follow('${user.email }')").attr("class","badge badge-follow").text("Seguir");
+		      },
+		      error: function(data, status, e) {
+		    	  //Show Error Div 
+			  }
+		   });
+    }
     
     </script>
 
