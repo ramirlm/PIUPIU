@@ -1,5 +1,7 @@
 package info.noip.piupiu.dao;
 
+import info.noip.piupiu.model.mongo.Circle;
+
 public interface CircleDao {
 	
 	void follow(String userEmail, String userToFollowEmail);
@@ -7,5 +9,7 @@ public interface CircleDao {
 	void unfollow(String userEmail, String userToUnfollowEmail);
 	
 	Boolean isFollowing(String loggedEmailUser, String email);
+
+	Circle getCircleByEmail(String email);
 	
 }
