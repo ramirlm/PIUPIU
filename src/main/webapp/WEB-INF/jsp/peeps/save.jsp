@@ -3,7 +3,7 @@
     <div class="row">
       <div class="span1">
         <a href="#" class="thumbnail">
-            <img src="http://placehold.it/140x100" alt="">
+            <img src="http://www.gravatar.com/avatar/${peep.hash}?s=200" alt="">
         </a>
       </div>
       <div class="span4">
@@ -17,6 +17,7 @@
         <p>
           <i class="icon-user"></i> by <a href="#">${peep.author}</a>
           | <i class="icon-calendar"></i> ${peep.date}
+          | <a title="RePiar" class="icon-random" href="javascript: showRepeepDialog('${peep.author}','${peep.text}')"></a>
         </p>
       </div>
     </div>

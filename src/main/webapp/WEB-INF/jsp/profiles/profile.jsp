@@ -15,7 +15,6 @@
     <link href="../css/bootstrap.css" rel="stylesheet">
     <link href="../css/jquery-ui.css" rel="stylesheet">
     <link href="../css/jquery.ui.theme.css" rel="stylesheet">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
     <style type="text/css">
 
       /* Sticky footer styles
@@ -54,9 +53,6 @@
           padding-right: 20px;
         }
       }
-
-
-
       /* Custom page CSS
       -------------------------------------------------- */
       /* Not required for template or sticky footer method. */
@@ -71,16 +67,14 @@
       code {
         font-size: 80%;
       }
-
     </style>
     <link href="../css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="../css/typeahead.js-bootstrap.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-
 
     <!-- Part 1: Wrap all page content here -->
     <div id="wrap">
@@ -126,12 +120,12 @@
         			<p><strong>${user.name }</strong></p>
 					    <span class=" badge badge-warning">0 Mensagens Pessoais</span>
 					    <p>
-	  				    <span class=" badge badge-follow">Seguindo ${following}</span>
+	  				    <span class=" badge badge-info">Seguindo ${following}</span>
   					    <span class=" badge badge-info">${followers} Seguidores</span>
 					    </p>
 					    <p id="pIsFollowing">
 							<c:if test="${isFollowing}">
-		  				    	<a href="javascript:unfollow('${user.email }')" class=" badge badge-inverse">Deixar de Seguir</a>
+		  				    	<a href="javascript:unfollow('${user.email }')" class=" badge badge-important">Deixar de Seguir</a>
 		  				    </c:if>
 		  				    <c:if test="${not isFollowing && user.email != userSession.user.email}">
 		  				    	<a href="javascript:follow('${user.email }')" class=" badge badge-success">Seguir</a>
@@ -147,7 +141,7 @@
 				    <div class="row">
 				      <div class="span1">
 				        <a href="#" class="thumbnail">
-				            <img src="http://placehold.it/140x100" alt="">
+				            <img src="http://www.gravatar.com/avatar/${peep.hash}?s=200" alt="">
 				        </a>
 				      </div>
 				      <div class="span4">
@@ -189,6 +183,7 @@
     <script src="../js/jquery-ui.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/bootstrap-typeahead.js"></script>
+    <script src="../js/profile.js"></script>
     <script>
     $(function() {
     	
@@ -235,44 +230,6 @@
             }
         });
     });
-    
-    function follow(email){
-    	$.ajax({
-		      url: "${ctx}/users/follow",
-		      type: "POST",
-		      data: '{ "userToFollow":{ "email":  "' + email + '" }}',
-		      contentType: "application/json",
-		      async: true,
-		      success: function(html){
-		    	  $("#pIsFollowing").empty();
-		    	  $("#pIsFollowing").append("<a></a>");
-		    	  $("#pIsFollowing a").attr("href","javascript:unfollow('${user.email }')").attr("class","badge badge-inverse").text("Deixar de Seguir");
-		      },
-		      error: function(data, status, e) {
-		    	  //Show Error Div 
-			  }
-		   });
-    }
-    
-    function unfollow(email){
-    	$.ajax({
-		      url: "${ctx}/users/unfollow",
-		      type: "POST",
-		      data: '{ "userToUnfollow":{ "email":  "' + email + '" }}',
-		      contentType: "application/json",
-		      async: true,
-		      success: function(html){
-		    	  $("#pIsFollowing").empty();
-		    	  $("#pIsFollowing").append("<a></a>");
-		    	  $("#pIsFollowing a").attr("href","javascript:follow('${user.email }')").attr("class","badge badge-success").text("Seguir");
-		      },
-		      error: function(data, status, e) {
-		    	  //Show Error Div 
-			  }
-		   });
-    }
-    
     </script>
-
   </body>
 </html>
