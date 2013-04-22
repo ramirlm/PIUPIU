@@ -1,7 +1,6 @@
 package info.noip.piupiu.controller;
 
 import info.noip.piupiu.dao.PostsDao;
-import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;
 import info.noip.piupiu.model.mongo.Peep;
@@ -21,14 +20,12 @@ import br.com.caelum.vraptor.view.Results;
 public class PeepsController {
 
 	private PostsDao postsDao;
-	private UsersDao usersDao;
 	private Result result;
 	private UserSession userSession;
 
-	public PeepsController(PostsDao postsDao, UsersDao usersDao,Result result,
+	public PeepsController(PostsDao postsDao, Result result,
 			UserSession userSession) {
 		this.postsDao = postsDao;
-		this.usersDao = usersDao;
 		this.result = result;
 		this.userSession = userSession;
 	}
@@ -59,8 +56,8 @@ public class PeepsController {
 	@Get
 	public void show() {
 		User user = userSession.getUser();
-		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), 0, 50);
+		List<Peep> peeps = postsDao.retrieveTimeline(user, 0, 50);
 		result.include("peeps", peeps);
 	}
-	
+
 }
