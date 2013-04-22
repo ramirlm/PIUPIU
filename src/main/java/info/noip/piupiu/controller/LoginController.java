@@ -54,7 +54,7 @@ public class LoginController {
 
 		this.userSession.setUser(userLogged);
 		result.include("userSession",userSession);
-		result.redirectTo(ProfilesController.class).show(userLogged);
+		result.redirectTo(ProfilesController.class).show();
 	}
 	
 	@Get("/logout")

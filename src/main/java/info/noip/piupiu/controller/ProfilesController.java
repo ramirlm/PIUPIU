@@ -24,16 +24,17 @@ public class ProfilesController {
 		this.postsDao = postsDao;
 	}
 
-	public void show(User user) {
-		result.include("user", user);
+	@Path("/profiles")
+	public void show() {
 	}
 
 	@Get
-	@Path("/profile/{email}")
+	@Path("/profiles/{email}")
 	public void profile(String email) {
 		User user = usersDao.findByEmail(email);
 		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), 0, 50);
 		result.include("user", user);
 		result.include("peeps", peeps);
 	}
+	
 }

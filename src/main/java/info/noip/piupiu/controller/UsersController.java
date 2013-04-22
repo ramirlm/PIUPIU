@@ -58,13 +58,7 @@ public class UsersController {
 			return;
 		}
 		List<User> usuarios = usersDao.find(query);
-		result.use(Results.json()).from(usuarios).exclude("password")
-				.serialize();
-	}
-
-	@Get
-	public User show(Long id) {
-		return usersDao.getById(id);
+		result.use(Results.json()).from(usuarios).exclude("password").serialize();
 	}
 
 }

@@ -12,9 +12,9 @@
 	<c:set var="ctx" value="<%= request.getContextPath() %>"/>
 
     <!-- CSS -->
-    <link href="../css/bootstrap.css" rel="stylesheet">
-    <link href="../css/jquery-ui.css" rel="stylesheet">
-    <link href="../css/jquery.ui.theme.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery.ui.theme.css" rel="stylesheet">
     <style type="text/css">
 
       /* Sticky footer styles
@@ -72,22 +72,8 @@
       }
 
     </style>
-    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
-	<link href="../css/typeahead.js-bootstrap.css" rel="stylesheet">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
-    
-    <script src="../js/jquery-ui.js"></script>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="css/typeahead.js-bootstrap.css" rel="stylesheet">
   </head>
 
   <body>
@@ -105,19 +91,19 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="/piupiu/profiles/show">Piu-Piu</a>
+            <a class="brand" href="/piupiu/profiles">Piu-Piu</a>
             <div class="nav-collapse collapse">
             	<ul class="nav">
-                	<li class="active"><a href="/piupiu/profiles/show">Home</a></li>
+                	<li class="active"><a href="/piupiu/profiles">Home</a></li>
                 	<li><a href="#sobre">Sobre</a></li>
               	</ul>
-            	<form class="navbar-search pull-left" action="/piupiu/users/show" method="get">
+            	<form class="navbar-search pull-left" action="/piupiu/profiles/" method="get">
 		          <input type="text" class="search-query" placeholder="Pesquisar" id="search" autocomplete="off">
-		          <input type="hidden" name="id" id="idUser">
+		          <input type="hidden" name="email" id="emailUser">
 		        </form>
               	<p class="navbar-text pull-right">
               		Logado como ${userSession.user.email}
-              		<a href="${ctx}/logout" class="btn">Sair</a>
+              		<a href="${ctx}/logout" >Sair</a>
             	</p>
             </div><!--/.nav-collapse -->
           </div>
@@ -168,12 +154,14 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../js/jquery-1.8.3.js"></script>
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/bootstrap-typeahead.js"></script>
-    <script src="../js/peeps.js"></script>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+    <script src="js/peeps.js"></script>
     <script>
     $(function() {
+    	
     	loadPeeps();
     	
         $(".maxlength").keyup(function(event){
@@ -192,14 +180,14 @@
         $('#search').typeahead({
         	minLength : 3,
             source: function (query, process) {
-                return $.get('../users/find', { query: query }, function (data) {
+                return $.get('/piupiu/users/find', { query: query }, function (data) {
                 	 names = new Array();
-                     ids    = new Array();
+                     emails    = new Array();
              
                      for (var i= 0; i < data.list.length; i++) {
                         var user = data.list[i];
                         names[i] = user.name;
-                        ids[i]    = user.id;
+                        emails[i] = user.email;
                      }
                     return process(names);
                 });
@@ -207,17 +195,17 @@
             updater: function(item) {
 				for ( var i = 0; i < names.length; i++) {
 					if(names[i] === item) {
-						$('#idUser').val(ids[i]);
+						$('#emailUser').val(emails[i]);
+						var email = emails[i];
 						break;
 					}
 				}
-            	this.$element[0].form.submit();
-                return item;
+            	var url = "/piupiu/profiles/" + email;
+            	window.location = url;
+            	return item;
             }
         });
     });
-    
-    
     
     </script>
 
