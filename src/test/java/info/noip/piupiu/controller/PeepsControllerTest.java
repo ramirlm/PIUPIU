@@ -61,7 +61,7 @@ public class PeepsControllerTest {
 		when(postsDao.findByAuthor("teste@gmail.com", 0, 50)).thenReturn(peeps);
 		
 		MockResult result = new MockResult();
-		PeepsController controller = new PeepsController(postsDao, usersDao, result, userSession);
+		PeepsController controller = new PeepsController(postsDao, result, userSession);
 		controller.list(0, 50);
 		Assert.assertTrue(result.used());
 	}
