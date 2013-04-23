@@ -43,7 +43,7 @@ public class PostsDaoImpl implements PostsDao {
 	public List<Peep> retrieveTimeline(User user, Integer skip, Integer limit) {
 		Circle circle = circleDao.getCircleByEmail(user.getEmail());
 		List<String> following = new ArrayList<String>();
-		if (circle != null) {
+		if (circle != null && circle.getFollowing() != null) {
 			following.addAll(circle.getFollowing());
 		}
 		following.add(user.getEmail());
