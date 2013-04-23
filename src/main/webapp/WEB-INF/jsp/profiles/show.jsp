@@ -15,12 +15,9 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/jquery-ui.css" rel="stylesheet">
     <link href="css/jquery.ui.theme.css" rel="stylesheet">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <style type="text/css">
-
       /* Sticky footer styles
       -------------------------------------------------- */
-
       html,
       body {
         height: 100%;
@@ -75,10 +72,10 @@
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="css/typeahead.js-bootstrap.css" rel="stylesheet">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-
 
     <!-- Part 1: Wrap all page content here -->
     <div id="wrap">
@@ -124,7 +121,7 @@
         			<p><strong>${userSession.user.name }</strong></p>
 					    <span class=" badge badge-warning">0 Mensagens Pessoais</span>
 					    <p>
-	  				    <span class=" badge badge-follow">Seguindo ${following}</span>
+	  				    <span class=" badge badge-info">Seguindo ${following}</span>
   					    <span class=" badge badge-info">${followers} Seguidores</span>
 					    </p>
 				    </div>
