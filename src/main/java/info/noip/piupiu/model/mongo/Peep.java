@@ -1,7 +1,10 @@
 package info.noip.piupiu.model.mongo;
 
+import info.noip.piupiu.infra.MD5Util;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -22,6 +25,8 @@ public class Peep implements Serializable{
 	private String text;
 	
 	private String hash;
+	
+	private HashSet<Liker> likers;
 
 	public ObjectId getId() {
 		return id;
@@ -61,6 +66,24 @@ public class Peep implements Serializable{
 
 	public void setHash(String hash) {
 		this.hash = hash;
+	}
+
+	public HashSet<Liker> getLikers() {
+		return likers;
+	}
+
+	public void setLikers(HashSet<Liker> likers) {
+		this.likers = likers;
+	}
+
+	public void addLiker(String likerEmail) {
+		if(likers == null){
+			likers = new HashSet<Liker>();
+		}
+		Liker liker = new Liker();
+		liker.setUserEmail(likerEmail);
+		liker.setHash(MD5Util.md5Hex(likerEmail));
+		likers.add(liker);
 	}
 
 }

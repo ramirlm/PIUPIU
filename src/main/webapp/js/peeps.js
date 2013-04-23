@@ -39,3 +39,21 @@ function get_username(email) {
     var m = email.match('([^@]+)');
     return m ? m[0] : null;
 }
+
+
+function showLikers(id){
+	$.ajax({
+		url: "/piupiu/peeps/showLikers", 
+		type: "POST",
+	    data: '{ "peep":{ "id":  "' + id + '" }}',
+	    contentType: "application/json",
+	    async: true,
+	    success: function(html){
+    	  $('#idShowLikes').append(html);
+    	  $("#idShowLikes").dialog("open");
+	    },
+	    error: function(data, status, e) {
+    	  //Show Error Div 
+	    }
+	});
+}

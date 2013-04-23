@@ -148,6 +148,9 @@
           <p class="muted credit">&copy; Piu-Piu Company 2013</p>
         </div>
       </div>
+      
+      <div id="idShowLikes">
+      </div>
 
 
     <!-- Le javascript
@@ -205,6 +208,14 @@
             }
         });
     });
+    
+    $("#idShowLikes").dialog({
+  	  height: 200,
+  	  width: 350,
+  	  autoOpen: false,
+        modal: true,
+        resizable: false
+      });
     
     </script>
 
