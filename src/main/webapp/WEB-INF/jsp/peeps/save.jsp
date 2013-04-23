@@ -15,7 +15,7 @@
       <div class="span8">
         <p></p>
         <p>
-          <i class="icon-user"></i> by <a href="#">${peep.author}</a>
+          <i class="icon-user"></i> by <a href="/piupiu/profiles/${peep.author}">${peep.author}</a>
           | <i class="icon-calendar"></i> ${peep.date}
           | <a title="RePiar" class="icon-random" href="javascript: showRepeepDialog('${peep.author}','${peep.text}')"></a>
         </p>
