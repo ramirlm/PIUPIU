@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,11 +51,7 @@ public class PeepsControllerTest {
 		
 		peeps = new ArrayList<Peep>();
 		
-		Peep peep = new Peep();
-		peep.setAuthor("teste@gmail.com");
-		peep.setText("Teste");
-		peep.setDate(new Date());
-		
+		Peep peep = createFakePeep("teste@gmail.com", "Teste");
 		peeps.add(peep);
 		
 		when(userSession.getUser()).thenReturn(user);
@@ -64,6 +61,51 @@ public class PeepsControllerTest {
 		PeepsController controller = new PeepsController(postsDao, result, userSession);
 		controller.list(0, 50);
 		Assert.assertTrue(result.used());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shoudShow(){
+		
+		peeps = new ArrayList<Peep>();
+		
+		Peep peep = createFakePeep("teste@gmail.com", "Teste1");
+		peeps.add(peep);
+		peep = createFakePeep("teste@gmail.com", "Teste2");
+		peeps.add(peep);
+		
+		when(userSession.getUser()).thenReturn(user);
+		when(postsDao.retrieveTimeline(user, 0, 50)).thenReturn(peeps);
+		MockResult result = new MockResult();
+		PeepsController controller = new PeepsController(postsDao, result, userSession);
+		controller.show();
+		List<Peep> list = (List<Peep>)result.included().get("peeps");
+		Assert.assertEquals(2, list.size());
+	}
+	
+	@Test
+	public void shouldSave(){
+		peeps = new ArrayList<Peep>();
+		Peep peep = createFakePeep("teste@gmail.com", "Teste1");
+		peeps.add(peep);
+		
+		when(userSession.getUser()).thenReturn(user);
+		when(postsDao.save(peep)).thenReturn(peep);
+		MockResult result = new MockResult();
+		PeepsController controller = new PeepsController(postsDao, result, userSession);
+		controller.save(peep);
+		Peep peepSaved = (Peep) result.included().get("peep");
+		Assert.assertEquals(peep, peepSaved);
+		
+	}
+	
+	private Peep createFakePeep(String author, String text){
+		Peep peep = new Peep();
+		peep.setAuthor(author);
+		peep.setText(text);
+		peep.setDate(new Date());
+		return peep;
+		
 	}
 	
 }
