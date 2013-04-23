@@ -27,7 +27,7 @@ public class UsersController {
 	private UserSession userSession;
 	private CircleDao circleDao;
 
-	private UsersController(UsersDao usersDao, Result result,
+	public UsersController(UsersDao usersDao, Result result,
 			Validator validator, UserSession userSession, CircleDao circleDao) {
 		this.usersDao = usersDao;
 		this.result = result;
@@ -56,6 +56,7 @@ public class UsersController {
 		validator.onErrorRedirectTo(IndexController.class).index();
 		user.setHashFoto(MD5Util.md5Hex(user.getEmail()));
 		this.usersDao.save(user);
+		result.include(user);
 		result.forwardTo(LoginController.class).login(user);
 	}
 
