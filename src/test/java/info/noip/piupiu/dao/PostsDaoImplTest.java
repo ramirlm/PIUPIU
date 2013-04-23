@@ -11,6 +11,9 @@ public class PostsDaoImplTest {
 	
 	@Mock
 	MongoTemplate mongoTemplate;
+	
+	@Mock
+	CircleDao circleDao;
 
 	@Before
 	public void setUp() throws Exception {
@@ -23,7 +26,7 @@ public class PostsDaoImplTest {
 
 	@Test
 	public void testFindByAuthor() {
-		PostsDaoImpl posts = new PostsDaoImpl(mongoTemplate);
+		PostsDaoImpl posts = new PostsDaoImpl(mongoTemplate,circleDao);
 	}
 
 }

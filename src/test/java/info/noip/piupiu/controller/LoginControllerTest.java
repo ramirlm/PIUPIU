@@ -1,7 +1,6 @@
 package info.noip.piupiu.controller;
 
 import static org.mockito.Mockito.when;
-import static org.junit.Assert.fail;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;

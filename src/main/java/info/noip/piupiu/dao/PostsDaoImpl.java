@@ -20,7 +20,7 @@ public class PostsDaoImpl implements PostsDao {
 	private MongoTemplate mongoTemplate;
 	private CircleDao circleDao;
 
-	private PostsDaoImpl(MongoTemplate mongoTemplate, CircleDao circleDao) {
+	public PostsDaoImpl(MongoTemplate mongoTemplate, CircleDao circleDao) {
 		this.mongoTemplate = mongoTemplate;
 		this.circleDao = circleDao;
 	}

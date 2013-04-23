@@ -2,6 +2,7 @@ package info.noip.piupiu.dao;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
+
 import info.noip.piupiu.infra.MongoTemplate;
 import info.noip.piupiu.model.mongo.Circle;
 
