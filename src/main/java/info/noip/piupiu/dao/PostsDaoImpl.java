@@ -68,4 +68,11 @@ public class PostsDaoImpl implements PostsDao {
 		return  mongoTemplate.getMongoOperations().findById(peep.getId(), Peep.class);
 	}
 
+	@Override
+	public void dislike(Peep peep, String likerEmail) {
+		peep = mongoTemplate.getMongoOperations().findById(peep.getId(), Peep.class);
+		peep.removeLiker(likerEmail);
+		mongoTemplate.getMongoOperations().save(peep);
+	}
+
 }

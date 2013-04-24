@@ -15,5 +15,7 @@ public interface PostsDao {
 
 	void like(Peep peep, String likerEmail);
 	
+	void dislike(Peep peep, String likerEmail);
+	
 	Peep retrieveById(Peep peep);
 }

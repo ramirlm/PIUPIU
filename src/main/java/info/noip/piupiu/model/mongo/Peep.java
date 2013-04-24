@@ -85,5 +85,25 @@ public class Peep implements Serializable{
 		liker.setHash(MD5Util.md5Hex(likerEmail));
 		likers.add(liker);
 	}
+	
+	public Boolean isALiker(String likerEmail){
+		if(likers != null){
+			Liker liker = new Liker();
+			liker.setUserEmail(likerEmail);
+			liker.setHash(MD5Util.md5Hex(likerEmail));
+			return likers.contains(liker);
+		}
+		return false;
+	}
+
+	public void removeLiker(String likerEmail) {
+		if(likers != null && !likers.isEmpty()){
+			Liker liker = new Liker();
+			liker.setUserEmail(likerEmail);
+			liker.setHash(MD5Util.md5Hex(likerEmail));
+			likers.remove(liker);	
+		}
+		
+	}
 
 }

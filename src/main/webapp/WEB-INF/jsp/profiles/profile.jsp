@@ -77,6 +77,17 @@
 				        <p>
 				          <i class="icon-user"></i> by <a href="/piupiu/profiles/${peep.author}">${peep.author}</a>
 				          | <i class="icon-calendar"></i> ${peep.date}
+				          | <a title="Quem Curte" href="javascript: showLikers('${peep.id}')">
+	          					<img src="img/favicon.ico" alt="Quem Curte" height="16" width="16">
+	          				</a>
+							<c:choose>
+								<c:when test="${peep.likers.size() > 0}">
+									<span class=" badge badge-info"><c:out value="${peep.likers.size()}"/></span>
+								</c:when>
+								<c:otherwise>
+									<span class=" badge badge-info">0</span>
+								</c:otherwise>
+							</c:choose>
 				        </p>
 				      </div>
 				    </div>
@@ -89,6 +100,9 @@
 
       </div> <!-- container -->
       
+      <div id="idShowLikes">
+      </div>
+      
       <%@ include file="../template/_footer.jsp" %>
 
     <!-- Le javascript
@@ -100,6 +114,7 @@
     <script src="../js/bootstrap-typeahead.js"></script>
     <script src="../js/profile.js"></script>
     <script src="../js/search.js"></script>
+    <script src="../js/peeps.js"></script>
     <script>
     $(function() {
     	charactersCount();

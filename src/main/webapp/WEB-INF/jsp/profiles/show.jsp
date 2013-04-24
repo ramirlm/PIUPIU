@@ -91,14 +91,6 @@
     	userSearchAutoComplete();        
     });
     
-    $("#idShowLikes").dialog({
-  	  height: 200,
-  	  width: 350,
-  	  autoOpen: false,
-        modal: true,
-        resizable: false
-      });
-    
     </script>
 </div>
   </body>
