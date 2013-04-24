@@ -57,13 +57,15 @@
           <hr>
           <div id="wall">
           </div>
-    	    
         </div>
 
       </div> <!-- container -->
       
-      <%@ include file="../template/_footer.jsp" %>
+      <div id="idShowLikes">
+      </div>
 
+      <%@ include file="../template/_footer.jsp" %>
+      
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

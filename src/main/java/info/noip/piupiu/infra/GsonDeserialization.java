@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,6 +68,7 @@ public class GsonDeserialization implements Deserializer {
 
 	protected Gson getGson() {
 		GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+		gsonBuilder.registerTypeAdapter(ObjectId.class, new ObjectIdDeserializer());
 		return gsonBuilder.create();
 	}
 

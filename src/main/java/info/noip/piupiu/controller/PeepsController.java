@@ -3,6 +3,7 @@ package info.noip.piupiu.controller;
 import info.noip.piupiu.dao.PostsDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;
+import info.noip.piupiu.model.mongo.Liker;
 import info.noip.piupiu.model.mongo.Peep;
 
 import java.util.Date;
@@ -49,7 +50,7 @@ public class PeepsController {
 	public void list(Integer skip, Integer limit) {
 		User user = userSession.getUser();
 		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), skip, limit);
-		result.use(Results.json()).withoutRoot().from(peeps).serialize();
+		result.use(Results.json()).withoutRoot().from(peeps).include("id").serialize();
 	}
 
 	@Path("/peeps/show")
@@ -60,4 +61,30 @@ public class PeepsController {
 		result.include("peeps", peeps);
 	}
 
+	@Path("/peeps/like")
+	@Post
+	@Consumes("application/json")
+	public void like(Peep peep){
+		User loggedUser = userSession.getUser();
+		postsDao.like(peep, loggedUser.getEmail());
+		result.use(Results.status()).ok();
+	}
+	
+	@Path("/peeps/showLikers")
+	@Post
+	@Consumes("application/json")
+	public void showLikers(Peep peep){
+		peep = postsDao.retrieveById(peep);
+		result.include("isALiker", peep.isALiker(userSession.getUser().getEmail()));
+		result.include("peep", peep);
+	}
+	
+	@Path("/peeps/dislike")
+	@Post
+	@Consumes("application/json")
+	public void dislike(Peep peep){
+		User loggedUser = userSession.getUser();
+		postsDao.dislike(peep, loggedUser.getEmail());
+		result.use(Results.status()).ok();
+	}
 }

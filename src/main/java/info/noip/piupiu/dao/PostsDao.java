@@ -12,4 +12,10 @@ public interface PostsDao {
 	List<Peep> findByAuthor(String author, Integer skip, Integer limit);
 
 	List<Peep> retrieveTimeline(User user, Integer skip, Integer limit);
+
+	void like(Peep peep, String likerEmail);
+	
+	void dislike(Peep peep, String likerEmail);
+	
+	Peep retrieveById(Peep peep);
 }
