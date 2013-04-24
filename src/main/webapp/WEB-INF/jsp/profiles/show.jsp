@@ -61,8 +61,6 @@
 
       </div> <!-- container -->
       
-      <div id="push"></div>
-
       <div id="idShowLikes">
       </div>
 
