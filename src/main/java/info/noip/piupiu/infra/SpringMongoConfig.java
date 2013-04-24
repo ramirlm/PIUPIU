@@ -18,6 +18,7 @@ public class SpringMongoConfig {
 		return new SimpleMongoDbFactory(new Mongo("piupiu.no-ip.info"), "database");
 	}
 
+	
 	public @Bean MongoTemplate mongoTemplate() throws Exception {
 
 		MappingMongoConverter converter = new MappingMongoConverter(
