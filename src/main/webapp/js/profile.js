@@ -9,6 +9,10 @@ function follow(email){
 			$("#pIsFollowing").empty();
 			$("#pIsFollowing").append("<a></a>");
 			$("#pIsFollowing a").attr("href","javascript:unfollow('${user.email }')").attr("class","badge badge-important").text("Deixar de Seguir");
+			
+			var followersCounter = $("#followersCounter");
+			var followersCounterInt = parseInt(followersCounter.text());
+			followersCounter.text(followersCounterInt + 1);
 		}
    });
 }
@@ -24,6 +28,10 @@ function unfollow(email){
 	    	  $("#pIsFollowing").empty();
 	    	  $("#pIsFollowing").append("<a></a>");
 	    	  $("#pIsFollowing a").attr("href","javascript:follow('${user.email }')").attr("class","badge badge-success").text("Seguir");
+	    	  
+	    	  var followersCounter = $("#followersCounter");
+			  var followersCounterInt = parseInt(followersCounter.text());
+			  followersCounter.text(followersCounterInt - 1);
 	      }
    });
 }

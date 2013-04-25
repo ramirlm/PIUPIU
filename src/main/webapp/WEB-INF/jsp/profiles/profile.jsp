@@ -43,7 +43,7 @@
 					    <span class=" badge badge-warning">0 Mensagens Pessoais</span>
 					    <p>
 	  				    <span class=" badge badge-info">Seguindo ${following}</span>
-  					    <span class=" badge badge-info">${followers} Seguidores</span>
+  					    <span class=" badge badge-info"><span id="followersCounter">${followers}</span> Seguidores</span>
 					    </p>
 					    <p id="pIsFollowing">
 							<c:if test="${isFollowing}">
