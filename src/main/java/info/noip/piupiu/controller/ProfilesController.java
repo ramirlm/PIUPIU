@@ -6,9 +6,9 @@ import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.PostsDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.UserSession;
 import info.noip.piupiu.model.mongo.Circle;
 import info.noip.piupiu.model.mongo.Peep;
+import info.noip.piupiu.security.UserSession;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
@@ -41,11 +41,15 @@ public class ProfilesController {
 	@Path("/profiles/{email}")
 	public void profile(String email) {
 		User user = usersDao.findByEmail(email);
-		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), 0, 50);
-		result.include("user", user);
-		result.include("peeps", peeps);
-		result.include("isFollowing", isFollowing(email));
-		getNumberOfFollowersAndFollowing(email);
+		if (user != null) {
+			List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), 0, 50);
+			result.include("user", user);
+			result.include("peeps", peeps);
+			result.include("isFollowing", isFollowing(email));
+			getNumberOfFollowersAndFollowing(email);
+		} else {
+			result.redirectTo(ProfilesController.class).show();
+		}
 	}
 
 	private void getNumberOfFollowersAndFollowing(String email) {

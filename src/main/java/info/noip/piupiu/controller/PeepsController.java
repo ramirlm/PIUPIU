@@ -2,9 +2,9 @@ package info.noip.piupiu.controller;
 
 import info.noip.piupiu.dao.PostsDao;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.UserSession;
 import info.noip.piupiu.model.mongo.Liker;
 import info.noip.piupiu.model.mongo.Peep;
+import info.noip.piupiu.security.UserSession;
 
 import java.util.Date;
 import java.util.List;

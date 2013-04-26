@@ -2,7 +2,8 @@ package info.noip.piupiu.controller;
 
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.UserSession;
+import info.noip.piupiu.security.Public;
+import info.noip.piupiu.security.UserSession;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
@@ -19,48 +20,47 @@ public class LoginController {
 	private final UsersDao usersDao;
 	private final Validator validator;
 
-	public LoginController(Result result, UserSession userSession,
-			UsersDao usersDao, Validator validator) {
+	public LoginController(Result result, UserSession userSession,	UsersDao usersDao, Validator validator) {
 		this.result = result;
 		this.userSession = userSession;
 		this.usersDao = usersDao;
 		this.validator = validator;
 	}
 
-	@Path("/login")
+	@Public
+	@Get("/")
+	public void index() {
+	}
+
+	@Public
 	@Post
+	@Path("/login")
 	public void login(final User user) {
 		validator.checking(new Validations() {
 			{
-				that(user.getEmail() != null, "emailLogin",
-						"- O E-mail é obrigatório.");
-				that(user.getPassword() != null, "passwordLogin",
-						"- A Senha é obrigatória.");
+				that(user.getEmail() != null, "emailLogin",	"- O E-mail é obrigatório.");
+				that(user.getPassword() != null, "passwordLogin","- A Senha é obrigatória.");
 			}
 		});
-		
-		validator.onErrorRedirectTo(IndexController.class).index();
 
+		validator.onErrorRedirectTo(LoginController.class).index();
 		final User userLogged = usersDao.login(user);
-		
 		validator.checking(new Validations() {
 			{
-				that(userLogged != null, "user",
-						"- Usuário e/ou senha incorretos.");
+				that(userLogged != null, "user", "- Usuário e/ou senha incorretos.");
 			}
 		});
 
-		validator.onErrorRedirectTo(IndexController.class).index();
-
+		validator.onErrorRedirectTo(LoginController.class).index();
 		this.userSession.setUser(userLogged);
-		result.include("userSession",userSession);
+		result.include("userSession", userSession);
 		result.redirectTo(ProfilesController.class).show();
 	}
-	
+
 	@Get("/logout")
-    public void logout() {
+	public void logout() {
 		this.userSession.setUser(null);
-		result.include("userSession",null);
-        result.redirectTo(IndexController.class).index();
-    }
+		result.include("userSession", null);
+		result.redirectTo(LoginController.class).index();
+	}
 }
