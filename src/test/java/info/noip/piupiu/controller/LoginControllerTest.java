@@ -3,7 +3,7 @@ package info.noip.piupiu.controller;
 import static org.mockito.Mockito.when;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.security.UserSession;
+import info.noip.piupiu.model.UserSession;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,7 +25,7 @@ public class LoginControllerTest {
 	Validator validator;
 	
 	@Mock
-	LoginController loginController;
+	IndexController indexController;
 	
 	UserSession userSession;
 	
@@ -43,7 +43,7 @@ public class LoginControllerTest {
 		User user = createFakeUser("jonesbones@ufc.com", "Jon Bones Jones");
 		when(usersDao.login(user)).thenReturn(user);
 		MockResult result = new MockResult();
-		when(validator.onErrorRedirectTo(LoginController.class)).thenReturn(loginController);
+		when(validator.onErrorRedirectTo(IndexController.class)).thenReturn(indexController);
 		LoginController controller = new LoginController(result, userSession, usersDao, validator);
 		controller.login(user);
 		Assert.assertTrue(result.used());

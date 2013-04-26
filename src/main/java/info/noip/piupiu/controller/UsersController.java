@@ -4,7 +4,7 @@ import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.infra.MD5Util;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.security.UserSession;
+import info.noip.piupiu.model.UserSession;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class UsersController {
 			}
 		});
 
-		validator.onErrorRedirectTo(LoginController.class).index();
+		validator.onErrorRedirectTo(IndexController.class).index();
 		user.setHashFoto(MD5Util.md5Hex(user.getEmail()));
 		this.usersDao.save(user);
 		result.include(user);
