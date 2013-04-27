@@ -16,10 +16,6 @@
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
   	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   	
   	<style type="text/css">
@@ -87,78 +83,16 @@
       
       <hr>
 	  <div id="push"></div>
-      <footer>
-        <p class="muted credit" style="text-align: center;">&copy; Piu-Piu Company 2013</p>
-      </footer>
-      
-      <div id="messages" title="Atenção" style="display: none;">
-      	<ul></ul>
-      </div>
       
 	<c:if test="${not empty errors}">
-		<div id="errors">
-			<c:forEach items="${errors}" var="error">
-				<script type="text/javascript">
-					$("#messages").append("<p>${error.message}</p>");
-				</script>
-				
-				<c:if test="${error.category eq 'emailLogin'}">
-					<script type="text/javascript">
-						var elem = document.getElementById("emailLogin");
-			    	    elem.style.borderColor="#CC0000";
-					</script>
-				</c:if>
-				<c:if test="${error.category eq 'passwordLogin'}">
-					<script type="text/javascript">
-						var elem = document.getElementById("passwordLogin");
-			    	    elem.style.borderColor="#CC0000";
-					</script>
-				</c:if>
-			
-				<c:if test="${error.category eq 'name'}">
-					<script type="text/javascript">
-						var elem = document.getElementById("userName");
-			    	    elem.style.borderColor="#CC0000";
-					</script>
-				</c:if>
-				<c:if test="${error.category eq 'email'}">
-					<script type="text/javascript">
-						var elem = document.getElementById("userEmail");
-			    	    elem.style.borderColor="#CC0000";
-					</script>
-				</c:if>
-				<c:if test="${error.category eq 'password'}">
-					<script type="text/javascript">
-						var elem = document.getElementById("userPassword");
-			    	    elem.style.borderColor="#CC0000";
-					</script>
-				</c:if>
-				<c:if test="${error.category eq 'passwordConfirmation'}">
-					<script type="text/javascript">
-						var elem = document.getElementById("userPasswordConfirmation");
-			    	    elem.style.borderColor="#CC0000";
-					</script>
-				</c:if>
-			</c:forEach>
-			
-			<script type="text/javascript">
-				$(function() {
-				    $("#messages").dialog("open");
-				});
-			</script>
-			
+		<div class="alert alert-error" id="messages">  
+	      <h4 class="alert-heading">Erros</h4>  
+		  <c:forEach items="${errors}" var="error">
+			<p>- ${error.message}</p>
+		  </c:forEach>
 		</div>
 	</c:if>
+	<%@ include file="../template/_footer.jsp" %>
     </div><!--/.fluid-container-->
   </body>
-  
-  <script type="text/javascript">
-	$("#messages").dialog({
-	  height: 200,
-	  width: 350,
-	  autoOpen: false,
-      modal: true,
-      resizable: false
-    });
-  </script>
 </html>
