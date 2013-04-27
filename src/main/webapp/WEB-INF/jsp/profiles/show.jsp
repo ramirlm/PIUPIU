@@ -56,6 +56,10 @@
   	        <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
    	      </form>
           <hr>
+          <div id="idLoadActualPeeps" align="right">
+          	<button class="btn btn-info" type="button" onclick="loadPeeps();">Atualizar Peeps</button>
+          </div>
+          <hr>
           <div id="wall">
           </div>
           
