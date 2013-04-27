@@ -15,7 +15,7 @@ import com.mongodb.Mongo;
 public class SpringMongoConfig {
 	
 	public @Bean MongoDbFactory mongoDbFactory() throws Exception {
-		return new SimpleMongoDbFactory(new Mongo("localhost"), "piupiudev");
+		return new SimpleMongoDbFactory(new Mongo("piupiu.no-ip.info"), "database");
 	}
 
 	public @Bean MongoTemplate mongoTemplate() throws Exception {

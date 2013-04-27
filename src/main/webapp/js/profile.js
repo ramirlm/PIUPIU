@@ -35,3 +35,17 @@ function unfollow(email){
 	      }
    });
 }
+
+function loadProfilePeeps(usermail) {
+	$.ajax({
+      url: "/piupiu/profiles/peeps/" + usermail, 
+      type: "GET",
+      async: true,
+      success: function(html){
+    	  $('#wall').append(html);
+      },
+      error: function(data, status, e) {
+    	  //Show Error Div 
+	  }
+   });
+}

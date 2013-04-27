@@ -20,7 +20,7 @@ import br.com.caelum.vraptor.view.Results;
 @Resource
 public class PeepsController {
 
-	private static final Integer PEEPS_LIMIT = 20;
+	public static final Integer PEEPS_LIMIT = 20;
 	
 	private PostsDao postsDao;
 	private Result result;
