@@ -43,7 +43,7 @@
 					    <span class=" badge badge-warning">0 Mensagens Pessoais</span>
 					    <p>
 	  				    <span class=" badge badge-info">Seguindo ${following}</span>
-  					    <span class=" badge badge-info">${followers} Seguidores</span>
+  					    <span class=" badge badge-info"><span id="followersCounter">${followers}</span> Seguidores</span>
 					    </p>
 					    <p id="pIsFollowing">
 							<c:if test="${isFollowing}">
@@ -78,7 +78,7 @@
 				          <i class="icon-user"></i> by <a href="/piupiu/profiles/${peep.author}">${peep.author}</a>
 				          | <i class="icon-calendar"></i> ${peep.date}
 				          | <a title="Quem Curte" href="javascript: showLikers('${peep.id}')">
-	          					<img src="img/favicon.ico" alt="Quem Curte" height="16" width="16">
+	          					<img src="../img/favicon.ico" alt="Quem Curte" height="16" width="16">
 	          				</a>
 							<c:choose>
 								<c:when test="${peep.likers.size() > 0}">
