@@ -55,11 +55,11 @@ public class PeepsControllerTest {
 		peeps.add(peep);
 		
 		when(userSession.getUser()).thenReturn(user);
-		when(postsDao.findByAuthor("teste@gmail.com", 0, 50)).thenReturn(peeps);
+		when(postsDao.findByAuthor("teste@gmail.com", 0, PeepsController.PEEPS_LIMIT)).thenReturn(peeps);
 		
 		MockResult result = new MockResult();
 		PeepsController controller = new PeepsController(postsDao, result, userSession);
-		controller.list(0, 50);
+		controller.list(0);
 		Assert.assertTrue(result.used());
 	}
 	
@@ -75,10 +75,10 @@ public class PeepsControllerTest {
 		peeps.add(peep);
 		
 		when(userSession.getUser()).thenReturn(user);
-		when(postsDao.retrieveTimeline(user, 0, 50)).thenReturn(peeps);
+		when(postsDao.retrieveTimeline(user, 0, PeepsController.PEEPS_LIMIT)).thenReturn(peeps);
 		MockResult result = new MockResult();
 		PeepsController controller = new PeepsController(postsDao, result, userSession);
-		controller.show();
+		controller.list();
 		List<Peep> list = (List<Peep>)result.included().get("peeps");
 		Assert.assertEquals(2, list.size());
 	}

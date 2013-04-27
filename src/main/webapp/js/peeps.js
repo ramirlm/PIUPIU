@@ -17,6 +17,9 @@ function peep(){
 }
     
 function loadPeeps() {
+	    $('#totalPeeps').val(0);
+	    $('#wall').empty();
+	
     	$.ajax({
 	      url: "/piupiu/peeps/show",
 	      type: "GET",

@@ -19,11 +19,10 @@
 	        <p>
 	          <i class="icon-user"></i> by <a href="/piupiu/profiles/${peep.author}">${peep.author}</a>
 	          | <i class="icon-calendar"></i> ${peep.date}
-	          | <a title="RePiar" class="icon-random" href="javascript: showRepeepDialog('${peep.author}','${peep.text}')"></a>
 	          | <a title="Quem Curte" href="javascript: showLikers('${peep.id}')">
-	          		<img src="img/favicon.ico" alt="Quem Curte" height="16" width="16">
-	          	</a>
-	       		<c:choose>
+        					<img src="../img/favicon.ico" alt="Quem Curte" height="16" width="16">
+        				</a>
+				<c:choose>
 					<c:when test="${peep.likers.size() > 0}">
 						<span class=" badge badge-info"><c:out value="${peep.likers.size()}"/></span>
 					</c:when>
