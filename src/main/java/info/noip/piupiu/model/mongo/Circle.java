@@ -12,64 +12,71 @@ public class Circle {
 	@Id
 	private ObjectId id;
 	private String userEmail;
-	private HashSet<String> followers;
-	private HashSet<String> following;
-	
-	public void addFollower(String email){
-		if(followers == null){
-			followers = new HashSet<String>();
+	private HashSet<Avatar> followers;
+	private HashSet<Avatar> following;
+
+	public void addFollower(String email) {
+		if (followers == null) {
+			followers = new HashSet<Avatar>();
 		}
-		followers.add(email);
+		Avatar follower = new Avatar(email);
+		followers.add(follower);
 	}
-	
-	public void addFollowing(String email){
-		if(following == null){
-			following = new HashSet<String>();
+
+	public void addFollowing(String email) {
+		if (following == null) {
+			following = new HashSet<Avatar>();
 		}
-		following.add(email);
+		Avatar follow = new Avatar(email);
+		following.add(follow);
 	}
-	
+
 	public ObjectId getId() {
 		return id;
 	}
+
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
+
 	public String getUserEmail() {
 		return userEmail;
 	}
+
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
 
-	public HashSet<String> getFollowers() {
+	public HashSet<Avatar> getFollowers() {
 		return followers;
 	}
 
-	public void setFollowers(HashSet<String> followers) {
+	public void setFollowers(HashSet<Avatar> followers) {
 		this.followers = followers;
 	}
 
-	public HashSet<String> getFollowing() {
+	public HashSet<Avatar> getFollowing() {
 		return following;
 	}
 
-	public void setFollowing(HashSet<String> following) {
+	public void setFollowing(HashSet<Avatar> following) {
 		this.following = following;
 	}
 
-	public void removeFollowing(String userToUnfollowEmail) {
-		if(following==null){
-			following = new HashSet<String>();
+	public void removeFollowing(String emailUserToUnfollow) {
+		if (following == null) {
+			following = new HashSet<Avatar>();
 		}
-		following.remove(userToUnfollowEmail);
+		Avatar userToUnfollow = new Avatar(emailUserToUnfollow);
+		following.remove(userToUnfollow);
 	}
-	
-	public void removeFollowers(String userToUnfollowEmail) {
-		if(followers==null){
-			followers = new HashSet<String>();
+
+	public void removeFollowers(String emailUserToUnfollow) {
+		if (followers == null) {
+			followers = new HashSet<Avatar>();
 		}
-		followers.remove(userToUnfollowEmail);
+		Avatar userToUnfollow = new Avatar(emailUserToUnfollow);
+		followers.remove(userToUnfollow);
 	}
-	
+
 }

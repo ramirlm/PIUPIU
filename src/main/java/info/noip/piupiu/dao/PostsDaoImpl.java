@@ -2,10 +2,12 @@ package info.noip.piupiu.dao;
 
 import info.noip.piupiu.infra.MongoTemplate;
 import info.noip.piupiu.model.User;
+import info.noip.piupiu.model.mongo.Avatar;
 import info.noip.piupiu.model.mongo.Circle;
 import info.noip.piupiu.model.mongo.Peep;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -44,7 +46,11 @@ public class PostsDaoImpl implements PostsDao {
 		Circle circle = circleDao.getCircleByEmail(user.getEmail());
 		List<String> following = new ArrayList<String>();
 		if (circle != null && circle.getFollowing() != null) {
-			following.addAll(circle.getFollowing());
+			Iterator<Avatar> iterator = circle.getFollowing().iterator();
+			while (iterator.hasNext()) {
+				Avatar avatar = iterator.next();
+				following.add(avatar.getUserEmail());
+			}
 		}
 		following.add(user.getEmail());
 
@@ -58,19 +64,22 @@ public class PostsDaoImpl implements PostsDao {
 
 	@Override
 	public void like(Peep peep, String likerEmail) {
-		peep = mongoTemplate.getMongoOperations().findById(peep.getId(), Peep.class);
+		peep = mongoTemplate.getMongoOperations().findById(peep.getId(),
+				Peep.class);
 		peep.addLiker(likerEmail);
 		mongoTemplate.getMongoOperations().save(peep);
 	}
 
 	@Override
 	public Peep retrieveById(Peep peep) {
-		return  mongoTemplate.getMongoOperations().findById(peep.getId(), Peep.class);
+		return mongoTemplate.getMongoOperations().findById(peep.getId(),
+				Peep.class);
 	}
 
 	@Override
 	public void dislike(Peep peep, String likerEmail) {
-		peep = mongoTemplate.getMongoOperations().findById(peep.getId(), Peep.class);
+		peep = mongoTemplate.getMongoOperations().findById(peep.getId(),
+				Peep.class);
 		peep.removeLiker(likerEmail);
 		mongoTemplate.getMongoOperations().save(peep);
 	}

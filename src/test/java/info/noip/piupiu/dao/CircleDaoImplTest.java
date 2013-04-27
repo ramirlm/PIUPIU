@@ -1,9 +1,8 @@
 package info.noip.piupiu.dao;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
-
 import info.noip.piupiu.infra.MongoTemplate;
+import info.noip.piupiu.model.mongo.Avatar;
 import info.noip.piupiu.model.mongo.Circle;
 
 import java.util.HashSet;
@@ -35,7 +34,7 @@ public class CircleDaoImplTest {
 
 	@Test
 	public void testFollow() {
-		HashSet<String> followers = createFakeListOfEmails("fighter@ufc.com", "Fighter", 5);
+		HashSet<Avatar> followers = createFakeListOfEmails("fighter@ufc.com", "Fighter", 5);
 		Circle userCircle = createCircleOfAnUser("andersonsilva@gmail.com", followers);
 		
 		Query userEmail = new Query(Criteria.where("userEmail").is("andersonsilva@gmail.com"));
@@ -49,7 +48,7 @@ public class CircleDaoImplTest {
 	
 	@Test
 	public void testFirstFollow() {
-		Circle userCircle = createCircleOfAnUser("andersonsilva@gmail.com", new HashSet<String>());
+		Circle userCircle = createCircleOfAnUser("andersonsilva@gmail.com", new HashSet<Avatar>());
 		userCircle.addFollowing("chaelsonnen@gmail.com");
 		
 		Query userEmail = new Query(Criteria.where("userEmail").is("andersonsilva@gmail.com"));
@@ -63,7 +62,7 @@ public class CircleDaoImplTest {
 
 	@Test
 	public void testIsFollowing() {
-		HashSet<String> followers = createFakeListOfEmails("fighter@ufc.com", "Fighter", 5);
+		HashSet<Avatar> followers = createFakeListOfEmails("fighter@ufc.com", "Fighter", 5);
 		Circle userCircle = createCircleOfAnUser("andersonsilva@gmail.com", followers);
 		
 		Query userEmail = new Query(Criteria.where("userEmail").is("andersonsilva@gmail.com"));
@@ -77,7 +76,7 @@ public class CircleDaoImplTest {
 	
 	@Test
 	public void testIsNotFollowing() {
-		HashSet<String> followers = createFakeListOfEmails("fighter@ufc.com", "Fighter", 5);
+		HashSet<Avatar> followers = createFakeListOfEmails("fighter@ufc.com", "Fighter", 5);
 		Circle userCircle = createCircleOfAnUser("andersonsilva@gmail.com", followers);
 		
 		Query userEmail = new Query(Criteria.where("userEmail").is("andersonsilva@gmail.com"));
@@ -104,7 +103,7 @@ public class CircleDaoImplTest {
 
 	@Test
 	public void testUnfollow() {
-		HashSet<String> followers = createFakeListOfEmails("fighter@ufc.com", "Fighter", 5);
+		HashSet<Avatar> followers = createFakeListOfEmails("fighter@ufc.com", "Fighter", 5);
 		Circle userCircle = createCircleOfAnUser("andersonsilva@gmail.com", followers);
 		
 		Query userEmail = new Query(Criteria.where("userEmail").is("andersonsilva@gmail.com"));
@@ -116,18 +115,19 @@ public class CircleDaoImplTest {
 		Assert.assertFalse(userCircle.getFollowing().contains("chaelsonnen@gmail.com"));
 	}
 	
-	private HashSet<String> createFakeListOfEmails(String email, String name, int qtd){
-		HashSet<String> users = new HashSet<String>();
+	private HashSet<Avatar> createFakeListOfEmails(String email, String name, int qtd){
+		HashSet<Avatar> users = new HashSet<Avatar>();
 		for(int i=0; i<qtd; i++){
-			users.add(i+"_test@gmail.com");
+			Avatar avatar = new Avatar(i+"_test@gmail.com");
+			users.add(avatar);
 		}
 		return users;
 	}
 	
-	private Circle createCircleOfAnUser(String userEmail, Set<String> followers){
+	private Circle createCircleOfAnUser(String userEmail, Set<Avatar> followers){
 		Circle ret = new Circle();
 		ret.setUserEmail(userEmail);
-		ret.setFollowers(new HashSet<String>(followers));
+		ret.setFollowers(new HashSet<Avatar>(followers));
 		return ret;
 	}
 

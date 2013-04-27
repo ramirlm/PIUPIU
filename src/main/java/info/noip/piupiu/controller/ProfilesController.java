@@ -1,14 +1,17 @@
 package info.noip.piupiu.controller;
 
-import java.util.List;
-
 import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.PostsDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;
+import info.noip.piupiu.model.mongo.Avatar;
 import info.noip.piupiu.model.mongo.Circle;
 import info.noip.piupiu.model.mongo.Peep;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
@@ -34,7 +37,7 @@ public class ProfilesController {
 
 	@Path("/profiles")
 	public void show() {
-		getNumberOfFollowersAndFollowing(userSession.getUser().getEmail());
+		getNumberOfFollowersAndFollowing2(userSession.getUser().getEmail());
 	}
 
 	@Get
@@ -59,6 +62,28 @@ public class ProfilesController {
 					: circle.getFollowers().size());
 			result.include("following", circle.getFollowing() == null ? 0
 					: circle.getFollowing().size());
+		}
+	}
+
+	private void getNumberOfFollowersAndFollowing2(String email) {
+		List<Avatar> listaVazia = new ArrayList<Avatar>();
+
+		Circle circle = circleDao.getCircleByEmail(email);
+		if (circle == null) {
+			result.include("followers", listaVazia);
+			result.include("following", listaVazia);
+		} else {
+			if (circle.getFollowers() != null) {
+				result.include("followers", new ArrayList<Avatar>(circle.getFollowers()));
+			} else {
+				result.include("followers", listaVazia);
+			}
+
+			if (circle.getFollowing() != null) {
+				result.include("following", new ArrayList<Avatar>(circle.getFollowing()));
+			} else {
+				result.include("following", listaVazia);
+			}
 		}
 	}
 

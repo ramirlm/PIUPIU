@@ -1,6 +1,7 @@
 package info.noip.piupiu.dao;
 
 import info.noip.piupiu.infra.MongoTemplate;
+import info.noip.piupiu.model.mongo.Avatar;
 import info.noip.piupiu.model.mongo.Circle;
 
 import java.util.HashSet;
@@ -63,8 +64,9 @@ public class CircleDaoImpl implements CircleDao {
 				Circle.class);
 
 		if (userCircle != null) {
-			HashSet<String> following = userCircle.getFollowing();
-			return following == null ? false : following.contains(email);
+			HashSet<Avatar> following = userCircle.getFollowing();
+			Avatar avatar = new Avatar(email);
+			return following == null ? false : following.contains(avatar);
 		}
 
 		return false;
