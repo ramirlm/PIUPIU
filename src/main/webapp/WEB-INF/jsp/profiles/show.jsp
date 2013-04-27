@@ -72,6 +72,7 @@
             </div>
             <div class="span6 well">
                <form accept-charset="UTF-8" id="peepForm">
+               	  <input type="hidden" name="totalPeeps" id="totalPeeps" value="0">
                   <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
                   <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
                   <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
@@ -79,29 +80,32 @@
                <hr>
                <div id="wall">
                </div>
+               <div>
+	          	<button class="btn btn-info" type="button" onclick="loadMorePeeps();">Veja mais</button>
+	           </div>
             </div>
          </div>
          <!-- container -->
          <div id="idShowLikes">
          </div>
          <%@ include file="../template/_footer.jsp" %>
-         <!-- Le javascript
-            ================================================== -->
-         <!-- Placed at the end of the document so the pages load faster -->
-         <script src="js/jquery-1.8.3.js"></script>
-         <script src="js/jquery-ui.js"></script>
-         <script src="js/bootstrap.js"></script>
-         <script src="js/bootstrap-typeahead.js"></script>
-         <script src="js/peeps.js"></script>
-         <script src="js/search.js"></script>
-         <script>
-            $(function() {
-            	loadPeeps();
-            	charactersCount();
-            	userSearchAutoComplete();   
-            });
-            
-         </script>
-      </div>
-   </body>
+      
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+    <script src="js/peeps.js"></script>
+    <script src="js/search.js"></script>
+    <script>
+    $(function() {
+    	loadPeeps();
+    	charactersCount();
+    	userSearchAutoComplete();        
+    });
+    </script>
+</div>
+  </body>
 </html>

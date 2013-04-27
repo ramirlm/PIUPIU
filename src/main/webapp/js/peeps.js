@@ -17,6 +17,9 @@ function peep(){
 }
     
 function loadPeeps() {
+	    $('#totalPeeps').val(0);
+	    $('#wall').empty();
+	
     	$.ajax({
 	      url: "/piupiu/peeps/show",
 	      type: "GET",
@@ -101,4 +104,26 @@ function dislike(id){
     	  //Show Error Div 
 	    }
 	});
+}
+
+function updateTotalPeeps(){
+	var total = $('#totalPeeps').val();
+	var count = eval(total) + 1;
+    $('#totalPeeps').val(count);	
+}
+
+function loadMorePeeps(){
+	var skip = $('#totalPeeps').val();
+	
+	$.ajax({
+	      url: "/piupiu/peeps/"+skip,
+	      type: "GET",
+	      async: true,
+	      success: function(html){
+	    	  $('#wall').append(html);
+	      },
+	      error: function(data, status, e) {
+	    	  //Show Error Div 
+		  }
+	   });
 }

@@ -15,10 +15,9 @@ import com.mongodb.Mongo;
 public class SpringMongoConfig {
 	
 	public @Bean MongoDbFactory mongoDbFactory() throws Exception {
-		return new SimpleMongoDbFactory(new Mongo("piupiu.no-ip.info"), "database");
+		return new SimpleMongoDbFactory(new Mongo("localhost"), "piupiudev");
 	}
 
-	
 	public @Bean MongoTemplate mongoTemplate() throws Exception {
 
 		MappingMongoConverter converter = new MappingMongoConverter(

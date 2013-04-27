@@ -44,12 +44,35 @@ public class ProfilesController {
 	@Path("/profiles/{email}")
 	public void profile(String email) {
 		User user = usersDao.findByEmail(email);
-		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), 0, 50);
 		result.include("user", user);
-		result.include("peeps", peeps);
 		result.include("isFollowing", isFollowing(email));
 		getNumberOfFollowersAndFollowing(email);
 	}
+	
+	@Get
+	@Path("/profiles/peeps/{email}")
+	public void profilePeeps(String email) {
+		User user = usersDao.findByEmail(email);
+		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), 0, PeepsController.PEEPS_LIMIT);
+		result.include("peeps", peeps);
+		result.forwardTo(ProfilesController.class).peeps();
+	}
+	
+	@Get
+	@Path("/profiles/peeps/{email}/skip/{skip}")
+	public void profilePeeps(String email, Integer skip) {
+		User user = usersDao.findByEmail(email);
+		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), skip, PeepsController.PEEPS_LIMIT);
+		result.include("peeps", peeps);
+		result.forwardTo(ProfilesController.class).peeps();
+	}
+	
+	/** 
+	 *  Nao remover. Metodo responsavel por redirecionar 
+	 * 	as duas chamdas feitas ao metodos profilePeeps 
+	 *  para a pagina 'peeps'
+	 */
+	public void peeps(){ }
 
 	private void getNumberOfFollowersAndFollowing(String email) {
 		Circle circle = circleDao.getCircleByEmail(email);

@@ -19,6 +19,8 @@ import br.com.caelum.vraptor.view.Results;
 @Resource
 public class PeepsController {
 
+	public static final Integer PEEPS_LIMIT = 10;
+	
 	private PostsDao postsDao;
 	private Result result;
 	private UserSession userSession;
@@ -44,21 +46,30 @@ public class PeepsController {
 		}
 	}
 
-	@Path("/peeps/{skip}/{limit}")
+	@Path("/peeps/{skip}")
 	@Get
-	public void list(Integer skip, Integer limit) {
+	public void list(Integer skip) {
 		User user = userSession.getUser();
-		List<Peep> peeps = postsDao.findByAuthor(user.getEmail(), skip, limit);
-		result.use(Results.json()).withoutRoot().from(peeps).include("id").serialize();
+		List<Peep> peeps = postsDao.retrieveTimeline(user, skip, PEEPS_LIMIT);
+		result.include("peeps", peeps);
+		result.forwardTo(PeepsController.class).show();
 	}
 
 	@Path("/peeps/show")
 	@Get
-	public void show() {
+	public void list(){
 		User user = userSession.getUser();
-		List<Peep> peeps = postsDao.retrieveTimeline(user, 0, 50);
-		result.include("peeps", peeps);
+		List<Peep> peeps = postsDao.retrieveTimeline(user, 0, PEEPS_LIMIT);
+		result.include("peeps", peeps);		
+		result.forwardTo(PeepsController.class).show();
 	}
+
+	/** 
+	 *  Nao remover. Metodo responsavel por redirecionar 
+	 * 	as duas chamdas feitas ao metodos list() e list(Integer skip, Integer limit) 
+	 *  para a pagia=na 'show'
+	 */
+	public void show() {}
 
 	@Path("/peeps/like")
 	@Post
