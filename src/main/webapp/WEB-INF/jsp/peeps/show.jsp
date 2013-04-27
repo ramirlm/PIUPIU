@@ -37,4 +37,7 @@
 	  </div>
 	</div>
 	<hr>
+	<script>
+		updateTotalPeeps();
+	</script>
 </c:forEach>

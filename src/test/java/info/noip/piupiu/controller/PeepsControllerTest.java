@@ -59,7 +59,7 @@ public class PeepsControllerTest {
 		
 		MockResult result = new MockResult();
 		PeepsController controller = new PeepsController(postsDao, result, userSession);
-		controller.list(0, 50);
+		controller.list(0);
 		Assert.assertTrue(result.used());
 	}
 	

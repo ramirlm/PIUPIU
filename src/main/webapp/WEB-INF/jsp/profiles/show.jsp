@@ -50,12 +50,17 @@
         </div>
         <div class="span6 well">
   	      <form accept-charset="UTF-8" id="peepForm">
+  	      	<input type="hidden" name="totalPeeps" id="totalPeeps" value="0">
             <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
 	        <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
   	        <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
    	      </form>
           <hr>
           <div id="wall">
+          </div>
+          
+          <div>
+          	<button class="btn btn-info" type="button" onclick="loadMorePeeps();">Veja mais</button>
           </div>
         </div>
 
@@ -81,6 +86,28 @@
     	charactersCount();
     	userSearchAutoComplete();        
     });
+    
+    function updateTotalPeeps(){
+    	var total = $('#totalPeeps').val();
+    	var count = eval(total) + 1;
+        $('#totalPeeps').val(count);	
+    }
+    
+    function loadMorePeeps(){
+    	var skip = $('#totalPeeps').val();
+    	
+    	$.ajax({
+  	      url: "/piupiu/peeps/"+skip,
+  	      type: "GET",
+  	      async: true,
+  	      success: function(html){
+  	    	  $('#wall').append(html);
+  	      },
+  	      error: function(data, status, e) {
+  	    	  //Show Error Div 
+  		  }
+  	   });
+    }
     
     </script>
 </div>
