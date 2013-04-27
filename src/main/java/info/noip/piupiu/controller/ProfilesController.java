@@ -37,7 +37,7 @@ public class ProfilesController {
 
 	@Path("/profiles")
 	public void show() {
-		getNumberOfFollowersAndFollowing2(userSession.getUser().getEmail());
+		getFollowersAndFollowing(userSession.getUser().getEmail());
 	}
 
 	@Get
@@ -46,7 +46,7 @@ public class ProfilesController {
 		User user = usersDao.findByEmail(email);
 		result.include("user", user);
 		result.include("isFollowing", isFollowing(email));
-		getNumberOfFollowersAndFollowing(email);
+		getFollowersAndFollowing(email);
 	}
 	
 	@Get
@@ -74,21 +74,7 @@ public class ProfilesController {
 	 */
 	public void peeps(){ }
 
-	private void getNumberOfFollowersAndFollowing(String email) {
-		Circle circle = circleDao.getCircleByEmail(email);
-
-		if (circle == null) {
-			result.include("followers", 0);
-			result.include("following", 0);
-		} else {
-			result.include("followers", circle.getFollowers() == null ? 0
-					: circle.getFollowers().size());
-			result.include("following", circle.getFollowing() == null ? 0
-					: circle.getFollowing().size());
-		}
-	}
-
-	private void getNumberOfFollowersAndFollowing2(String email) {
+	private void getFollowersAndFollowing(String email) {
 		List<Avatar> listaVazia = new ArrayList<Avatar>();
 
 		Circle circle = circleDao.getCircleByEmail(email);
