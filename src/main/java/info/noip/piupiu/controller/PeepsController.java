@@ -3,7 +3,6 @@ package info.noip.piupiu.controller;
 import info.noip.piupiu.dao.PostsDao;
 import info.noip.piupiu.model.User;
 import info.noip.piupiu.model.UserSession;
-import info.noip.piupiu.model.mongo.Liker;
 import info.noip.piupiu.model.mongo.Peep;
 
 import java.util.Date;
@@ -20,7 +19,7 @@ import br.com.caelum.vraptor.view.Results;
 @Resource
 public class PeepsController {
 
-	public static final Integer PEEPS_LIMIT = 20;
+	public static final Integer PEEPS_LIMIT = 10;
 	
 	private PostsDao postsDao;
 	private Result result;

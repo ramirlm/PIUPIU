@@ -32,10 +32,8 @@ public class LoginController {
 	public void login(final User user) {
 		validator.checking(new Validations() {
 			{
-				that(user.getEmail() != null, "emailLogin",
-						"- O E-mail é obrigatório.");
-				that(user.getPassword() != null, "passwordLogin",
-						"- A Senha é obrigatória.");
+				that(user.getEmail() != null, "login.error",	"login.email.obrigatorio");
+				that(user.getPassword() != null, "login.error", "login.password.obrigatorio");
 			}
 		});
 		
@@ -45,8 +43,7 @@ public class LoginController {
 		
 		validator.checking(new Validations() {
 			{
-				that(userLogged != null, "user",
-						"- Usuário e/ou senha incorretos.");
+				that(userLogged != null, "login.error", "login.usuariosenha.incorretos");
 			}
 		});
 

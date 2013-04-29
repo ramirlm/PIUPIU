@@ -105,3 +105,25 @@ function dislike(id){
 	    }
 	});
 }
+
+function updateTotalPeeps(){
+	var total = $('#totalPeeps').val();
+	var count = eval(total) + 1;
+    $('#totalPeeps').val(count);	
+}
+
+function loadMorePeeps(){
+	var skip = $('#totalPeeps').val();
+	
+	$.ajax({
+	      url: "/piupiu/peeps/"+skip,
+	      type: "GET",
+	      async: true,
+	      success: function(html){
+	    	  $('#wall').append(html);
+	      },
+	      error: function(data, status, e) {
+	    	  //Show Error Div 
+		  }
+	   });
+}

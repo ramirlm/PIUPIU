@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="<%= request.getContextPath() %>"/>
 <c:forEach items="${peeps}" var="peep">
 	<div class="row">
 	  <div class="span8">
@@ -17,10 +18,10 @@
 	      <div class="span8">
 	        <p></p>
 	        <p>
-	          <i class="icon-user"></i> by <a href="/piupiu/profiles/${peep.author}">${peep.author}</a>
+	          <i class="icon-user"></i> by <a href="${ctx}/profiles/${peep.author}">${peep.author}</a>
 	          | <i class="icon-calendar"></i> ${peep.date}
 	          | <a title="Quem Curte" href="javascript: showLikers('${peep.id}')">
-        					<img src="../img/favicon.ico" alt="Quem Curte" height="16" width="16">
+        					<img src="${ctx}/img/favicon.ico" alt="Quem Curte" height="16" width="16">
         				</a>
 				<c:choose>
 					<c:when test="${peep.likers.size() > 0}">
