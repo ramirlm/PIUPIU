@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.AssertTrue;
+
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -99,6 +101,18 @@ public class PeepsControllerTest {
 		
 	}
 	
+	@Test
+	public void shouldShowLikers(){
+		Peep peep = createFakePeep("teste@gmail.com", "Teste1");
+		peep.addLiker("josealdo@ufc.com");
+		peep.addLiker("urijahfaber@ufc.com");
+		
+		Assert.assertTrue(peep.isALiker("josealdo@ufc.com"));
+		
+		MockResult result = new MockResult();
+		PeepsController controller = new PeepsController(postsDao, result, userSession);
+	}
+	
 	private Peep createFakePeep(String author, String text){
 		Peep peep = new Peep();
 		peep.setAuthor(author);
@@ -107,5 +121,7 @@ public class PeepsControllerTest {
 		return peep;
 		
 	}
+	
+	
 	
 }
