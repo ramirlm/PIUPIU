@@ -43,7 +43,8 @@ public class CircleDaoImplTest {
 		
 		CircleDaoImpl circleDao = new CircleDaoImpl(mongoTemplate);
 		circleDao.follow("andersonsilva@gmail.com", "chaelsonnen@gmail.com");
-		Assert.assertTrue(userCircle.getFollowing().contains("chaelsonnen@gmail.com"));
+		Avatar avatar = new Avatar("chaelsonnen@gmail.com");
+		Assert.assertTrue(userCircle.getFollowing().contains(avatar));
 	}
 	
 	@Test
@@ -57,7 +58,8 @@ public class CircleDaoImplTest {
 		
 		CircleDaoImpl circleDao = new CircleDaoImpl(mongoTemplate);
 		circleDao.follow("andersonsilva@gmail.com", "chaelsonnen@gmail.com");
-		Assert.assertTrue(userCircle.getFollowing().contains("chaelsonnen@gmail.com"));
+		Avatar avatar = new Avatar("chaelsonnen@gmail.com");
+		Assert.assertTrue(userCircle.getFollowing().contains(avatar));
 	}
 
 	@Test
