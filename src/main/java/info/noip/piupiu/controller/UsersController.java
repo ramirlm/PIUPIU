@@ -4,6 +4,7 @@ import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.infra.MD5Util;
 import info.noip.piupiu.model.User;
+import info.noip.piupiu.security.Public;
 import info.noip.piupiu.security.UserSession;
 
 import java.util.List;
@@ -36,19 +37,18 @@ public class UsersController {
 		this.circleDao = circleDao;
 	}
 
+	@Public
 	@Path("/users")
 	@Post
 	public void save(final User user) {
+		System.out.println("tesssadasdsa fdsda");
 		validator.validate(user);
 
 		validator.checking(new Validations() {
 			{
-				if (user.getPassword() != null
-						&& user.getPasswordConfirmation() != null) {
-					that(user.getPassword().equals(
-							user.getPasswordConfirmation()),
-							"passwordConfirmation",
-							"- A Senha e a Confirmação de Senha não conferem.");
+				if (user.getPassword() != null	&& user.getPasswordConfirmation() != null) {
+					that(user.getPassword().equals(user.getPasswordConfirmation()),	"passwordConfirmation", "- A Senha e a Confirmação de Senha não conferem.");
+					System.out.println("testessssss");
 				}
 			}
 		});
