@@ -4,6 +4,7 @@ import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.infra.MD5Util;
 import info.noip.piupiu.model.User;
+import info.noip.piupiu.security.Public;
 import info.noip.piupiu.security.UserSession;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class UsersController {
 		this.circleDao = circleDao;
 	}
 
+	@Public
 	@Path("/users")
 	@Post
 	public void save(final User user) {
