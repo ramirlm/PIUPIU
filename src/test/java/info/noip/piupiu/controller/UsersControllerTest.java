@@ -4,7 +4,7 @@ import static org.mockito.Mockito.when;
 import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.UserSession;
+import info.noip.piupiu.security.UserSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class UsersControllerTest {
 	Validator validator;
 	
 	@Mock
-	IndexController indexController;
+	LoginController loginController;
 	
 	private User user;
 	private List<User> users;
@@ -57,7 +57,7 @@ public class UsersControllerTest {
 		user = createFakeUser("teste@gmail.com","testuser");
 		user.setPassword("trolololo");
 		MockResult result = new MockResult();
-		when(validator.onErrorRedirectTo(IndexController.class)).thenReturn(indexController);
+		when(validator.onErrorRedirectTo(LoginController.class)).thenReturn(loginController);
 		UsersController controller = new UsersController(usersDao, result, validator, userSession, circleDao);
 		controller.save(user);
 		Assert.assertTrue(result.used());

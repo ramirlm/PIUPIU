@@ -2,7 +2,8 @@ package info.noip.piupiu.controller;
 
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.UserSession;
+import info.noip.piupiu.security.Public;
+import info.noip.piupiu.security.UserSession;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
@@ -27,37 +28,43 @@ public class LoginController {
 		this.validator = validator;
 	}
 
+	@Public
+	@Get("/")
+	public void index() {
+	}
+
+	@Public
 	@Path("/login")
 	@Post
 	public void login(final User user) {
 		validator.checking(new Validations() {
 			{
-				that(user.getEmail() != null, "login.error",	"login.email.obrigatorio");
-				that(user.getPassword() != null, "login.error", "login.password.obrigatorio");
+				that(user.getEmail() != null, "login.error", "login.email.obrigatorio");
+				that(user.getPassword() != null, "login.error", 	"login.password.obrigatorio");
 			}
 		});
-		
-		validator.onErrorRedirectTo(IndexController.class).index();
+
+		validator.onErrorRedirectTo(LoginController.class).index();
 
 		final User userLogged = usersDao.login(user);
-		
+
 		validator.checking(new Validations() {
 			{
-				that(userLogged != null, "login.error", "login.usuariosenha.incorretos");
+				that(userLogged != null, "login.error",	"login.usuariosenha.incorretos");
 			}
 		});
 
-		validator.onErrorRedirectTo(IndexController.class).index();
+		validator.onErrorRedirectTo(LoginController.class).index();
 
 		this.userSession.setUser(userLogged);
-		result.include("userSession",userSession);
+		result.include("userSession", userSession);
 		result.redirectTo(ProfilesController.class).show();
 	}
-	
+
 	@Get("/logout")
-    public void logout() {
+	public void logout() {
 		this.userSession.setUser(null);
-		result.include("userSession",null);
-        result.redirectTo(IndexController.class).index();
-    }
+		result.include("userSession", null);
+		result.redirectTo(LoginController.class).index();
+	}
 }
