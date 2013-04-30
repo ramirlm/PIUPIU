@@ -4,8 +4,8 @@ import static org.mockito.Mockito.when;
 import info.noip.piupiu.dao.PostsDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.UserSession;
 import info.noip.piupiu.model.mongo.Peep;
+import info.noip.piupiu.security.UserSession;
 
 import java.util.ArrayList;
 import java.util.Date;
