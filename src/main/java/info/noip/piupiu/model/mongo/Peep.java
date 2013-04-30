@@ -3,6 +3,8 @@ package info.noip.piupiu.model.mongo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -21,11 +23,15 @@ public class Peep implements Serializable {
 	private Date date;
 
 	private String text;
+	
+	private String formattedText;
 
 	private String hash;
 
 	private HashSet<Avatar> likers;
 
+	private HashSet<String> hashTags;
+	
 	public ObjectId getId() {
 		return id;
 	}
@@ -73,6 +79,23 @@ public class Peep implements Serializable {
 	public void setLikers(HashSet<Avatar> likers) {
 		this.likers = likers;
 	}
+	
+
+	public HashSet<String> getHashTags() {
+		if(hashTags==null){
+			hashTags = new HashSet<String>();
+		}
+		return hashTags;
+	}
+
+	public String getFormattedText() {
+		if(formattedText == null) formattedText = formatText();
+		return formattedText;
+	}
+
+	public void setHashTags(HashSet<String> hashTags) {
+		this.hashTags = hashTags;
+	}
 
 	public void addLiker(String likerEmail) {
 		if (likers == null) {
@@ -97,5 +120,35 @@ public class Peep implements Serializable {
 		}
 
 	}
+
+	public void addHashTags() {
+		if(this.text!=null){
+			Pattern pattern = Pattern.compile("\\B#(\\w*[A-Za-z_]+\\w*)");
+			Matcher matcher = pattern.matcher(this.text);
+
+			while (matcher.find()) {
+				String attribute = matcher.group();
+				getHashTags().add(attribute);
+			}			
+		}
+	}
+	
+	public String formatText(){
+		String ret = "";
+		if(this.text!=null){
+			ret = this.text;
+			Pattern pattern = Pattern.compile("\\B#(\\w*[A-Za-z_]+\\w*)");
+			Matcher matcher = pattern.matcher(ret);
+
+			while (matcher.find()) {
+				String attribute = matcher.group();
+				ret = ret.replaceAll(attribute, "<a href='#'>"+attribute+"</a>");
+			}			
+		}
+		
+		return ret;
+	}
+	
+	
 
 }
