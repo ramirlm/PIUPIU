@@ -8,10 +8,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 public class PostsDaoImplTest {
-	
+
 	@Mock
 	MongoTemplate mongoTemplate;
-	
+
 	@Mock
 	CircleDao circleDao;
 
@@ -19,14 +19,12 @@ public class PostsDaoImplTest {
 	public void setUp() throws Exception {
 	}
 
-	
 	public void testSave() {
 		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testFindByAuthor() {
-		PostsDaoImpl posts = new PostsDaoImpl(mongoTemplate,circleDao);
 	}
 
 }
