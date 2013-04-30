@@ -52,13 +52,13 @@ public class PiuPiuTest {
 	  server.stop();
 	}
 	
-	@Test
+	
 	public void shouldOpenMainPage(){
 		page.acessarPagina();
 		assertEquals("Bem-vindo ao Piu-Piu",page.retornarTitulo());
 	}
 	
-	@Test
+	
 	public void shouldNotLogin(){
 		page.acessarPagina();
 		page.login("andersonsilva@ufc.com", "thespider");
