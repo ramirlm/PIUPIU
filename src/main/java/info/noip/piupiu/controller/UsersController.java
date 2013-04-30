@@ -48,7 +48,7 @@ public class UsersController {
 					that(user.getPassword().equals(
 							user.getPasswordConfirmation()),
 							"passwordConfirmation",
-							"- A Senha e a Confirmação de Senha não conferem.");
+							"newUser.password.confirmation");
 				}
 			}
 		});
