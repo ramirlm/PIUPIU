@@ -1,4 +1,12 @@
 PIUPIU
 ======
 
-Twitter Like System
+Twitter Like System.
+
+====
+Using:
+VRaptor
+PostgreSQL
+MongoDB
+JQuery
+Twitter Bootstrap
