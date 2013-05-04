@@ -44,8 +44,8 @@ function get_username(email) {
 }
 
 $("#idShowLikes").dialog({
-	  height: 200,
-	  width: 350,
+	  height: 300,
+	  width: 450,
 	  autoOpen: false,
       modal: true,
       resizable: true,
@@ -82,6 +82,7 @@ function like(id){
 	    success: function(html){
 	    	$("#idShowLikes").empty();
 	    	$("#idShowLikes").dialog("close");
+	    	location.reload();
 	    },
 	    error: function(data, status, e) {
     	  //Show Error Div 
@@ -99,6 +100,7 @@ function dislike(id){
 	    success: function(html){
 	    	$("#idShowLikes").empty();
 	    	$("#idShowLikes").dialog("close");
+	    	location.reload();
 	    },
 	    error: function(data, status, e) {
     	  //Show Error Div 
