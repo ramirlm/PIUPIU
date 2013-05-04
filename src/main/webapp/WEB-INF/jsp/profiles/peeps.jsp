@@ -5,7 +5,7 @@
 	  <div class="span8">
 	    <div class="row">
 	      <div class="span1">
-	        <a href="#" class="thumbnail">
+	        <a href="${ctx}/profiles/${peep.author}" class="thumbnail">
 	            <img src="http://www.gravatar.com/avatar/${peep.hash}?s=200" alt="">
 	        </a>
 	      </div>
