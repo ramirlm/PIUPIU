@@ -74,7 +74,7 @@ public class ProfilesController {
 	 */
 	public void peeps(){ }
 
-	private void getFollowersAndFollowing(String email) {
+	public void getFollowersAndFollowing(String email) {
 		List<Avatar> listaVazia = new ArrayList<Avatar>();
 
 		Circle circle = circleDao.getCircleByEmail(email);
