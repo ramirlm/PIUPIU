@@ -10,8 +10,6 @@
     <meta name="author" content="">
     
     <!-- Le styles -->
-    <link href="css/jquery-ui.css" rel="stylesheet">
-    <link href="css/jquery.ui.theme.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     
@@ -25,8 +23,6 @@
       }
     </style>
   	
-  	<script src="js/jquery-1.9.1.js"></script>
-  	<script src="js/jquery-ui.js"></script>
     <script src="js/bootstrap.js"></script>
   </head>
 
@@ -39,7 +35,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="index">Piu-Piu</a>
+          <a class="brand" href="/piupiu/">Piu-Piu</a>
           <div class="nav-collapse collapse">
             <form class="navbar-form pull-right" action="/piupiu/login" name="registerForm" method="post" accept-charset="utf-8">
               <input id="emailLogin" class="span2" type="text" 
@@ -82,11 +78,10 @@
       </div><!--/row-->
       
       <hr>
-	  <div id="push"></div>
       
 	<c:if test="${not empty errors}">
 		<div class="alert alert-error" id="messages">  
-	      <h4 class="alert-heading">Erros</h4>  
+	      <h4 class="alert-heading">Erros</h4><br/>  
 		  <c:forEach items="${errors}" var="error">
 			<p>- ${error.message}</p>
 		  </c:forEach>

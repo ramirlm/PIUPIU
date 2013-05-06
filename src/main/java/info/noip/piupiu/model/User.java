@@ -23,21 +23,21 @@ public class User {
 	private Long id;
 
 	@Column(nullable = false, length = 45)
-	@NotEmpty(message = "- O Nome é obrigatório.")
-	@Length(min = 3, message = "- O Nome deve conter no mínimo 3 caracteres.")
+	@NotEmpty(message = "O Nome é obrigatório.")
+	@Length(min = 3, message = "O Nome deve conter no mínimo 3 caracteres.")
 	private String name;
 
 	@Column(nullable = false, length = 45)
-	@NotEmpty(message = "- A Senha é obrigatória.")
+	@NotEmpty(message = "A Senha é obrigatória.")
 	private String password;
 
 	@Transient
-	@NotEmpty(message = "- A Confirmação de Senha é obrigatória.")
+	@NotEmpty(message = "A Confirmação de Senha é obrigatória.")
 	private String passwordConfirmation;
 
 	@Column(unique = true, nullable = false, length = 45)
-	@Email(message = "- E-mail inválido.")
-	@NotEmpty(message = "- O E-mail é obrigatório.")
+	@Email(message = "E-mail inválido.")
+	@NotEmpty(message = "O E-mail é obrigatório.")
 	private String email;
 	
 	private String hashFoto;

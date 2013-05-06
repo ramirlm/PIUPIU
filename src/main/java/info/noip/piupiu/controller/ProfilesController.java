@@ -4,10 +4,10 @@ import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.PostsDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.UserSession;
 import info.noip.piupiu.model.mongo.Avatar;
 import info.noip.piupiu.model.mongo.Circle;
 import info.noip.piupiu.model.mongo.Peep;
+import info.noip.piupiu.security.UserSession;
 
 import java.util.ArrayList;
 import java.util.List;
