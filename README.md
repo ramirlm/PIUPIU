@@ -1,6 +1,13 @@
 PIUPIU
 ======
 
-Twitter Like System
+Twitter Like System.
 
-Fazendo um teste de branch
+====
+Using:
+VRaptor
+Hibernate
+PostgreSQL
+MongoDB
+JQuery
+Twitter Bootstrap

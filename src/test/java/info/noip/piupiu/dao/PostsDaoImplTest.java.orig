@@ -31,7 +31,9 @@ public class PostsDaoImplTest {
 	public void setUp() throws Exception {
 	}
 
-@Test
+<<<<<<< HEAD
+	
+	@Test
 	public void shouldLikePeep(){
 		Peep peep = new Peep();
 		peep.setId(new ObjectId());
@@ -42,9 +44,14 @@ public class PostsDaoImplTest {
 		dao.like(peep, "eduardohitek@gmail.com");
 		assertTrue(peep.getLikers().size() > 0);
 		assertEquals(1, peep.getLikers().size());
+=======
+	public void testSave() {
+		fail("Not yet implemented");
+>>>>>>> master
 	}
 	
 	@Test
+<<<<<<< HEAD
 	public void shouldDislikePeep(){
 		Peep peep = new Peep();
 		peep.setId(new ObjectId());
@@ -59,6 +66,9 @@ public class PostsDaoImplTest {
 		dao.dislike(peep, "eduardohitek@gmail.com");
 		assertFalse(peep.getLikers().size() > 0);
 		assertEquals(0, peep.getLikers().size());
+=======
+	public void testFindByAuthor() {
+>>>>>>> master
 	}
 
 

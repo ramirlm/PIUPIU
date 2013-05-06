@@ -7,7 +7,7 @@
         </a>
       </div>
       <div class="span4">
-        <p> ${peep.text}
+        <p> ${peep.formattedText}
         </p>
       </div>
     </div>

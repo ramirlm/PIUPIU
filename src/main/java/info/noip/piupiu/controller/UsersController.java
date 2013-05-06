@@ -4,7 +4,8 @@ import info.noip.piupiu.dao.CircleDao;
 import info.noip.piupiu.dao.UsersDao;
 import info.noip.piupiu.infra.MD5Util;
 import info.noip.piupiu.model.User;
-import info.noip.piupiu.model.UserSession;
+import info.noip.piupiu.security.Public;
+import info.noip.piupiu.security.UserSession;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class UsersController {
 		this.circleDao = circleDao;
 	}
 
+	@Public
 	@Path("/users")
 	@Post
 	public void save(final User user) {
@@ -48,12 +50,12 @@ public class UsersController {
 					that(user.getPassword().equals(
 							user.getPasswordConfirmation()),
 							"passwordConfirmation",
-							"- A Senha e a Confirmação de Senha não conferem.");
+							"newUser.password.confirmation");
 				}
 			}
 		});
 
-		validator.onErrorRedirectTo(IndexController.class).index();
+		validator.onErrorRedirectTo(LoginController.class).index();
 		user.setHashFoto(MD5Util.md5Hex(user.getEmail()));
 		this.usersDao.save(user);
 		result.include(user);

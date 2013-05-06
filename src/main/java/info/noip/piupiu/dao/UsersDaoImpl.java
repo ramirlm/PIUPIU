@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.NoResultException;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -32,21 +31,23 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public User login(User user) {
 		try {
-			Query query = (Query) session
-					.createQuery("from User where email = :email and password = :password");
-			query.setParameter("email", user.getEmail());
-			query.setParameter("password", user.getPassword());
-			return (User) query.uniqueResult();
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.add(Restrictions.eq("email", user.getEmail()));
+			criteria.add(Restrictions.eq("password", user.getPassword()));
+
+			return (User) criteria.uniqueResult();
 		} catch (NoResultException e) {
 			return null;
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> find(String user) {
 		Criteria criteria = session.createCriteria(User.class);
-		criteria.add(Restrictions.ilike("name", user.toLowerCase(), MatchMode.ANYWHERE));
-		return (List<User>)criteria.list();
+		criteria.add(Restrictions.ilike("name", user.toLowerCase(),
+				MatchMode.ANYWHERE));
+		return (List<User>) criteria.list();
 	}
 
 	@Override
@@ -60,7 +61,5 @@ public class UsersDaoImpl implements UsersDao {
 		criteria.add(Restrictions.like("email", email, MatchMode.EXACT));
 		return (User) criteria.uniqueResult();
 	}
-	
-	
 
 }
