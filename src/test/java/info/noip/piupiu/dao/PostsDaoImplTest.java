@@ -17,10 +17,10 @@ import org.springframework.data.mongodb.core.MongoOperations;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostsDaoImplTest {
-
+	
 	@Mock
 	MongoTemplate mongoTemplate;
-
+	
 	@Mock
 	CircleDao circleDao;
 	
@@ -31,7 +31,8 @@ public class PostsDaoImplTest {
 	public void setUp() throws Exception {
 	}
 
-@Test
+	
+	@Test
 	public void shouldLikePeep(){
 		Peep peep = new Peep();
 		peep.setId(new ObjectId());
