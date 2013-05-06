@@ -14,6 +14,8 @@
       <%@ include file="../template/_style.jsp" %>
       <link href="../css/bootstrap-responsive.css" rel="stylesheet">
       <link href="../css/typeahead.js-bootstrap.css" rel="stylesheet">
+      <link href="../css/jquery-ui.css" rel="stylesheet">
+      <link href="../css/jquery.ui.theme.css" rel="stylesheet">
       <link rel="shortcut icon" href="${ctx}/img/favicon.ico" type="image/x-icon" />
    </head>
    <body>
@@ -87,13 +89,14 @@
             </div>
          </div>
          <!-- container -->
-         <div id="idShowLikes">
+         <div id="idShowLikes" title="Curtidas">
          </div>
          <%@ include file="../template/_footer.jsp" %>
          <!-- Le javascript
             ================================================== -->
          <!-- Placed at the end of the document so the pages load faster -->
          <script src="../js/jquery-1.8.3.js"></script>
+         <script src="../js/jquery-ui.js"></script>
          <script src="../js/bootstrap.js"></script>
          <script src="../js/bootstrap-typeahead.js"></script>
          <script src="../js/profile.js"></script>
