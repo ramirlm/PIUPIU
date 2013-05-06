@@ -4,6 +4,7 @@ import info.noip.piupiu.functional.page.PiuPiuPage;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.openqa.selenium.server.RemoteControlConfiguration;
 import org.openqa.selenium.server.SeleniumServer;
 import static org.junit.Assert.*;
@@ -14,6 +15,7 @@ import com.thoughtworks.selenium.HttpCommandProcessor;
 import com.thoughtworks.selenium.Selenium;
 import org.junit.Test;
 
+@Ignore
 public class PiuPiuTest {
 
 	private static SeleniumServer server;
