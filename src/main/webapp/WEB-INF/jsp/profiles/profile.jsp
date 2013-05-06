@@ -84,7 +84,7 @@
                <div id="wall">
                </div>
                <div>
-                  <button class="btn btn-info" type="button" onclick="loadMorePeeps('${user.email}');">Veja mais</button>
+                  <button class="btn btn-info" type="button" onclick="loadMorePeepsProfile('${user.email}');">Veja mais</button>
                </div>
             </div>
          </div>

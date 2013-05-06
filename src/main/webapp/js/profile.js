@@ -37,3 +37,25 @@ function loadProfilePeeps(usermail) {
 	  }
    });
 }
+
+function updateTotalPeeps(){
+	var total = $('#totalPeeps').val();
+	var count = eval(total) + 1;
+    $('#totalPeeps').val(count);	
+}
+
+function loadMorePeepsProfile(usermail){
+	var skip = $('#totalPeeps').val();
+	
+	$.ajax({
+	      url: "/piupiu/profiles/peeps/"+ usermail+ "/skip/" +skip,
+	      type: "GET",
+	      async: true,
+	      success: function(html){
+	    	  $('#wall').append(html);
+	      },
+	      error: function(data, status, e) {
+	    	  //Show Error Div 
+		  }
+	   });
+}
