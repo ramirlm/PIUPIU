@@ -51,24 +51,13 @@ public class PiuPiuTest {
 	  selenium.stop();
 	  server.stop();
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
-	@Test
->>>>>>> 4f98952cee6bb5524d5449904f86efd1f358f750
 	public void shouldOpenMainPage(){
 		page.acessarPagina();
 		assertEquals("Bem-vindo ao Piu-Piu",page.retornarTitulo());
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
-	@Test
->>>>>>> 4f98952cee6bb5524d5449904f86efd1f358f750
+
 	public void shouldNotLogin(){
 		page.acessarPagina();
 		page.login("andersonsilva@ufc.com", "thespider");
@@ -76,14 +65,12 @@ public class PiuPiuTest {
 
 	}
 
-	@Test
 	public void shouldLogin(){
 		page.acessarPagina();
 		page.login("testeselenium@gmail.com", "selenium123");
 		assertTrue(page.verificarTextoPresente("Logado como testeselenium@gmail.com"));
 	}
 
-	@Test
 	public void shouldPiar(){
 		long currentTimes = System.currentTimeMillis();
 		page.acessarPagina();
@@ -92,7 +79,6 @@ public class PiuPiuTest {
 		assertTrue(page.verificarTextoPresente("Piando agora "+currentTimes));
 	}
 
-	@Test
 	public void shouldPesquisarUsuario(){
 		page.acessarPagina();
 		page.login("testeselenium@gmail.com", "selenium123");
