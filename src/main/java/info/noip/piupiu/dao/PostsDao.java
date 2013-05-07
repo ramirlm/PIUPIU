@@ -18,4 +18,6 @@ public interface PostsDao {
 	void dislike(Peep peep, String likerEmail);
 	
 	Peep retrieveById(Peep peep);
+
+	List<Peep> findByHashTag(String hashtag, Integer skip, Integer peepsLimit);
 }
