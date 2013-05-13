@@ -37,6 +37,7 @@ public class HashTagsController {
 
 	@Path("/hashtags/{hashtag}")
 	public void show(String hashtag) {
+		result.include("user", userSession.getUser());
 		result.include("hashtag", hashtag);
 		getFollowersAndFollowing(userSession.getUser().getEmail());
 	}
@@ -71,12 +72,6 @@ public class HashTagsController {
 				result.include("following", listaVazia);
 			}
 		}
-	}
-
-	private Boolean isFollowing(String email) {
-		User loggedUser = userSession.getUser();
-		String loggedEmailUser = loggedUser.getEmail();
-		return circleDao.isFollowing(loggedEmailUser, email);
 	}
 
 }
