@@ -84,4 +84,18 @@ public class PostsDaoImpl implements PostsDao {
 		mongoTemplate.getMongoOperations().save(peep);
 	}
 
+	@Override
+	public List<Peep> findByHashTag(String hashtag, Integer skip,
+			Integer limit) {
+		List<String> hashtags = new ArrayList<String>();
+		hashtags.add("#" + hashtag);
+		
+		Query query = new Query(Criteria.where("hashTags").in(hashtags));
+		query.sort().on("date", Order.DESCENDING);
+		query.skip(skip == null ? 0 : skip);
+		query.limit(limit == null ? 0 : limit);
+
+		return mongoTemplate.getMongoOperations().find(query, Peep.class);
+	}
+
 }

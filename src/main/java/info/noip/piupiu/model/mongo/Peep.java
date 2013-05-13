@@ -142,7 +142,8 @@ public class Peep implements Serializable {
 
 			while (matcher.find()) {
 				String attribute = matcher.group();
-				ret = ret.replaceAll(attribute, "<a href='#'>"+attribute+"</a>");
+				String serchableAttribute = attribute.substring(1, attribute.length());
+				ret = ret.replaceAll(attribute, "<a href='/piupiu/hashtags/"+serchableAttribute+"'>"+attribute+"</a>");
 			}			
 		}
 		
