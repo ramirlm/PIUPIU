@@ -54,13 +54,12 @@ public class PiuPiuTest {
 	  server.stop();
 	}
 
-	@Test
 	public void shouldOpenMainPage(){
 		page.acessarPagina();
 		assertEquals("Bem-vindo ao Piu-Piu",page.retornarTitulo());
 	}
 
-	@Test
+
 	public void shouldNotLogin(){
 		page.acessarPagina();
 		page.login("andersonsilva@ufc.com", "thespider");
@@ -68,14 +67,12 @@ public class PiuPiuTest {
 
 	}
 
-	@Test
 	public void shouldLogin(){
 		page.acessarPagina();
 		page.login("testeselenium@gmail.com", "selenium123");
 		assertTrue(page.verificarTextoPresente("Logado como testeselenium@gmail.com"));
 	}
 
-	@Test
 	public void shouldPiar(){
 		long currentTimes = System.currentTimeMillis();
 		page.acessarPagina();
@@ -84,7 +81,6 @@ public class PiuPiuTest {
 		assertTrue(page.verificarTextoPresente("Piando agora "+currentTimes));
 	}
 
-	@Test
 	public void shouldPesquisarUsuario(){
 		page.acessarPagina();
 		page.login("testeselenium@gmail.com", "selenium123");

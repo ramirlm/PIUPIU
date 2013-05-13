@@ -23,7 +23,7 @@ public class PiuPiuPage extends PageObject {
 		String usuarioType = usuario.substring(0, usuario.length()-1);
 		preencherCampo("id=search", usuarioType);
 		preencherCampoAutoComplete("id=search", usuario.substring(usuario.length()-1));
-		acessarLinkAjax("css=strong");
+		acessarLink("css=strong");
 	}
 
 
