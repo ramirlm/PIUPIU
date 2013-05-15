@@ -89,7 +89,7 @@
          <!-- container -->
          <div id="idShowLikes" title="Curtidas">
          </div>
-         <div id="idShortUrl" title="Short Url">
+         <div id="idShortUrl" title="Short Url" style="display: none">
          	<form accept-charset="UTF-8" id="shortUrlForm">
          		<p class="sub-text">Url a ser Encurtada</p>
          		<input id="url" class="span3" type="text" placeholder="Url a ser Encurtada" name="url">
