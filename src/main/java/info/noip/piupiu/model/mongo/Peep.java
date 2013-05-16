@@ -23,7 +23,7 @@ public class Peep implements Serializable {
 	private Date date;
 
 	private String text;
-	
+
 	private String formattedText;
 
 	private String hash;
@@ -31,7 +31,7 @@ public class Peep implements Serializable {
 	private HashSet<Avatar> likers;
 
 	private HashSet<String> hashTags;
-	
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -79,17 +79,17 @@ public class Peep implements Serializable {
 	public void setLikers(HashSet<Avatar> likers) {
 		this.likers = likers;
 	}
-	
 
 	public HashSet<String> getHashTags() {
-		if(hashTags==null){
+		if (hashTags == null) {
 			hashTags = new HashSet<String>();
 		}
 		return hashTags;
 	}
 
 	public String getFormattedText() {
-		if(formattedText == null) formattedText = formatText();
+		if (formattedText == null)
+			formattedText = formatText();
 		return formattedText;
 	}
 
@@ -122,34 +122,42 @@ public class Peep implements Serializable {
 	}
 
 	public void addHashTags() {
-		if(this.text!=null){
+		if (this.text != null) {
 			Pattern pattern = Pattern.compile("\\B#(\\w*[A-Za-z_]+\\w*)");
 			Matcher matcher = pattern.matcher(this.text);
 
 			while (matcher.find()) {
 				String attribute = matcher.group();
 				getHashTags().add(attribute);
-			}			
+			}
 		}
 	}
-	
-	public String formatText(){
+
+	public String formatText() {
 		String ret = "";
-		if(this.text!=null){
+		if (this.text != null) {
 			ret = this.text;
 			Pattern pattern = Pattern.compile("\\B#(\\w*[A-Za-z_]+\\w*)");
 			Matcher matcher = pattern.matcher(ret);
 
 			while (matcher.find()) {
 				String attribute = matcher.group();
-				String serchableAttribute = attribute.substring(1, attribute.length());
-				ret = ret.replaceAll(attribute, "<a href='/piupiu/hashtags/"+serchableAttribute+"'>"+attribute+"</a>");
-			}			
+				String serchableAttribute = attribute.substring(1,
+						attribute.length());
+				ret = ret.replaceAll(attribute, "<a href='/piupiu/hashtags/"
+						+ serchableAttribute + "'>" + attribute + "</a>");
+			}
+			
+			String urlPattern = "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)";
+			Pattern re = Pattern.compile(urlPattern, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Matcher m = re.matcher(ret);
+			while (m.find()) {
+				String attribute = m.group();
+				ret = ret.replaceAll(attribute, "<a href='" + attribute + "' target='_blank'>" + attribute + "</a>");
+			}
 		}
-		
+
 		return ret;
 	}
-	
-	
 
 }
