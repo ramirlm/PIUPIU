@@ -89,7 +89,7 @@
             </div>
          </div>
          <!-- container -->
-         <div id="idShowLikes" title="Curtidas">
+         <div id="idShowLikes" title="Curtidas" style="display: none;">
          </div>
          <%@ include file="../template/_footer.jsp" %>
          <!-- Le javascript

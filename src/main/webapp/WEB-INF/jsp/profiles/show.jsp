@@ -87,7 +87,11 @@
             </div>
          </div>
          <!-- container -->
-         <div id="idShowLikes" title="Curtidas">
+         <div id="idShowLikes" title="Curtidas" style="display: none;">
+         </div>
+         <div id="confirmationDialog" title="Atenção" style="display: none;">
+         	<p>Tem certeza que deseja excluir este post?</p>
+         	<input id="peepId" type="hidden"/>
          </div>
          <div id="idShortUrl" title="Short Url" style="display: none">
          	<form accept-charset="UTF-8" id="shortUrlForm">
