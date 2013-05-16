@@ -76,6 +76,7 @@
                   <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
                   <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
                   <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
+                  <button class="btn btn-mini" type="button" onclick="openDialogShortUrl();">Encurte</button>
                </form>
                <hr>
                <div id="wall">
@@ -91,6 +92,13 @@
          <div id="confirmationDialog" title="Atenção" style="display: none;">
          	<p>Tem certeza que deseja excluir este post?</p>
          	<input id="peepId" type="hidden"/>
+         </div>
+         <div id="idShortUrl" title="Short Url" style="display: none">
+         	<form accept-charset="UTF-8" id="shortUrlForm">
+         		<p class="sub-text">Url a ser Encurtada</p>
+         		<input id="url" class="span3" type="text" placeholder="Url a ser Encurtada" name="url">
+         		<button class="btn btn-success" type="button" onclick="shortUrl();">Encurtar</button>
+         	</form>
          </div>
          <%@ include file="../template/_footer.jsp" %>
       
