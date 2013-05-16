@@ -98,4 +98,12 @@ public class PeepsController {
 		postsDao.dislike(peep, loggedUser.getEmail());
 		result.use(Results.status()).ok();
 	}
+	
+	@Path("/peeps/delete")
+	@Post
+	@Consumes("application/json")
+	public void delete(Peep peep){
+		postsDao.deletePeep(peep);
+		result.use(Results.status()).ok();
+	}
 }

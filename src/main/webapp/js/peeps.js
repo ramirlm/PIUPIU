@@ -129,3 +129,35 @@ function loadMorePeeps(){
 		  }
 	   });
 }
+
+$( "#confirmationDialog" ).dialog({
+	autoOpen: false,
+    modal: true,
+    resizable: true,
+    buttons: {
+      "Sim": function() {
+        deletePeep($("#peepId").val());
+      },
+      "Não": function() {
+        $( this ).dialog( "close" );
+      }
+    }
+  });
+
+function deletePeep(peepId) {
+	$.ajax({
+	      url: "/piupiu/peeps/delete",
+	      type: "POST",
+	      data: '{ "peep":{ "id":  "' + peepId + '" }}',
+		  contentType: "application/json",
+	      async: true,
+	      success: function(){
+	    	  location.reload();
+	      }
+	   });
+}
+
+function showConfirmationDialog(peepId){
+	$("#confirmationDialog").dialog("open");
+	$("#peepId").val(peepId);
+}

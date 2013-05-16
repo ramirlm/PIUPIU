@@ -20,4 +20,6 @@ public interface PostsDao {
 	Peep retrieveById(Peep peep);
 
 	List<Peep> findByHashTag(String hashtag, Integer skip, Integer peepsLimit);
+
+	void deletePeep(Peep peep);
 }

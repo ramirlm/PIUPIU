@@ -20,6 +20,10 @@
 	          <i class="icon-user"></i> by <a href="/piupiu/profiles/${peep.author}">${peep.author}</a>
 	          | <i class="icon-calendar"></i> ${peep.date}
 	          | <a title="RePiar" class="icon-random" href="javascript: showRepeepDialog('${peep.author}','${peep.text}')"></a>
+	          <c:if test="${peep.author == userSession.user.email}">
+                 | <a title="DesPiar" class="icon-trash" href="javascript: showConfirmationDialog('${peep.id}')"></a>
+              </c:if>
+	          
 	          | <a title="Quem Curte" href="javascript: showLikers('${peep.id}')">
 	          		<img src="img/favicon.ico" alt="Quem Curte" height="16" width="16">
 	          	</a>
