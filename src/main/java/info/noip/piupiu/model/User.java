@@ -1,5 +1,7 @@
 package info.noip.piupiu.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1197161031396565735L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
