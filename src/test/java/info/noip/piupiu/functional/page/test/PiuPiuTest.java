@@ -1,5 +1,7 @@
 package info.noip.piupiu.functional.page.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import info.noip.piupiu.functional.page.PiuPiuPage;
 
 import org.junit.AfterClass;
@@ -7,13 +9,11 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.openqa.selenium.server.RemoteControlConfiguration;
 import org.openqa.selenium.server.SeleniumServer;
-import static org.junit.Assert.*;
 
 import com.thoughtworks.selenium.CommandProcessor;
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.HttpCommandProcessor;
 import com.thoughtworks.selenium.Selenium;
-import org.junit.Test;
 
 @Ignore
 public class PiuPiuTest {
@@ -85,7 +85,7 @@ public class PiuPiuTest {
 		page.acessarPagina();
 		page.login("testeselenium@gmail.com", "selenium123");
 		page.pesquisarUsuario("eduardo");
-		assertTrue(page.verificarTextoPresente("eduardohitek"));
+		assertTrue(page.verificarTextoPresente("Eduardo Henrique"));
 	}
 
 }

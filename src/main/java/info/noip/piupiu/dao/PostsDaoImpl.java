@@ -98,4 +98,9 @@ public class PostsDaoImpl implements PostsDao {
 		return mongoTemplate.getMongoOperations().find(query, Peep.class);
 	}
 
+	@Override
+	public void deletePeep(Peep peep) {
+		mongoTemplate.getMongoOperations().remove(peep);
+	}
+
 }

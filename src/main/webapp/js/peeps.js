@@ -129,3 +129,75 @@ function loadMorePeeps(){
 		  }
 	   });
 }
+
+$( "#confirmationDialog" ).dialog({
+	autoOpen: false,
+    modal: true,
+    resizable: true,
+    buttons: {
+      "Sim": function() {
+        deletePeep($("#peepId").val());
+      },
+      "Não": function() {
+        $( this ).dialog( "close" );
+      }
+    }
+  });
+
+function deletePeep(peepId) {
+	$.ajax({
+	      url: "/piupiu/peeps/delete",
+	      type: "POST",
+	      data: '{ "peep":{ "id":  "' + peepId + '" }}',
+		  contentType: "application/json",
+	      async: true,
+	      success: function(){
+	    	  location.reload();
+	      }
+	   });
+}
+
+function showConfirmationDialog(peepId){
+	$("#confirmationDialog").dialog("open");
+	$("#peepId").val(peepId);
+
+function openDialogShortUrl() {
+	$("#idShortUrl").dialog({
+		  height: 200,
+		  width: 450,
+		  autoOpen: false,
+	      modal: true,
+	      resizable: true
+	    });
+	$("#url").val('');
+	$("#idShortUrl").dialog("open");
+}
+
+function bit_url(url) { 
+	var username="o_1a40gtdkg";
+	var key="R_ba6345da8469187f7481a4b5d0958646";
+	$.ajax({
+		url:"http://api.bit.ly/v3/shorten",
+		data:{longUrl:url,apiKey:key,login:username},
+		dataType:"jsonp",
+		success:function(v) {
+			var bit_url = v.data.url;
+			$("#new_message").val($('#new_message').val() + bit_url);
+		},
+		error: function(v) {
+			alert('Erro ao encurtar URL');
+		}
+	});
+}
+
+function shortUrl() {
+	var valor = $("#url").val();
+	var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	var urltest = urlRegex.test(valor);
+	if(urltest) {
+		bit_url(valor);
+		$("#idShortUrl").dialog("close");
+	} else {
+		alert("Verifique se a URL possui http ou https");
+	}
+}
