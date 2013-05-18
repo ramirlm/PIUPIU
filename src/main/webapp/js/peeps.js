@@ -160,6 +160,7 @@ function deletePeep(peepId) {
 function showConfirmationDialog(peepId){
 	$("#confirmationDialog").dialog("open");
 	$("#peepId").val(peepId);
+}
 
 function openDialogShortUrl() {
 	$("#idShortUrl").dialog({

@@ -19,7 +19,7 @@
 	        <p></p>
 	        <p>
 	          <i class="icon-user"></i> by <a href="${ctx}/profiles/${peep.author}">${peep.author}</a>
-	          | <i class="icon-calendar"></i> ${peep.date}
+	          <br/><i class="icon-calendar"></i> ${peep.date}
 	        </p>
 	      </div>
 	    </div>
