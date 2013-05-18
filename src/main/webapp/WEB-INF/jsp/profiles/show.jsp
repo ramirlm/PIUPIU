@@ -77,6 +77,12 @@
                   <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
                   <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
                </form>
+               <form id="form_foto" method="post" enctype="multipart/form-data" action="http://www.imageshack.us/upload_api.php">
+               	<input id="file" type="file" name="fileupload"/>
+               	<input type="hidden" name="key" value="3ZFYDRMOa18b0d4c520a173c7443e4e8ec29095c">
+               	<input type="hidden" name="format" value="json">
+               	<input id="enviar_foto" type="submit" value="Enviar"/>
+               </form>
                <hr>
                <div id="wall">
                </div>
@@ -103,7 +109,65 @@
     $(function() {
     	loadPeeps();
     	charactersCount();
-    	userSearchAutoComplete();        
+    	userSearchAutoComplete(); 
+    	
+//     	$("#form_foto").submit(function(event) {
+//     		event.preventDefault();
+//     		$.post("http://www.imageshack.us/upload_api.php", $("#form_foto").serialize()).done(function(data) {
+//   			  alert("alert: " + data);
+//   			});
+//     	});
+    	
+    	var _URL = window.URL || window.webkitURL;
+
+    	$("#file").change(function(e) {
+    	    var file, img;
+
+    	    if ((file = this.files[0])) {
+    	        img = new Image();
+    	        img.onerror = function() {
+    	            alert( "Arquivo inválido: " + file.type);
+    	        };
+    	        img.src = _URL.createObjectURL(file);
+    	        
+    	        var params = {                                               
+    	                url: escape(img.src),                                
+    	                key: '3ZFYDRMOa18b0d4c520a173c7443e4e8ec29095c'          
+    	            };                                                            
+    	                                                                         
+    	            var xhr = new XMLHttpRequest();                              
+    	            xhr.open("POST", 'http://www.imageshack.us/upload_api.php', true);                                                            
+    	                                                                         
+    	            //Send the proper header information along with the request  
+    	            xhr.setRequestHeader("Content-type", "multipart/form-data"); 
+//     	            xhr.setRequestHeader("Content-length", params.length);       
+//     	            xhr.setRequestHeader("Connection", "close");                 
+    	                                                                         
+    	            xhr.onreadystatechange = function() {                        
+    	                if (xhr.readyState == 4) {                               
+    	                    // JSON.parse does not evaluate the attacker's scripts.                                                               
+    	                    console.log(xhr.responseText);                       
+    	                }                                                        
+    	            };                                                          
+    	            var result = xhr.send(params);            
+    	        	alert(result);
+    	        
+//     	        $.ajax({
+//     	    		url: "https://post.imageshack.us/upload_api.php",
+//     	    		type: "POST",
+//     	    	    data: '{ "key": "3ZFYDRMOa18b0d4c520a173c7443e4e8ec29095c", "url": '+img.src+', "format": "json"}',
+//     	    	    contentType: "jsonp",
+//     	    	    crossDomain: true,
+//     	    	    success: function(data){
+//     	        	  alert(data);
+//     	    	    },
+//     	    	    error: function(data, status, e) {
+//     	        	  alert("erro"); 
+//     	    	    }
+//     	    	});
+    	    }
+
+    	});
     });
     </script>
 </div>
