@@ -201,3 +201,4 @@ function shortUrl() {
 		alert("Verifique se a URL possui http ou https");
 	}
 }
+}
