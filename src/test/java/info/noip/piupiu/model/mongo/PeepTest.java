@@ -25,7 +25,7 @@ public class PeepTest {
 	
 	@Test
 	public void shouldFormatText(){
-		assertTrue(peep.getFormattedText().contains("<a href='#'>#prontofalei</a>"));
+		assertTrue(peep.getFormattedText().contains("Devemos identificar 2 hashtags <a href='/piupiu/hashtags/prontofalei'>#prontofalei</a> <a href='/piupiu/hashtags/fikdik'>#fikdik</a>"));
 	}
 	
 }

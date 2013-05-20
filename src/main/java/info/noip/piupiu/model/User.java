@@ -1,5 +1,7 @@
 package info.noip.piupiu.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
@@ -39,7 +41,7 @@ public class User {
 	@Email(message = "E-mail inválido.")
 	@NotEmpty(message = "O E-mail é obrigatório.")
 	private String email;
-	
+
 	private String hashFoto;
 
 	public String getHashFoto() {
