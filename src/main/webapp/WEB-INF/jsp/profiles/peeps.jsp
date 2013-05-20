@@ -19,10 +19,8 @@
 	        <p></p>
 	        <p>
 	          <i class="icon-user"></i> by <a href="${ctx}/profiles/${peep.author}">${peep.author}</a>
-	          | <i class="icon-calendar"></i> ${peep.date}
-	          | <a title="Quem Curte" href="javascript: showLikers('${peep.id}')">
-        					<img src="${ctx}/img/favicon.ico" alt="Quem Curte" height="16" width="16">
-        				</a>
+	          <br/><i class="icon-calendar"></i> ${peep.date}
+	          | <a title="Quem Curte" class="icon-thumbs-up" href="javascript: showLikers('${peep.id}')"></a>
 				<c:choose>
 					<c:when test="${peep.likers.size() > 0}">
 						<span class=" badge badge-info"><c:out value="${peep.likers.size()}"/></span>

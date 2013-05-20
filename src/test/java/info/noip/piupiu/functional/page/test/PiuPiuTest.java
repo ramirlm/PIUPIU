@@ -7,6 +7,7 @@ import info.noip.piupiu.functional.page.PiuPiuPage;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.openqa.selenium.server.RemoteControlConfiguration;
 import org.openqa.selenium.server.SeleniumServer;
 
@@ -15,7 +16,7 @@ import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.HttpCommandProcessor;
 import com.thoughtworks.selenium.Selenium;
 
-@Ignore
+//@Ignore
 public class PiuPiuTest {
 
 	private static SeleniumServer server;
@@ -54,25 +55,27 @@ public class PiuPiuTest {
 	  server.stop();
 	}
 
+	@Test
 	public void shouldOpenMainPage(){
 		page.acessarPagina();
 		assertEquals("Bem-vindo ao Piu-Piu",page.retornarTitulo());
 	}
 
-
+	@Test
 	public void shouldNotLogin(){
 		page.acessarPagina();
 		page.login("andersonsilva@ufc.com", "thespider");
 		assertTrue(page.verificarTextoPresente("- Usuário e/ou senha incorretos."));
-
 	}
 
+	@Test
 	public void shouldLogin(){
 		page.acessarPagina();
 		page.login("testeselenium@gmail.com", "selenium123");
 		assertTrue(page.verificarTextoPresente("Logado como testeselenium@gmail.com"));
 	}
 
+	@Test
 	public void shouldPiar(){
 		long currentTimes = System.currentTimeMillis();
 		page.acessarPagina();
@@ -81,6 +84,7 @@ public class PiuPiuTest {
 		assertTrue(page.verificarTextoPresente("Piando agora "+currentTimes));
 	}
 
+	@Test
 	public void shouldPesquisarUsuario(){
 		page.acessarPagina();
 		page.login("testeselenium@gmail.com", "selenium123");
