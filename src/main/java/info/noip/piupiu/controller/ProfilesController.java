@@ -8,14 +8,21 @@ import info.noip.piupiu.model.mongo.Avatar;
 import info.noip.piupiu.model.mongo.Circle;
 import info.noip.piupiu.model.mongo.Peep;
 import info.noip.piupiu.security.UserSession;
+import info.noip.piupiu.service.UploadImage;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 
 @Resource
 public class ProfilesController {
@@ -25,19 +32,41 @@ public class ProfilesController {
 	private PostsDao postsDao;
 	private UserSession userSession;
 	private CircleDao circleDao;
+	private final Validator validator;
 
 	public ProfilesController(Result result, UsersDao usersDao,
-			PostsDao postsDao, UserSession userSession, CircleDao circleDao) {
+			PostsDao postsDao, UserSession userSession, CircleDao circleDao, Validator validator) {
 		this.result = result;
 		this.usersDao = usersDao;
 		this.postsDao = postsDao;
 		this.userSession = userSession;
 		this.circleDao = circleDao;
+		this.validator = validator;
 	}
 
 	@Path("/profiles")
 	public void show() {
 		getFollowersAndFollowing(userSession.getUser().getEmail());
+	}
+	
+	@Post("/profiles/uploadImage")
+	public void uploadImage(String message, UploadedFile photo) throws FileNotFoundException, IOException{
+		if(photo!=null){
+			String imageLink = new UploadImage().attach(photo.getFile()).send();	
+			User user = userSession.getUser();
+			if (user != null) {
+				Peep peep = new Peep();
+				peep.setText(message);
+				peep.setDate(new Date());
+				peep.setAuthor(user.getEmail());
+				peep.setHash(user.getHashFoto());
+				peep.addHashTags();
+				peep.setImageLink(imageLink);
+				postsDao.save(peep);
+			}
+		}
+		validator.onErrorRedirectTo(ProfilesController.class).show();
+		result.redirectTo(ProfilesController.class).show();
 	}
 
 	@Get
