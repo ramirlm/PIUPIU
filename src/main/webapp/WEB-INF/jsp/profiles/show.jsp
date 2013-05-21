@@ -42,7 +42,7 @@
                <hr>
                <div class="row">
                   <div class="span3">
-                  	<p class="sub-text"><a href="#">Seguindo</a></p>
+                  	<p class="sub-text"><a href="javascript:listAll('${userSession.user.email }','following','divListAllFollowing');">Seguindo</a></p>
                      <ul class="thumbnails">
 	                     <c:forEach items="${following}" var="seguindo">
 	                        <li class="span1">
@@ -57,7 +57,7 @@
                <hr>
                <div class="row">
                   <div class="span3">
-                  	<p class="sub-text"><a href="#">Seguidores</a></p>
+                  	<p class="sub-text"><a href="javascript:listAll('${userSession.user.email }','followers','divListAllFollowers');">Seguidores</a></p>
                      <ul class="thumbnails">
 	                     <c:forEach items="${followers}" var="seguidor">
 	                        <li class="span1">
@@ -87,7 +87,11 @@
             </div>
          </div>
          <!-- container -->
-         <div id="idShowLikes" title="Curtidas" style="display: none;">
+         <div id="idShowLikes" title="Curtidas" style="display: none; overflow-x: hidden;">
+         </div>
+         <div id="divListAllFollowers" style="display: none; overflow-x: hidden;" title="Usuários Seguidores">
+         </div>
+         <div id="divListAllFollowing" style="display: none; overflow-x: hidden;" title="Seguindo">
          </div>
          <div id="confirmationDialog" title="Atenção" style="display: none;">
          	<p>Tem certeza que deseja excluir este post?</p>

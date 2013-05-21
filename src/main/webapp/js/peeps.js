@@ -43,19 +43,76 @@ function get_username(email) {
     return m ? m[0] : null;
 }
 
+$("#divListAllFollowers").dialog({
+	  height: 300,
+	  width: 450,
+	  autoOpen: false,
+    modal: true,
+    maxWidth : 450,
+    resizable: false,
+    close: function(ev, ui) {
+    	$(this).empty();
+    }
+  });
+
+$("#divListAllFollowing").dialog({
+	  height: 300,
+	  width: 450,
+	  autoOpen: false,
+  modal: true,
+  maxWidth : 450,
+  resizable: false,
+  close: function(ev, ui) {
+  	$(this).empty();
+  }
+});
+
+
 $("#idShowLikes").dialog({
 	  height: 300,
 	  width: 450,
 	  autoOpen: false,
-      modal: true,
-      resizable: true,
-      close: function(ev, ui) {
-      	$(this).empty();
-      }
-    });
-  
+    modal: true,
+    resizable: true,
+    close: function(ev, ui) {
+    	$(this).empty();
+    }
+  });
 
 function showLikers(id){
+	$.ajax({
+		url: "/piupiu/peeps/showLikers", 
+		type: "POST",
+	    data: '{ "peep":{ "id":  "' + id + '" }}',
+	    contentType: "application/json",
+	    async: true,
+	    success: function(html){
+    	  $('#idShowLikes').append(html);
+    	  $("#idShowLikes").dialog("open");
+	    },
+	    error: function(data, status, e) {
+    	  //Show Error Div 
+	    }
+	});
+}
+
+
+function listAll(email,followersOrFollowing,divToOpen){
+	$.ajax({
+		url: "/piupiu/profiles/listAll/"+email+"/"+followersOrFollowing, 
+		type: "GET",
+	    async: true,
+	    success: function(html){
+    	  $('#'+divToOpen).append(html);
+    	  $('#'+divToOpen).dialog("open");
+	    },
+	    error: function(data, status, e) {
+    	  //Show Error Div 
+	    }
+	});
+}
+
+function list(id){
 	$.ajax({
 		url: "/piupiu/peeps/showLikers", 
 		type: "POST",

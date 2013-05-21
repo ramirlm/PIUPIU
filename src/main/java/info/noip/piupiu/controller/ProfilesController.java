@@ -14,6 +14,7 @@ import java.util.List;
 
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 
@@ -95,11 +96,40 @@ public class ProfilesController {
 			}
 		}
 	}
-
+	
+	@Path("/profiles/listAll/{userMail}/{followersOrFollowing}")
+	public void listAll(String userMail,String followersOrFollowing){
+		List<Avatar> listaVazia = new ArrayList<Avatar>();
+		
+		Circle circle = circleDao.getCircleByEmail(userMail);
+		
+		if (circle == null) {
+			result.include("listAll", listaVazia);
+			result.include("listAll", listaVazia);
+		} else {
+			if(followersOrFollowing.equals("followers"))
+			{
+				if (circle.getFollowers() != null) {
+					result.include("listAll", new ArrayList<Avatar>(circle.getFollowers()));
+				} else {
+					result.include("listAll", listaVazia);
+				}
+			}else{
+				if (circle.getFollowing() != null) {
+					result.include("listAll", new ArrayList<Avatar>(circle.getFollowing()));
+				} else {
+					result.include("listAll", listaVazia);
+				}
+			}
+			
+		}
+	}
+	
 	private Boolean isFollowing(String email) {
 		User loggedUser = userSession.getUser();
 		String loggedEmailUser = loggedUser.getEmail();
 		return circleDao.isFollowing(loggedEmailUser, email);
 	}
+	
 
 }
