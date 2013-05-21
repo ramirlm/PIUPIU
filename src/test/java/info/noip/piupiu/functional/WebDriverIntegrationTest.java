@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class WebDriverTest {
+public class WebDriverIntegrationTest {
 
 	WebDriver driver = new FirefoxDriver();
 	

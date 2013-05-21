@@ -20,7 +20,7 @@ import com.thoughtworks.selenium.Selenium;
  * @author efreitas
  *
  */
-public class SeleniumServerTest {
+public class SeleniumServerIntegrationTest {
 	private SeleniumServer server;
 	private Selenium selenium;
 	private CommandProcessor proc;
