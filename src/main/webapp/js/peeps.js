@@ -1,19 +1,25 @@
 function peep(){
 	var message = $('#new_message').val();
-	$.ajax({
-		url: "/piupiu/peeps",
-		type: "POST",
-	    data: '{ "peep":{ "text":  "' + message + '" }}',
-	    contentType: "application/json",
-	    async: true,
-	    success: function(html){
-    	  $('#new_message').val('');
-    	  $('#wall').prepend(html);
-	    },
-	    error: function(data, status, e) {
-    	  //Show Error Div 
-	    }
-	});
+	var photo = $('#file').val();
+	if(photo){
+		$('#photo_message').val(message);
+		$('#form_photo').submit();
+	}else{
+		$.ajax({
+			url: "/piupiu/peeps",
+			type: "POST",
+		    data: '{ "peep":{ "text":  "' + message + '" }}',
+		    contentType: "application/json",
+		    async: true,
+		    success: function(html){
+	    	  $('#new_message').val('');
+	    	  $('#wall').prepend(html);
+		    },
+		    error: function(data, status, e) {
+	    	  //Show Error Div 
+		    }
+		});	
+	}
 }
     
 function loadPeeps() {
@@ -201,4 +207,5 @@ function shortUrl() {
 	} else {
 		alert("Verifique se a URL possui http ou https");
 	}
+
 }
