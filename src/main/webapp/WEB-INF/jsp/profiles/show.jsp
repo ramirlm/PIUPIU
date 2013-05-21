@@ -78,6 +78,10 @@
                   <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
                   <button class="btn btn-mini" type="button" onclick="openDialogShortUrl();">Encurte</button>
                </form>
+               <form id="form_photo" method="post" enctype="multipart/form-data" action="/piupiu/profiles/uploadImage">
+	               	<input id="file" type="file" name="photo"/>
+	               	<input id="photo_message" type="hidden" name="message" value="">
+               </form>
                <hr>
                <div id="wall">
                </div>
@@ -119,7 +123,7 @@
     $(function() {
     	loadPeeps();
     	charactersCount();
-    	userSearchAutoComplete();        
+    	userSearchAutoComplete();     	
     });
     </script>
 </div>
