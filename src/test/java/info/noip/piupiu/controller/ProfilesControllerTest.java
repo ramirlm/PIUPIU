@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.util.test.MockResult;
 
 /**
@@ -39,6 +40,8 @@ public class ProfilesControllerTest {
 	UserSession userSession;
 	@Mock
 	CircleDao circleDao;
+	@Mock
+	Validator validator;
 
 	@Test
 	public void shouldShowFollowersAndFollowing(){
@@ -49,7 +52,7 @@ public class ProfilesControllerTest {
 
 		MockResult result = new MockResult();
 
-		ProfilesController controller = new ProfilesController(result, usersDao, postsDao, userSession, circleDao);
+		ProfilesController controller = new ProfilesController(result, usersDao, postsDao, userSession, circleDao, validator);
 
 		when(circleDao.getCircleByEmail("andersonsilva@ufc.com")).thenReturn(null);
 		controller.getFollowersAndFollowing("andersonsilva@ufc.com");
