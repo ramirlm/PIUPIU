@@ -27,6 +27,8 @@ public class Peep implements Serializable {
 	private String formattedText;
 
 	private String hash;
+	
+	private String imageLink;
 
 	private HashSet<Avatar> likers;
 
@@ -96,6 +98,14 @@ public class Peep implements Serializable {
 	public void setHashTags(HashSet<String> hashTags) {
 		this.hashTags = hashTags;
 	}
+	
+	public String getImageLink() {
+		return imageLink;
+	}
+
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
+	}
 
 	public void addLiker(String likerEmail) {
 		if (likers == null) {
@@ -157,6 +167,9 @@ public class Peep implements Serializable {
 			}
 		}
 
+		if(this.imageLink!=null){
+			ret = ret + " - <a href='" + getImageLink() + "' target='_blank'> Veja a Imagem </a>";
+		}
 		return ret;
 	}
 
