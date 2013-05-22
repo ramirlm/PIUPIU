@@ -135,6 +135,7 @@
     	loadPeeps();
     	charactersCount();
     	userSearchAutoComplete();     	
+    	autocompleteUser();
     });
     </script>
 </div>
