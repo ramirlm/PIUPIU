@@ -50,7 +50,7 @@
                <hr>
                <div class="row">
                   <div class="span3">
-                  	<p class="sub-text"><a href="#">Seguindo</a></p>
+                  	<p class="sub-text"><a href="javascript:listAll('${userSession.user.email }','following','divListAllFollowing');">Seguindo</a></p>
                      <ul class="thumbnails">
 	                     <c:forEach items="${following}" var="seguindo">
 	                        <li class="span1">
@@ -65,7 +65,7 @@
                <hr>
                <div class="row">
                   <div class="span3">
-                  	<p class="sub-text"><a href="#">Seguidores</a></p>
+                  	<p class="sub-text"><a href="javascript:listAll('${userSession.user.email }','followers','divListAllFollowers');">Seguidores</a></p>
                      <ul class="thumbnails">
 	                     <c:forEach items="${followers}" var="seguidor">
 	                        <li class="span1">
@@ -91,6 +91,10 @@
                   <button class="btn btn-info" type="button" onclick="loadPeepsHashTag('${hashtag}');">Veja mais</button>
                </div>
             </div>
+            <div id="divListAllFollowers" style="display: none; overflow-x: hidden;" title="Usuários Seguidores">
+	        </div>
+	        <div id="divListAllFollowing" style="display: none; overflow-x: hidden;" title="Seguindo">
+	        </div>
          </div>
         
          <%@ include file="../template/_footer.jsp" %>
@@ -103,6 +107,7 @@
          <script src="${ctx}/js/bootstrap-typeahead.js"></script>
          <script src="${ctx}/js/profile.js"></script>
          <script src="${ctx}/js/search.js"></script>
+         <script src="${ctx}/js/peeps.js"></script>
          <script>
             $(function() {
             	loadPeepsHashTag($('#hashTag').val());

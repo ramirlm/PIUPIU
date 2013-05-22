@@ -49,19 +49,76 @@ function get_username(email) {
     return m ? m[0] : null;
 }
 
+$("#divListAllFollowers").dialog({
+	  height: 300,
+	  width: 450,
+	  autoOpen: false,
+    modal: true,
+    maxWidth : 450,
+    resizable: false,
+    close: function(ev, ui) {
+    	$(this).empty();
+    }
+  });
+
+$("#divListAllFollowing").dialog({
+	  height: 300,
+	  width: 450,
+	  autoOpen: false,
+  modal: true,
+  maxWidth : 450,
+  resizable: false,
+  close: function(ev, ui) {
+  	$(this).empty();
+  }
+});
+
+
 $("#idShowLikes").dialog({
 	  height: 300,
 	  width: 450,
 	  autoOpen: false,
-      modal: true,
-      resizable: true,
-      close: function(ev, ui) {
-      	$(this).empty();
-      }
-    });
-  
+    modal: true,
+    resizable: true,
+    close: function(ev, ui) {
+    	$(this).empty();
+    }
+  });
 
 function showLikers(id){
+	$.ajax({
+		url: "/piupiu/peeps/showLikers", 
+		type: "POST",
+	    data: '{ "peep":{ "id":  "' + id + '" }}',
+	    contentType: "application/json",
+	    async: true,
+	    success: function(html){
+    	  $('#idShowLikes').append(html);
+    	  $("#idShowLikes").dialog("open");
+	    },
+	    error: function(data, status, e) {
+    	  //Show Error Div 
+	    }
+	});
+}
+
+
+function listAll(email,followersOrFollowing,divToOpen){
+	$.ajax({
+		url: "/piupiu/profiles/listAll/"+email+"/"+followersOrFollowing, 
+		type: "GET",
+	    async: true,
+	    success: function(html){
+    	  $('#'+divToOpen).append(html);
+    	  $('#'+divToOpen).dialog("open");
+	    },
+	    error: function(data, status, e) {
+    	  //Show Error Div 
+	    }
+	});
+}
+
+function list(id){
 	$.ajax({
 		url: "/piupiu/peeps/showLikers", 
 		type: "POST",
@@ -192,7 +249,15 @@ function bit_url(url) {
 			$("#new_message").val($('#new_message').val() + bit_url);
 		},
 		error: function(v) {
-			alert('Erro ao encurtar URL');
+			$("#messages").dialog({
+				  height: 200,
+				  width: 300,
+				  autoOpen: false,
+			      modal: true,
+			      resizable: true
+			    });
+			$("#messages span").text('- Erro ao encurtar URL.');
+			$("#messages").dialog("open");
 		}
 	});
 }
@@ -205,7 +270,30 @@ function shortUrl() {
 		bit_url(valor);
 		$("#idShortUrl").dialog("close");
 	} else {
-		alert("Verifique se a URL possui http ou https");
+		$("#messages").dialog({
+			  height: 200,
+			  width: 300,
+			  autoOpen: false,
+		      modal: true,
+		      resizable: true
+		    });
+		$("#messages span").text('- Verifique se a URL possui http ou https.');
+		$("#messages").dialog("open");
 	}
 
+}
+
+function openDialogUploadImage() {
+	$("#uploadImageDiv").dialog({
+		  height: 230,
+		  width: 450,
+		  autoOpen: false,
+	      modal: true,
+	      resizable: true
+	    });
+	$("#uploadImageDiv").dialog("open");
+}
+
+function closeUploadDialog() {
+	$("#uploadImageDiv").dialog("close");
 }

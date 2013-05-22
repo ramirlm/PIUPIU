@@ -19,6 +19,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "users")
 public class User implements Serializable {
 
+	private static final long serialVersionUID = -1197161031396565735L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
 	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq")

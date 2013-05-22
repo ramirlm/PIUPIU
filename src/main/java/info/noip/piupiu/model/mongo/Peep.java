@@ -1,5 +1,7 @@
 package info.noip.piupiu.model.mongo;
 
+import info.noip.piupiu.infra.BitlyShortener;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -27,7 +29,7 @@ public class Peep implements Serializable {
 	private String formattedText;
 
 	private String hash;
-	
+
 	private String imageLink;
 
 	private HashSet<Avatar> likers;
@@ -98,7 +100,7 @@ public class Peep implements Serializable {
 	public void setHashTags(HashSet<String> hashTags) {
 		this.hashTags = hashTags;
 	}
-	
+
 	public String getImageLink() {
 		return imageLink;
 	}
@@ -157,18 +159,27 @@ public class Peep implements Serializable {
 				ret = ret.replaceAll(attribute, "<a href='/piupiu/hashtags/"
 						+ serchableAttribute + "'>" + attribute + "</a>");
 			}
-			
+
 			String urlPattern = "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)";
-			Pattern re = Pattern.compile(urlPattern, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern re = Pattern.compile(urlPattern, Pattern.CASE_INSENSITIVE
+					| Pattern.MULTILINE | Pattern.DOTALL);
 			Matcher m = re.matcher(ret);
 			while (m.find()) {
 				String attribute = m.group();
-				ret = ret.replaceAll(attribute, "<a href='" + attribute + "' target='_blank'>" + attribute + "</a>");
+				ret = ret.replaceAll(attribute, "<a href='" + attribute
+						+ "' target='_blank'>" + attribute + "</a>");
 			}
 		}
 
-		if(this.imageLink!=null){
-			ret = ret + " - <a href='" + getImageLink() + "' target='_blank'> Veja a Imagem </a>";
+		if (this.imageLink != null) {
+			if (ret.isEmpty()) {
+				ret = ret + "<a href='" + getImageLink() + "' target='_blank'>"
+						+ BitlyShortener.shortURL(getImageLink()) + "</a>";
+			} else {
+				ret = ret + " - <a href='" + getImageLink()
+						+ "' target='_blank'>"
+						+ BitlyShortener.shortURL(getImageLink()) + "</a>";
+			}
 		}
 		return ret;
 	}
