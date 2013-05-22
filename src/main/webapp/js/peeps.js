@@ -249,7 +249,15 @@ function bit_url(url) {
 			$("#new_message").val($('#new_message').val() + bit_url);
 		},
 		error: function(v) {
-			alert('Erro ao encurtar URL');
+			$("#messages").dialog({
+				  height: 200,
+				  width: 300,
+				  autoOpen: false,
+			      modal: true,
+			      resizable: true
+			    });
+			$("#messages span").text('- Erro ao encurtar URL.');
+			$("#messages").dialog("open");
 		}
 	});
 }
@@ -262,7 +270,30 @@ function shortUrl() {
 		bit_url(valor);
 		$("#idShortUrl").dialog("close");
 	} else {
-		alert("Verifique se a URL possui http ou https");
+		$("#messages").dialog({
+			  height: 200,
+			  width: 300,
+			  autoOpen: false,
+		      modal: true,
+		      resizable: true
+		    });
+		$("#messages span").text('- Verifique se a URL possui http ou https.');
+		$("#messages").dialog("open");
 	}
 
+}
+
+function openDialogUploadImage() {
+	$("#uploadImageDiv").dialog({
+		  height: 230,
+		  width: 450,
+		  autoOpen: false,
+	      modal: true,
+	      resizable: true
+	    });
+	$("#uploadImageDiv").dialog("open");
+}
+
+function closeUploadDialog() {
+	$("#uploadImageDiv").dialog("close");
 }
