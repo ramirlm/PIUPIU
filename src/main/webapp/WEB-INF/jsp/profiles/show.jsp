@@ -76,11 +76,8 @@
                   <textarea class="span6 maxlength" id="new_message" name="new_message" placeholder="Escreva sua mensagem" rows="5"></textarea>
                   <h6 class="pull-right" id="content-countdown">140 caracteres restantes</h6>
                   <button class="btn btn-info" type="button" onclick="peep();">Pie para seus amigos</button>
-                  <button class="btn btn-mini" type="button" onclick="openDialogShortUrl();">Encurte</button>
-               </form>
-               <form id="form_photo" method="post" enctype="multipart/form-data" action="/piupiu/profiles/uploadImage">
-	               	<input id="file" type="file" name="photo"/>
-	               	<input id="photo_message" type="hidden" name="message" value="">
+                  <a class="icon-resize-small" onclick="openDialogShortUrl();" title="Encurtar URL" style="cursor: pointer; margin-left: 10px;"></a>
+                  <a class="icon-picture" onclick="openDialogUploadImage();" title="Publicar imagem" style="cursor: pointer;  margin-left: 5px;"></a>
                </form>
                <hr>
                <div id="wall">
@@ -100,6 +97,18 @@
          <div id="confirmationDialog" title="Atenção" style="display: none;">
          	<p>Tem certeza que deseja excluir este post?</p>
          	<input id="peepId" type="hidden"/>
+         </div>
+         <div id="messages" style="display: none;" title="Atenção">
+         	<span></span>
+         </div>
+         <div id="uploadImageDiv" style="display: none;" title="Upload de imagem">
+         	<br/><br/>
+         	<form id="form_photo" method="post" enctype="multipart/form-data" action="/piupiu/profiles/uploadImage">
+               	<input id="file" type="file" name="photo" accept="image/*"/>
+               	<input id="photo_message" type="hidden" name="message" value="">
+               	<br/><br/>
+               	<button class="btn btn-success" type="button" onclick="closeUploadDialog();">Ok</button>
+            </form>
          </div>
          <div id="idShortUrl" title="Short Url" style="display: none">
          	<form accept-charset="UTF-8" id="shortUrlForm">
