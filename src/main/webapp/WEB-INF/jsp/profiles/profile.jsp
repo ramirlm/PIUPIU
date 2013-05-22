@@ -108,7 +108,7 @@
 			</div>
 		</div>
 		<!-- container -->
-		<div id="idShowLikes" title="Curtidas" style="display: none;"></div>
+		<div id="idShowLikes" title="Curtidas" style="display: none; overflow-x: hidden;"></div>
 		<div id="divListAllFollowing"
 			style="display: none; overflow-x: hidden;" title="Usuários Seguindo">
 		</div>
@@ -116,8 +116,7 @@
 			style="display: none; overflow-x: hidden;" title="Seguidores">
 		</div>
 		<%@ include file="../template/_footer.jsp"%>
-		<!-- Le javascript
-            ================================================== -->
+		<!-- Le javascript -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="../js/jquery-1.8.3.js"></script>
 		<script src="../js/jquery-ui.js"></script>
