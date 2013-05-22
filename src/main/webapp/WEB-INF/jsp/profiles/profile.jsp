@@ -16,6 +16,7 @@
 <link href="../css/typeahead.js-bootstrap.css" rel="stylesheet">
 <link href="../css/jquery-ui.css" rel="stylesheet">
 <link href="../css/jquery.ui.theme.css" rel="stylesheet">
+<link href="../css/loading.css" rel="stylesheet">
 <link rel="shortcut icon" href="${ctx}/img/favicon.ico"
 	type="image/x-icon" />
 </head>
@@ -116,6 +117,7 @@
 			style="display: none; overflow-x: hidden;" title="Seguidores">
 		</div>
 		<%@ include file="../template/_footer.jsp"%>
+		<%@ include file="../template/_loading.jsp"%>
 		<!-- Le javascript
             ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
