@@ -12,6 +12,7 @@
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/loading.css" rel="stylesheet">
     
     <!-- Fav and touch icons -->
   	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
@@ -24,6 +25,7 @@
     </style>
   	
     <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-1.8.3.js"></script>
   </head>
 
   <body>
@@ -88,6 +90,7 @@
 		</div>
 	</c:if>
 	<%@ include file="../template/_footer.jsp" %>
+	<%@ include file="../template/_loading.jsp" %>
     </div><!--/.fluid-container-->
   </body>
 </html>

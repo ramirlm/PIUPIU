@@ -1,0 +1,32 @@
+.bgLoader {
+    position: fixed;
+    z-index: 99997;
+    top: 0px;
+    left: 0px;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    filter: Alpha(Opacity=70);
+    opacity: 0.70;
+    -moz-opacity: 0.70;
+}
+
+* html .bgLoader {
+    position: absolute;
+    height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+    width: expression(document.body.scrollWidth > document.body.offsetWidth ? document.body.scrollWidth : document.body.offsetWidth + 'px');
+}
+
+.loader {
+    z-index: 99998;
+    position: fixed;
+    width: 120px;
+    margin-left: -60px;
+    top: 50%;
+    left: 50%;
+}
+
+* html .loader {
+    position: absolute;
+    margin-top: expression((document.body.scrollHeight / 4) + (0 - parseInt(this.offsetParent.clientHeight / 2) + (document.documentElement && document.documentElement.scrollTop || document.body.scrollTop)) + 'px');
+}
